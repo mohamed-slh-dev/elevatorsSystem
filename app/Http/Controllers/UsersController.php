@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Http\Request;
+
+use App\Models\User;
+
+class UsersController extends Controller
+{
+    public function users(){
+
+        $users = User::all();
+
+        return view('users',compact('users'));
+    }
+
+
+    public function addUser(Request $request){
+
+        $user = new User();
+
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+
+
+        if (!empty($request->file('image'))) {
+            
+            $image = 'elevator-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+
+            $path = $request->file('image')->storeAs('public/users',$image);
+    
+            $user->image = $image;
+
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'تم إضافة مستخدم بنجاح');
+
+
+    }
+}
