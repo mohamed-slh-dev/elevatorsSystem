@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'KFGQPC Uthman Taha Naskh';
+    src: url('KFGQPCUthmanTahaNaskh.woff2') format('woff2'),
+        url('KFGQPCUthmanTahaNaskh.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'KFGQPC Uthman Taha Naskh';
+    src: url('KFGQPCUthmanTahaNaskh-Bold.woff2') format('woff2'),
+        url('KFGQPCUthmanTahaNaskh-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'KFGQPC Uthman Taha Naskh';
+    src: url('KFGQPCUthmanTahaNaskh-Bold.woff2') format('woff2'),
+        url('KFGQPCUthmanTahaNaskh-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'KFGQPC Uthman Taha Naskh';
+    src: url('KFGQPCUthmanTahaNaskh.woff2') format('woff2'),
+        url('KFGQPCUthmanTahaNaskh.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

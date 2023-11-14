@@ -38,6 +38,13 @@
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/responsive.css')}}">
 
+
+    {{-- uthmanTaha font (ar) / Roboto (en) --}}
+    <link rel="stylesheet" href="{{asset('assets/fonts/Tajawal/styles.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/fonts/Roboto/styles.css')}}">
+
+    
+
     {{-- Customized style  --}}
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/customized-style.css')}}">
 
@@ -135,7 +142,7 @@
                   </li>
                 </ul>
               </li>
-              <li>
+              <li class='d-none'>
                 <div class="mode"><i class="fa fa-moon-o"></i></div>
               </li>
               {{-- <li class="onhover-dropdown"><i data-feather="message-square"></i>
@@ -208,7 +215,7 @@
                   <li class="back-btn">
                     <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                   </li>
-                  <li class="sidebar-main-title">
+                  <li class="sidebar-main-title d-none">
                     <div>
                       <h6>الصفحات</h6>
                     </div>
