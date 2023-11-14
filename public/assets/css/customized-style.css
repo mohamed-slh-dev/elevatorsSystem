@@ -5,10 +5,17 @@
 /* general override */
 body {
     font-family: "Tajawal", "Roboto";
-    letter-spacing: 0.6px;
+    letter-spacing: 0.5px;
     color: #222;
     font-weight: 500;
-    transition: 0.3s all ease-in-out;
+    transition: 0.4s all ease-in-out;
+}
+
+/* modal-sm */
+@media (min-width: 576px) {
+    .modal-sm {
+        max-width: 400px;
+    }
 }
 
 /* ------------------------- globals */

@@ -24,7 +24,7 @@
 {{-- table of contracts --}}
 <div class="col-sm-12 col-lg-12 col-xl-12">
     <div class="table-responsive">
-      <table class="table">
+      <table class="table table-bordered">
 
         {{-- tbody --}}
         <thead class="bg-primary">
@@ -67,7 +67,12 @@
 
 
 
-{{-- modal --}}
+{{-- ============================================================== --}}
+
+
+
+
+{{-- add modal --}}
 <div class="col-12">
   <div class="modal fade new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -156,41 +161,53 @@
 
 
 
-<div class="col-12">
+
+{{-- ============================================================== --}}
+
+
+
+{{-- confirmation modal --}}
+<div class="col-12 justify-content-center">
   <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-sm">
+
+        {{-- content --}}
         <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="delete">حذف عقد</h4>
-            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-  
-        <form action="{{route('deleteEmployeeContract')}}" method="post">
-  
-          <input type="hidden" name="id" value="" id="modal-assign-contract">
 
-          <div class="modal-body">
-  
-              @csrf
-              <div class="row">
-  
-                
-               <div class="col-12">
-                 <h4>هل أنت متأكد من حذف هذا العقد؟</h4>
-               </div>
-  
-              </div>
 
-          </div>
-  
-          <div class="modal-footer">
-  
-            <button  class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
-            <button class="btn btn-primary">حذف </button>
-  
-          </div>
-  
-        </form>
+          {{-- form --}}
+          <form action="{{route('deleteEmployeeContract')}}" method="post">
+            @csrf
+            
+            <input type="hidden" name="id" value="" id="modal-assign-contract">
+
+
+            {{-- body --}}
+            <div class="modal-body">
+    
+                <div class="row">
+                  <div class="col-12 text-center">
+                    
+                    {{-- main title --}}
+                    <h5 class="modal-title fw-bold form--subheading d-inline-block mb-4" id="delete">حذف عقد</h5>
+
+                    {{-- desc --}}
+                    <h6 class='mb-3'>هل أنت متأكد من حذف هذا العقد؟</h6>
+
+                    {{-- actions --}}
+                    <div class="d-block text-center">
+                      <button  class="btn btn-none py-1 px-3" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
+                      <button class="btn btn-danger py-1 px-3">حذف</button>
+                    </div>
+
+                  </div>
+                </div>
+
+            </div>
+            {{-- end body --}}
+            
+          </form>
+          {{-- end form --}}
   
         </div>
       </div>

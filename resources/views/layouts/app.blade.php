@@ -273,14 +273,16 @@
             <div class="page-header">
               <div class="row mt-4">
 
+                
+                {{-- page alerts --}}
+                @include('alerts.alerts')
+
+                
                 {{-- page title --}}
                 <div class="col-sm-6 mb-5">
                   <h3 class="form--subheading d-inline-block"> @yield('title')</h3>
                 </div>
 
-
-                {{-- page alerts --}}
-                @include('alerts.alerts')
 
                 {{-- page content --}}
                 @yield('content')
