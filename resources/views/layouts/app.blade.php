@@ -175,7 +175,7 @@
                 </ul>
               </li> --}}
               <li class="onhover-dropdown p-0">
-                <button class="btn btn-primary-light" type="button"><a href="login_two.html"><i data-feather="log-out"></i>Log out</a></button>
+                <button class="btn btn-primary-light" type="button"><a href="login_two.html"><i data-feather="log-out"></i>تسجيل خروج</a></button>
               </li>
             </ul>
           </div>
@@ -261,54 +261,42 @@
           </nav>
         </header>
         <!-- Page Sidebar Ends-->
+
+
+        {{-- ========================================================= --}}
+
+
+
+        {{-- page body --}}
         <div class="page-body">
           <div class="container-fluid">
             <div class="page-header">
-              <div class="row">
-                <div class="col-sm-6">
-                  <h3> @yield('title')</h3>
-                  {{-- <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Page Layout</li>
-                    <li class="breadcrumb-item active">RTL</li>
-                  </ol> --}}
+              <div class="row mt-4">
+
+                {{-- page title --}}
+                <div class="col-sm-6 mb-5">
+                  <h3 class="form--subheading d-inline-block"> @yield('title')</h3>
                 </div>
-                {{-- <div class="col-sm-6">
-                  <!-- Bookmark Start-->
-                  <div class="bookmark">
-                    <ul>
-                      <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
-                      <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
-                      <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
-                      <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
-                      <li><a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
-                        <form class="form-inline search-form">
-                          <div class="form-group form-control-search">
-                            <input type="text" placeholder="Search..">
-                          </div>
-                        </form>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- Bookmark Ends-->
-                </div> --}}
+
+
+                {{-- page alerts --}}
+                @include('alerts.alerts')
+
+                {{-- page content --}}
+                @yield('content')
+
               </div>
             </div>
           </div>
-          <!-- Container-fluid starts-->
-          <div class="container-fluid">
-
-            <div class="row">
-
-              @include('alerts.alerts')
-
-              @yield('content')
-
-            </div>
-          </div>
-          <!-- Container-fluid Ends-->
         </div>
-        <!-- footer start-->
+        {{-- end page body --}}
+
+
+
+        {{-- ========================================================= --}}
+
+
+        <!-- footer-->
         <footer class="footer">
           <div class="container-fluid">
             <div class="row">
@@ -321,8 +309,21 @@
             </div>
           </div>
         </footer>
+
+
+        {{-- ========================================================= --}}
+
+
       </div>
     </div>
+    {{-- end body --}}
+
+
+
+    {{-- ========================================================= --}}
+
+
+
     <!-- latest jquery-->
     <script src="{{asset('assets/js/jquery-3.5.1.min.js')}}"></script>
     <!-- feather icon js-->
@@ -339,8 +340,8 @@
     <script src="{{asset('assets/js/clipboard/clipboard.min.js')}}"></script>
     <script src="{{asset('assets/js/custom-card/custom-card.js')}}"></script>
     <script src="{{asset('assets/js/tooltip-init.js')}}"></script>
-    <script src="../assets/js/select2/select2.full.min.js"></script>
-    <script src="../assets/js/select2/select2-custom.js"></script>
+    <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
+    <script src="{{asset('assets/js/select2/select2-init.js')}}"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{asset('assets/js/script.js')}}"></script>

@@ -7,8 +7,10 @@
 
 
 {{-- title --}}
-<div class="col-12 mb-5">
-  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target=".new">إضافة موظف</button>
+<div class="col-6 mb-5 text-end">
+  <button class="btn btn-outline-primary d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".new">
+    <i class="fa fa-plus me-2 fs-13 "></i>
+    إضافة موظف</button>
 </div>
 
 
@@ -62,7 +64,7 @@
 
         <td class='py-2 '>
           <a href="{{route('employeeContracts', $employee->id)}}">
-            <button class="btn btn-outline-success btn--table">العقود</button>
+            <button class="btn btn-primary-light btn--table">العقود</button>
           </a>
         </td>
       </tr>
@@ -88,9 +90,8 @@
       <div class="modal-content">
 
         {{-- header --}}
-        <div class="modal-header">
-          
-          <h4 class="modal-title" id="new">إضافة موظف</h4>
+        <div class="modal-header mb-3">
+          <h4 class="modal-title fw-bold" id="new">إضافة موظف</h4>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -116,8 +117,9 @@
 
                 <div class="col-sm-4 mb-4">
                   <label for="identity_type">نوع الهوية</label>
-                  <select name="identity_type" class="form-control" id="identity_type">
+                  <select name="identity_type" class="form-control form--select" id="identity_type">
 
+                    <option value=""></option>
                     <option value="إقامة">إقامة</option>
                     <option value="هوية وطنية">هوية وطنية</option>
                     <option value="هوية خليجية">هوية خليجية</option>
@@ -134,103 +136,101 @@
 
                 <div class="col-sm-4 mb-4">
                   <label for="nationality">الجنسية</label>
-                  <select name="nationality" class="form-control js-example-basic-single" id="nationality">
+                  <select name="nationality" class="form-control form--select" id="nationality">
+                    
+                    <option value=""></option>
 
                     @foreach ($nationalities as $nation)
-                    <optgroup >
-
-                      <option value="{{$nation->id}}">{{$nation->name}}</option>
-
-                    </optgroup>
+                        <option value="{{$nation->id}}">{{$nation->name}}</option>
                     @endforeach
-                    
+
                   </select>
                 </div>
+
+
+                   
+                <div class="col-sm-4 mb-4">
+                  <label for="birthdate">تاريخ الميلاد</label>
+                  <input type="date" id="birthdate" required name="birthdate" class="form-control" >
+                </div>
+
+
+                
+                {{-- hr --}}
+                <div class="col-12 mb-4 mt-2">
+                  <hr>
+                </div>
+
 
                 <div class="col-sm-4 mb-4">
                   <label for="phone"> رقم الهاتف </label>
                   <input type="text" id="phone" required name="phone" class="form-control" >
                 </div>
 
-                <div class="col-sm-4 mb-4">
-                  <label for="birthdate">تاريخ الميلاد</label>
-                  <input type="date" id="birthdate" required name="birthdate" class="form-control" >
-                </div>
 
                 <div class="col-sm-4 mb-4">
                   <label for="region">المقاطعة</label>
-                  <select name="region" class=" js-example-basic-single col-sm-12" id="region">
+                  <select name="region" class="form--select col-sm-12" id="region">
+                    <option value=""></option>
 
-                    <optgroup>
+                    @foreach ($regions as $region)
+                      <option value="{{$region->id}}">{{$region->name_ar}}</option>
+                    @endforeach
 
-                      @foreach ($regions as $region)
-                      
-                        <option value="{{$region->id}}">{{$region->name_ar}}</option>
-                          
-                      @endforeach
-
-                  </optgroup>
                   </select>
                 </div>
 
                 <div class="col-sm-4 mb-4">
                   <label for="province">المحافظة</label>
-                  <select name="province" class="form-control js-example-basic-single" id="province">
+                  <select name="province" class="form-control form--select" id="province">
+                    
+                    <option value=""></option>
 
-                    <optgroup>
+                    @foreach ($provinces as $province)
+                      <option value="{{$province->id}}">{{$province->name_ar}}</option>
+                    @endforeach
 
-                      @foreach ($provinces as $province)
-                          
-                        <option value="{{$province->id}}">{{$province->name_ar}}</option>
-
-                      @endforeach
-
-                  </optgroup>
                   </select>
                 </div>
 
                 <div class="col-sm-4 mb-4">
                   <label for="city">المدينة</label>
-                  <select name="city" class="form-control js-example-basic-single" id="city">
+                  <select name="city" class="form-control form--select" id="city">
 
-                    <optgroup>
+                      <option value=""></option>
+
                       @foreach ($cities as $city)
-                        
                         <option value="{{$city->id}}">{{$city->name_ar}}</option>
-
                       @endforeach
-                  </optgroup>
+
                   </select>
                 </div>
 
 
                 <div class="col-sm-4 mb-4">
                   <label for="neighbor">الحي</label>
-                  <select name="neighbor" class="form-control js-example-basic-single" id="neighbor">
+                  <select name="neighbor" class="form-control form--select" id="neighbor">
 
-                    <optgroup>
-                      @foreach ($neighbors as $neighbor)
-                          
-                        <option value="{{$neighbor->id}}">{{$neighbor->name_ar}}</option>
+                    <option value=""></option>
 
-                      @endforeach
-                  </optgroup>
+                    @foreach ($neighbors as $neighbor)
+                      <option value="{{$neighbor->id}}">{{$neighbor->name_ar}}</option>
+                    @endforeach
+
                   </select>
                 </div>
 
                 <div class="col-sm-4 mb-4">
                   <label for="bank">البنك</label>
-                  <select name="bank" class="form-control js-example-basic-single" id="bank">
+                  <select name="bank" class="form-control form--select form--select" id="bank">
 
-                    <optgroup>
-                      @foreach ($banks as $bank)
-                        
-                        <option value="{{$bank->id}}">{{$bank->name}}</option>
+                    <option value=""></option>
 
-                      @endforeach
-                  </optgroup>
+                    @foreach ($banks as $bank)
+                      <option value="{{$bank->id}}">{{$bank->name}}</option>
+                    @endforeach
+
                   </select>
-
                 </div>
 
                 <div class="col-sm-4 mb-4">
@@ -251,30 +251,31 @@
                 </div>
 
                 <div class="col-12 mb-4">
-                  <h4>معلومات العقد</h4>
+                  <h5 class='fw-bold form--subheading d-inline-block'>معلومات العقد</h5>
                 </div>
 
                 
                 <div class="col-sm-4 mb-4">
                   <label for="title">المسمى الوظيفي</label>
-                  <select name="title" class="form-control" id="title">
+                  <select name="title" class="form-control form--select" id="title">
+
+                    <option value=""></option>
 
                     @foreach ($jobs as $job)
-                      
                       <option value="{{$job->id}}">{{$job->name}}</option>
-
                     @endforeach
+
                   </select>
                 </div>
 
 
                 <div class="col-sm-4 mb-4">
-                  <label for="date">التاريخ</label>
+                  <label for="date">تاريخ العقد</label>
                   <input type="date" class="form-control" name="date" id="date">
                 </div>
 
                 <div class="col-sm-4 mb-4">
-                  <label for="end_date">تاريخ إنتهاء العقد</label>
+                  <label for="end_date">تاريخ الإنتهاء</label>
                   <input type="date" class="form-control" name="end_date" id="end_date">
                 </div>
 
@@ -287,12 +288,11 @@
                 <div class="col-sm-4 mb-4">
                   <label for="status">الحالة</label>
 
-                  <select name="status" class="form-control" id="status">
-
+                  <select name="status" class="form-control form--select" id="status">
+                      <option value=""></option>
                       <option value="حالة 1">حالة 1</option>
                       <option value="حالة 2">حالة 2</option>
                       <option value="حالة 3">حالة 3</option>
-
                   </select>
                 </div>
 
@@ -309,10 +309,9 @@
 
           {{-- footer --}}
           <div class="modal-footer">
+            <button  class="btn btn-none text-danger px-3 btn--close" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
 
-            <button  class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
-            <button class="btn btn-primary">حفظ </button>
-
+            <button class="btn btn-primary px-5">حفظ </button>
           </div>
           {{-- end footer --}}
 
