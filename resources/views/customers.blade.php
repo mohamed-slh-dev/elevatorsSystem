@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'الموظفين')
+@section('title', 'العملاء')
     
 @section('content')
 
@@ -10,7 +10,7 @@
 <div class="col-6 mb-5 text-end">
   <button class="btn btn-outline-primary d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".new">
     <i class="fa fa-plus me-2 fs-13 "></i>
-    إضافة موظف</button>
+    إضافة عميل</button>
 </div>
 
 
@@ -22,6 +22,8 @@
       <thead class="bg-primary">
         <tr>
           <th scope="col" class='min-w-130px'>الأسم</th>
+          <th scope="col" class='min-w-130px'>البريد الإلكتروني</th>
+
           <th scope="col" class='min-w-100px'>نوع الهوية</th>
           <th scope="col" class="min-w-100px">رقم الهوية</th>
 
@@ -35,39 +37,30 @@
           <th scope="col">الحساب</th>
           <th scope="col">IBAN</th>
           <th scope="col"></th>
-          <th scope="col">تعديل</th>
-
         </tr>
       </thead>
       <tbody>
         
-      @foreach ($employees as $employee)
+      @foreach ($customers as $customer)
           
       <tr>
-        <td >{{$employee->first_name .' '. $employee->last_name}}</td>
-        <td>{{$employee->identity_type}}</td>
-        <td>{{$employee->identity_number}}</td>
+        <td class='scale--2 text-center'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/customers/'.$customer->image)}}" alt="part image"> <br><br>
+          {{$customer->first_name. ' '. $customer->last_name}}</td>
+        <td>{{$customer->email}}</td>
+        <td>{{$customer->identity_type}}</td>
+        <td>{{$customer->identity_number}}</td>
 
-        {{-- <td class='fw-bold'>{{$employee->birthdate}}</td> --}}
-        {{-- <td class='fw-bold'>{{$employee->nationality->name}}</td> --}}
+        {{-- <td class='fw-bold'>{{$customer->birthdate}}</td> --}}
+        {{-- <td class='fw-bold'>{{$customer->nationality->name}}</td> --}}
 
-        <td>{{$employee->phone}}</td>
-        <td>{{$employee->region->name_ar}} / {{$employee->province->name_ar}}, {{$employee->city->name_ar}}, {{$employee->neighbor->name_ar}}</td>
-        <td>{{$employee->bank->name}}</td>
-        <td>{{$employee->bank_account}}</td>
-        <td>{{$employee->iban}}</td>
+        <td>{{$customer->phone}}</td>
+        <td>{{$customer->region->name_ar}} / {{$customer->province->name_ar}}, {{$customer->city->name_ar}}, {{$customer->neighbor->name_ar}}</td>
+        <td>{{$customer->bank->name}}</td>
+        <td>{{$customer->bank_account}}</td>
+        <td>{{$customer->iban}}</td>
 
         <td class='py-2 '>
-          <a href="{{route('employeeContracts', $employee->id)}}">
-            <button class="btn btn-primary-light btn--table">العقود</button>
-          </a>
-        </td>
-
-        <td>
-
-          <button class="btn btn-outline-warning d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".edit-{{$employee->id}}">
-             تعديل</button>
-
+            <button class="btn btn-primary-light btn--table" data-bs-toggle="modal" data-bs-target=".edit-{{$customer->id}}">تعديل</button>
         </td>
       </tr>
 
@@ -94,13 +87,13 @@
 
         {{-- header --}}
         <div class="modal-header mb-3">
-          <h4 class="modal-title fw-bold" id="new">إضافة موظف</h4>
+          <h4 class="modal-title fw-bold" id="new">إضافة عميل</h4>
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
 
         {{-- form --}}
-        <form action="{{route('addEmployee')}}" method="post">
+        <form action="{{route('addCustomer')}}" method="post" enctype="multipart/form-data">
 
           {{-- modal body --}}
           <div class="modal-body">
@@ -108,6 +101,8 @@
 
               <div class="row no-gutters mx-0">
 
+
+              
                 <div class="col-sm-4 mb-4">
                   <label for="first_name"> الأسم الأول</label>
                   <input type="text" id="first_name" required name="first_name" class="form-control" >
@@ -117,6 +112,30 @@
                   <label for="last_name"> الأسم الأخير</label>
                   <input type="text" id="last_name" required name="last_name" class="form-control" >
                 </div>
+
+                <div class="col-sm-4 mb-4">
+                  <label for="email"> البريد الإلكتروني</label>
+                  <input type="email" id="email"  name="email" class="form-control" >
+                </div>
+
+                <div class="col-sm-4 mb-4">
+                    <label for="type">نوع العميل</label>
+                    <select name="type" class="form-control form--select" id="type">
+  
+                      <option value="عميل جديد">عميل جديد</option>
+                      <option value="عميل محتمل">عميل محتمل</option>
+                      <option value="عميل">عميل</option>
+  
+                    </select>
+                  </div>
+
+                  <div class="col-sm-4 mb-4">
+                    <label for="image">الصورة</label>
+                    <input type="file" class="form-control" name="image" id="image" accept="image/*" >
+                  </div>
+
+
+
 
                 <div class="col-sm-4 mb-4">
                   <label for="identity_type">نوع الهوية</label>
@@ -150,15 +169,6 @@
                   </select>
                 </div>
 
-
-                   
-                <div class="col-sm-4 mb-4">
-                  <label for="birthdate">تاريخ الميلاد</label>
-                  <input type="date" id="birthdate" required name="birthdate" class="form-control" >
-                </div>
-
-
-                
                 {{-- hr --}}
                 <div class="col-12 mb-4 mt-2">
                   <hr>
@@ -247,64 +257,6 @@
                   <input type="text" class="form-control" name="iban" id="iban">
                 </div>
 
-
-                {{-- hr --}}
-                <div class="col-12 mb-3">
-                  <hr>
-                </div>
-
-                <div class="col-12 mb-4">
-                  <h5 class='fw-bold form--subheading d-inline-block'>معلومات العقد</h5>
-                </div>
-
-                
-                <div class="col-sm-4 mb-4">
-                  <label for="title">المسمى الوظيفي</label>
-                  <select name="title" class="form-control form--select" id="title">
-
-                    <option value=""></option>
-
-                    @foreach ($jobs as $job)
-                      <option value="{{$job->id}}">{{$job->name}}</option>
-                    @endforeach
-
-                  </select>
-                </div>
-
-
-                <div class="col-sm-4 mb-4">
-                  <label for="date">تاريخ العقد</label>
-                  <input type="date" class="form-control" name="date" id="date">
-                </div>
-
-                <div class="col-sm-4 mb-4">
-                  <label for="end_date">تاريخ الإنتهاء</label>
-                  <input type="date" class="form-control" name="end_date" id="end_date">
-                </div>
-
-                <div class="col-sm-4 mb-4">
-                  <label for="salary">المرتب</label>
-                  <input type="number" class="form-control" name="salary" id="salary">
-                </div>
-
-
-                <div class="col-sm-4 mb-4">
-                  <label for="status">الحالة</label>
-
-                  <select name="status" class="form-control form--select" id="status">
-                      <option value=""></option>
-                      <option value="حالة 1">حالة 1</option>
-                      <option value="حالة 2">حالة 2</option>
-                      <option value="حالة 3">حالة 3</option>
-                  </select>
-                </div>
-
-
-                <div class="col-sm-4 mb-4">
-                  <label for="reference">المرجع</label>
-                  <input type="text" class="form-control" name="reference" id="reference">
-                </div>
-
               </div>
           </div>
           {{-- end body --}}
@@ -327,48 +279,74 @@
 {{-- end modal --}}
 
 
-@foreach ($employees as $employee)
-    
-
+@foreach ($customers as $customer)
 
 {{-- modal --}}
 <div class="col-12">
-  <div class="modal fade edit-{{$employee->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal fade edit-{{$customer->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
   
           {{-- header --}}
           <div class="modal-header mb-3">
-            <h4 class="modal-title fw-bold" id="new">تعديل موظف</h4>
+            <h4 class="modal-title fw-bold" id="new">تعديل عميل</h4>
             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
   
   
           {{-- form --}}
-          <form action="{{route('updateEmployee')}}" method="post">
+          <form action="{{route('updateCustomer')}}" method="post" enctype="multipart/form-data">
   
-            <input type="hidden" name="id" value="{{$employee->id}}" id="">
+            <input type="hidden" name="id" value="{{$customer->id}}" id="">
             {{-- modal body --}}
             <div class="modal-body">
                 @csrf
   
                 <div class="row no-gutters mx-0">
   
+  
+                
                   <div class="col-sm-4 mb-4">
                     <label for="first_name"> الأسم الأول</label>
-                    <input type="text" id="first_name" required value="{{$employee->first_name}}" name="first_name" class="form-control" >
+                    <input type="text" id="first_name" required name="first_name" value="{{$customer->first_name}}" class="form-control" >
                   </div>
   
                   <div class="col-sm-4 mb-4">
                     <label for="last_name"> الأسم الأخير</label>
-                    <input type="text" id="last_name" required value="{{$employee->last_name}}" name="last_name" class="form-control" >
+                    <input type="text" id="last_name" value="{{$customer->last_name}}" required name="last_name" class="form-control" >
                   </div>
+
+                  <div class="col-sm-4 mb-4">
+                    <label for="email"> البريد الإلكتروني</label>
+                    <input type="email" id="email" value="{{$customer->email}}" name="email" class="form-control" >
+                  </div>
+  
+                  <div class="col-sm-4 mb-4">
+                      <label for="type">نوع العميل</label>
+                      <select name="type" class="form-control form--select" id="type">
+    
+                        <option value="{{$customer->type}}">{{$customer->type}}</option>
+
+                        <option value="عميل جديد">عميل جديد</option>
+                        <option value="عميل محتمل">عميل محتمل</option>
+                        <option value="عميل">عميل</option>
+    
+                      </select>
+                    </div>
+  
+                    <div class="col-sm-4 mb-4">
+                      <label for="image">الصورة</label>
+                      <input type="file" class="form-control" name="image" id="image" accept="image/*" >
+                    </div>
+  
+  
+  
   
                   <div class="col-sm-4 mb-4">
                     <label for="identity_type">نوع الهوية</label>
                     <select name="identity_type" class="form-control form--select" id="identity_type">
   
-                      <option value="{{$employee->identity_type}}">{{$employee->identity_type}}</option>
+                      <option value="{{$customer->identity_type}}">{{$customer->identity_type}}</option>
 
                       <option value="إقامة">إقامة</option>
                       <option value="هوية وطنية">هوية وطنية</option>
@@ -381,14 +359,14 @@
                   
                   <div class="col-sm-4 mb-4">
                     <label for="identity_number">رقم الهوية</label>
-                    <input type="text" id="identity_number" value="{{$employee->identity_number}}" required name="identity_number" class="form-control" >
+                    <input type="text" id="identity_number" value="{{$customer->identity_number}}" required name="identity_number" class="form-control" >
                   </div>
   
                   <div class="col-sm-4 mb-4">
                     <label for="nationality">الجنسية</label>
                     <select name="nationality" class="form-control form--select" id="nationality">
                       
-                      <option value="{{$employee->nationality_id}}">{{$employee->nationality->name}}</option>
+                      <option value="{{$customer->nationality_id}}">{{$customer->nationality->name}}</option>
   
                       @foreach ($nationalities as $nation)
                           <option value="{{$nation->id}}">{{$nation->name}}</option>
@@ -397,15 +375,6 @@
                     </select>
                   </div>
   
-  
-                     
-                  <div class="col-sm-4 mb-4">
-                    <label for="birthdate">تاريخ الميلاد</label>
-                    <input type="date" id="birthdate" value="{{$employee->birthdate}}" required name="birthdate" class="form-control" >
-                  </div>
-  
-  
-                  
                   {{-- hr --}}
                   <div class="col-12 mb-4 mt-2">
                     <hr>
@@ -414,14 +383,14 @@
   
                   <div class="col-sm-4 mb-4">
                     <label for="phone"> رقم الهاتف </label>
-                    <input type="text" id="phone" required value="{{$employee->phone}}" name="phone" class="form-control text-start" dir='ltr' >
+                    <input type="text" id="phone" required value="{{$customer->phone}}" name="phone" class="form-control text-start" dir='ltr' >
                   </div>
   
   
                   <div class="col-sm-4 mb-4">
                     <label for="region">المقاطعة</label>
                     <select name="region" class="form--select col-sm-12" id="region">
-                      <option value="{{$employee->region_id}}">{{$employee->region->name_ar}}</option>
+                      <option value="{{$customer->region_id}}">{{$customer->region->name_ar}}</option>
   
                       @foreach ($regions as $region)
                         <option value="{{$region->id}}">{{$region->name_ar}}</option>
@@ -434,7 +403,7 @@
                     <label for="province">المحافظة</label>
                     <select name="province" class="form-control form--select" id="province">
                       
-                      <option value="{{$employee->province_id}}">{{$employee->province->name_ar}}</option>
+                      <option value="{{$customer->province_id}}">{{$customer->province->name_ar}}</option>
   
                       @foreach ($provinces as $province)
                         <option value="{{$province->id}}">{{$province->name_ar}}</option>
@@ -447,7 +416,7 @@
                     <label for="city">المدينة</label>
                     <select name="city" class="form-control form--select" id="city">
   
-                      <option value="{{$employee->city_id}}">{{$employee->city->name_ar}}</option>
+                      <option value="{{$customer->city_id}}">{{$customer->city->name_ar}}</option>
   
                         @foreach ($cities as $city)
                           <option value="{{$city->id}}">{{$city->name_ar}}</option>
@@ -461,7 +430,7 @@
                     <label for="neighbor">الحي</label>
                     <select name="neighbor" class="form-control form--select" id="neighbor">
   
-                      <option value="{{$employee->neighbor_id}}">{{$employee->neighbor->name_ar}}</option>
+                      <option value="{{$customer->neighbor_id}}">{{$customer->neighbor->name_ar}}</option>
   
                       @foreach ($neighbors as $neighbor)
                         <option value="{{$neighbor->id}}">{{$neighbor->name_ar}}</option>
@@ -474,7 +443,7 @@
                     <label for="bank">البنك</label>
                     <select name="bank" class="form-control form--select form--select" id="bank">
   
-                      <option value="{{$employee->bank_id}}">{{$employee->bank->name_ar}}</option>
+                      <option value="{{$customer->bank_id}}">{{$customer->bank->name}}</option>
   
                       @foreach ($banks as $bank)
                         <option value="{{$bank->id}}">{{$bank->name}}</option>
@@ -485,13 +454,13 @@
   
                   <div class="col-sm-4 mb-4">
                     <label for="bank_account">رقم الحساب</label>
-                    <input type="text" class="form-control" value="{{$employee->bank_account}}" name="bank_account" id="bank_account">
+                    <input type="text" class="form-control" value="{{$customer->bank_account}}" name="bank_account" id="bank_account">
                   </div>
   
   
                   <div class="col-sm-4 mb-4">
                     <label for="iban">IBAN</label>
-                    <input type="text" class="form-control" value="{{$employee->iban}}"  name="iban" id="iban">
+                    <input type="text" class="form-control" value="{{$customer->iban}}" name="iban" id="iban">
                   </div>
   
                 </div>
@@ -514,7 +483,7 @@
     </div>
   </div>
   {{-- end modal --}}
-
+    
 @endforeach
 
 @endsection

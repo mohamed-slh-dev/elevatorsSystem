@@ -35,4 +35,10 @@ class Customer extends Model
         return $this->belongsTo('App\Models\Nationality');
     }
 
+
+    public function bank()
+    {
+        return $this->belongsTo('App\Models\Bank');
+    }
+
 }

@@ -25,6 +25,7 @@ Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashb
 //employees
 Route::get('/employees', [EmployeesController::class, 'employees'])->name('employees');
 Route::post('/add-employee', [EmployeesController::class, 'addEmployee'])->name('addEmployee');
+Route::post('/update-employee', [EmployeesController::class, 'updateEmployee'])->name('updateEmployee');
 Route::get('/employee-contracts/{id}', [EmployeesController::class, 'employeeContracts'])->name('employeeContracts');
 Route::post('/delete-employee-contract', [EmployeesController::class, 'deleteEmployeeContract'])->name('deleteEmployeeContract');
 Route::post('/add-employee-contract', [EmployeesController::class, 'addEmployeeContract'])->name('addEmployeeContract');
@@ -44,3 +45,9 @@ Route::post('/add-elevator', [ElevatorsController::class, 'addElevator'])->name(
 //users
 Route::get('/users', [UsersController::class, 'users'])->name('users');
 Route::post('/add-user', [UsersController::class, 'addUser'])->name('addUser');
+
+
+//customers
+Route::get('/customers', [CustomersController::class, 'customers'])->name('customers');
+Route::post('/add-customer', [CustomersController::class, 'addCustomer'])->name('addCustomer');
+Route::post('/update-customer', [CustomersController::class, 'updateCustomer'])->name('updateCustomer');

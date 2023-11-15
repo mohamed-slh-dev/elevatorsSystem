@@ -78,6 +78,35 @@ class EmployeesController extends Controller
 
     }
 
+
+
+    public function updateEmployee(Request $request){
+
+        $employee = Employee::find($request->id);
+
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->identity_type = $request->identity_type;
+        $employee->identity_number = $request->identity_number;
+        $employee->nationality_id = $request->nationality;
+        $employee->phone = $request->phone;
+        $employee->birthdate = $request->birthdate;
+        $employee->region_id = $request->region;
+        $employee->province_id = $request->province;
+        $employee->city_id = $request->city;
+        $employee->neighbor_id = $request->neighbor;
+        $employee->bank_id = $request->bank;
+        $employee->bank_account = $request->bank_account;
+        $employee->iban = $request->iban;
+
+        $employee->save();
+
+       
+
+        return redirect()->back()->with('success','تم تعديل موظف بنجاح');
+
+    }
+
     public function employeeContracts($id){
 
         $employee = Employee::find($id);
