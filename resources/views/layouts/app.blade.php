@@ -192,7 +192,7 @@
               <i data-feather="settings"></i>
             </a> --}}
             <img class="img-90 rounded-circle" src="../assets/images/dashboard/1.png" alt="">
-            <div class="badge-bottom"></div><a href="user-profile.html">
+            <div class="badge-bottom"></div><a href="javascript:void(0);">
               <h6 class="mt-3 f-14 f-w-600">Emay Walter</h6></a>
             <p class="mb-0 font-roboto">Human Resources Department</p>
             {{-- <ul>
@@ -277,7 +277,7 @@
                 {{-- page alerts --}}
                 @include('alerts.alerts')
 
-                
+
                 {{-- page title --}}
                 <div class="col-sm-6 mb-5">
                   <h3 class="form--subheading d-inline-block"> @yield('title')</h3>

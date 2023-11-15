@@ -21,18 +21,15 @@
     <table class="table table-bordered">
       <thead class="bg-primary">
         <tr>
-          <th scope="col">الأسم</th>
-          <th scope="col" class='min-w-80px'>نوع الهوية</th>
-          <th scope="col" class="min-w-80px">رقم الهوية</th>
+          <th scope="col" class='min-w-130px'>الأسم</th>
+          <th scope="col" class='min-w-100px'>نوع الهوية</th>
+          <th scope="col" class="min-w-100px">رقم الهوية</th>
 
           {{-- <th scope="col" class='min-w-90px'>تاريخ الميلاد</th> --}}
           {{-- <th scope="col">الجنسية</th> --}}
 
-          <th scope="col">رقم الهاتف</th>
-          <th scope="col">المقاطعة</th>
-          <th scope="col">المحافظة</th>
-          <th scope="col">المدينة</th>
-          <th scope="col">الحي</th>
+          <th scope="col" class="min-w-110px">رقم الهاتف</th>
+          <th scope="col" class="min-w-120px">العنوان</th>
 
           <th scope="col">البنك</th>
           <th scope="col">الحساب</th>
@@ -53,11 +50,7 @@
         {{-- <td class='fw-bold'>{{$employee->nationality->name}}</td> --}}
 
         <td>{{$employee->phone}}</td>
-        <td>{{$employee->region->name_ar}}</td>
-        <td>{{$employee->province->name_ar}}</td>
-        <td>{{$employee->city->name_ar}}</td>
-        <td>{{$employee->neighbor->name_ar}}</td>
-
+        <td>{{$employee->region->name_ar}} / {{$employee->province->name_ar}}, {{$employee->city->name_ar}}, {{$employee->neighbor->name_ar}}</td>
         <td>{{$employee->bank->name}}</td>
         <td>{{$employee->bank_account}}</td>
         <td>{{$employee->iban}}</td>
@@ -164,7 +157,7 @@
 
                 <div class="col-sm-4 mb-4">
                   <label for="phone"> رقم الهاتف </label>
-                  <input type="text" id="phone" required name="phone" class="form-control" >
+                  <input type="text" id="phone" required name="phone" class="form-control text-start" dir='ltr' >
                 </div>
 
 

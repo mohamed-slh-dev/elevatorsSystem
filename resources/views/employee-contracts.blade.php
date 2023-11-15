@@ -185,7 +185,7 @@
             {{-- body --}}
             <div class="modal-body">
     
-                <div class="row">
+                <div class="row no-gutters mx-0">
                   <div class="col-12 text-center">
                     
                     {{-- main title --}}
