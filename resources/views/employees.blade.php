@@ -303,7 +303,6 @@
           {{-- footer --}}
           <div class="modal-footer">
             <button  class="btn btn-none text-danger px-3 btn--close" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
-
             <button class="btn btn-primary px-5">حفظ </button>
           </div>
           {{-- end footer --}}

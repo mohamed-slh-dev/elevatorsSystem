@@ -48,7 +48,7 @@
           <td>{{$contract->status}}</td>
           <td>{{$contract->reference}}</td>
           <td>
-            <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scaleRotate--1" value="{{$contract->id}}">
+            <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scale--2" value="{{$contract->id}}">
               <i class='fa fa-trash fs-5'></i>
             </button>
           </td>

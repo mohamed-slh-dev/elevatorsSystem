@@ -91,7 +91,7 @@
 
                 <div class="col-sm-4 mb-4">
                   <label for="image">الصورة</label>
-                  <input type="file" class="form-control" name="image" id="image" accept="image/*">
+                  <input type="file" class="form-control" name="image" id="image" accept="image/*" required>
                 </div>
 
 
