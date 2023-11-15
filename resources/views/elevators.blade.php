@@ -17,7 +17,7 @@
 {{-- table --}}
 <div class="col-sm-12 col-lg-12 col-xl-12">
     <div class="table-responsive">
-      <table class="table">
+      <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
             <th scope="col" class='min-w-130px'>الأسم</th>
