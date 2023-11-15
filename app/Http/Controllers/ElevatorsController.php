@@ -81,6 +81,8 @@ class ElevatorsController extends Controller
 
         $elevators = Elevator::all();
 
+        $elevators_parts = [];
+
         $parts = Part::all();
 
         $regions = Region::all();
@@ -92,7 +94,7 @@ class ElevatorsController extends Controller
 
         $banks = Bank::all();
 
-        return view('elevators', compact('elevators', 'parts', 'regions', 'provinces', 'cities', 'neighbors', 'banks', 'nationalities'));
+        return view('elevators', compact('elevators', 'parts', 'regions', 'provinces', 'cities', 'neighbors', 'banks', 'nationalities', 'elevators_parts'));
 
     }
 
@@ -130,19 +132,114 @@ class ElevatorsController extends Controller
 
         $elevator->save();
 
-        for ($i=0; $i < count($request->elevator_parts) ; $i++) { 
+        if (!empty($request->elevator_parts)) {
+           
+            for ($i=0; $i < count($request->elevator_parts) ; $i++) { 
             
-           $elevator_part = new ElevatorPart();
-           $elevator_part->elevator_id = $elevator->id;
-           $elevator_part->part_id =  $request->elevator_parts[$i];
-
-           $elevator_part->save();
+                $elevator_part = new ElevatorPart();
+                $elevator_part->elevator_id = $elevator->id;
+                $elevator_part->part_id =  $request->elevator_parts[$i];
+     
+                $elevator_part->save();
+     
+             }
 
         }
+      
 
         return redirect()->back()->with('success', 'تم إضافة مصعد بنجاح');
 
 
+    }
+
+
+    public function updateElevator(Request $request){
+
+
+        $elevator = Elevator::find($request->id);
+
+        $elevator->name = $request->name;
+        $elevator->company = $request->company;
+
+
+         if (!empty($request->file('image'))) {
+            
+            $image = 'elevator-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+
+            $path = $request->file('image')->storeAs('public/elevators',$image);
+    
+            $elevator->image = $image;
+
+        }
+
+        $elevator->nationality_id = $request->nationality;
+
+        $elevator->supplier_name = $request->supplier_name;
+        $elevator->supplier_phone = $request->supplier_phone;
+        $elevator->supplier_email = $request->supplier_email;
+
+        $elevator->region_id = $request->region;
+        $elevator->province_id = $request->province;
+        $elevator->city_id = $request->city;
+        $elevator->neighbor_id = $request->neighbor;
+        $elevator->bank_id = $request->bank;
+        $elevator->bank_account = $request->bank_account;
+        $elevator->iban = $request->iban;
+
+        $elevator->save();
+
+        return redirect()->back()->with('success', 'تم تعديل المصعد بنجاح');
+
+
+    }
+
+
+    public function editElevatorParts($id){
+
+        $elevator = Elevator::find($id);
+
+        $parts = Part::all();
+
+        $elevator_parts = [];
+
+        foreach ($elevator->elevatorParts as $part) {
+           
+            $elevator_parts [] = $part->part->id;
+
+        }
+
+
+        return view('edit-elevator-parts', compact('elevator', 'elevator_parts','parts'));
+    }
+
+    public function updateElevatorParts(Request $request){
+
+        $elevator = Elevator::find($request->id);
+
+        //delete all the old parts
+        foreach ($elevator->elevatorParts as $part) {
+            
+            $part->delete();
+
+        }
+
+
+        //add the new parts
+        if (!empty($request->elevator_parts)) {
+           
+            for ($i=0; $i < count($request->elevator_parts) ; $i++) { 
+            
+                $elevator_part = new ElevatorPart();
+                $elevator_part->elevator_id = $elevator->id;
+                $elevator_part->part_id =  $request->elevator_parts[$i];
+     
+                $elevator_part->save();
+     
+             }
+
+        }//end of if !empty($request->elevator_parts
+
+        return redirect()->route('elevators');
     }
 
 }

@@ -34,12 +34,16 @@ Route::post('/add-employee-contract', [EmployeesController::class, 'addEmployeeC
 //parts
 Route::get('/parts', [ElevatorsController::class, 'parts'])->name('parts');
 Route::post('/add-part', [ElevatorsController::class, 'addPart'])->name('addPart');
+Route::post('/update-part', [ElevatorsController::class, 'updatePart'])->name('updatePart');
 Route::post('/add-part-price', [ElevatorsController::class, 'addPartPrice'])->name('addPartPrice');
 
 
 //elevators
 Route::get('/elevators', [ElevatorsController::class, 'elevators'])->name('elevators');
 Route::post('/add-elevator', [ElevatorsController::class, 'addElevator'])->name('addElevator');
+Route::post('/update-elevator', [ElevatorsController::class, 'updateElevator'])->name('updateElevator');
+Route::get('/edit-elevator-parts/{id}', [ElevatorsController::class, 'editElevatorParts'])->name('editElevatorParts');
+Route::post('/update-elevator-parts', [ElevatorsController::class, 'updateElevatorParts'])->name('updateElevatorParts');
 
 
 //users

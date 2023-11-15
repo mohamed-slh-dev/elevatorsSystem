@@ -158,7 +158,7 @@
 
                 <div class="col-sm-4 mb-4">
                   <label for="nationality">الجنسية</label>
-                  <select name="nationality" class="form-control form--select" id="nationality">
+                  <select name="nationality" required class="form-control form--select" id="nationality">
                     
                     <option value=""></option>
 
@@ -183,7 +183,7 @@
 
                 <div class="col-sm-4 mb-4">
                   <label for="region">المقاطعة</label>
-                  <select name="region" class="form--select col-sm-12" id="region">
+                  <select name="region" required class="form--select col-sm-12" id="region">
                     <option value=""></option>
 
                     @foreach ($regions as $region)
@@ -195,7 +195,7 @@
 
                 <div class="col-sm-4 mb-4">
                   <label for="province">المحافظة</label>
-                  <select name="province" class="form-control form--select" id="province">
+                  <select name="province" required class="form-control form--select" id="province">
                     
                     <option value=""></option>
 
@@ -208,7 +208,7 @@
 
                 <div class="col-sm-4 mb-4">
                   <label for="city">المدينة</label>
-                  <select name="city" class="form-control form--select" id="city">
+                  <select name="city" required class="form-control form--select" id="city">
 
                       <option value=""></option>
 
@@ -222,7 +222,7 @@
 
                 <div class="col-sm-4 mb-4">
                   <label for="neighbor">الحي</label>
-                  <select name="neighbor" class="form-control form--select" id="neighbor">
+                  <select name="neighbor" required class="form-control form--select" id="neighbor">
 
                     <option value=""></option>
 
@@ -235,7 +235,7 @@
 
                 <div class="col-sm-4 mb-4">
                   <label for="bank">البنك</label>
-                  <select name="bank" class="form-control form--select form--select" id="bank">
+                  <select name="bank" required class="form-control form--select form--select" id="bank">
 
                     <option value=""></option>
 

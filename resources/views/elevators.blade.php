@@ -33,6 +33,11 @@
             <th scope="col">IBAN</th>
 
             <th scope="col" class='min-w-140px'></th>
+
+            <th scope="col">تعديل</th>
+            <th scope="col">تعديل أجزاء المصعد</th>
+
+
           </tr>
         </thead>
 
@@ -60,12 +65,26 @@
 
               {{-- parts --}}
               <td>
-                {{-- @foreach ($elevator->elevatorParts  as $part)
+                @foreach ($elevator->elevatorParts  as $part)
                   ( {{$part->part->name}} )
-                @endforeach --}}
+                @endforeach
                 {{-- TODO: POPOVER --}}
-                <button class="btn btn--table btn-primary-light">أجزاء المصعد</button>
+                {{-- <button class="btn btn--table btn-primary-light">أجزاء المصعد</button> --}}
               </td>
+
+              <td>
+                 <button class="btn btn-outline-warning d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".edit-{{$elevator->id}}">تعديل</button>
+              </td>
+
+
+              <td>
+                <a href="{{route('editElevatorParts', $elevator->id)}}">
+
+                  <button class="btn btn-outline-warning d-inline-flex align-items-center scaleRotate--1">تعديل أجزاء المصعد</button>
+
+                </a>
+               
+             </td>
 
             </tr>
             
@@ -131,7 +150,7 @@
 
               <div class="col-sm-4 mb-4">
                 <label for="nationality">بلد المنشأ</label>
-                <select name="nationality" class="form-control form--select" id="nationality">
+                <select name="nationality" required class="form-control form--select" id="nationality">
 
                   <option value=""></option>
 
@@ -173,7 +192,7 @@
 
               <div class="col-sm-4 mb-4">
                 <label for="region">المقاطعة</label>
-                <select name="region" class="form-control form--select" id="region">
+                <select name="region" required class="form-control form--select" id="region">
 
                   <option value=""></option>
 
@@ -188,7 +207,7 @@
 
               <div class="col-sm-4 mb-4">
                 <label for="province">المحافظة</label>
-                <select name="province" class="form-control form--select" id="province">
+                <select name="province" required class="form-control form--select" id="province">
 
                   <option value=""></option>
 
@@ -203,7 +222,7 @@
 
               <div class="col-sm-4 mb-4">
                 <label for="city">المدينة</label>
-                <select name="city" class="form-control form--select" id="city">
+                <select name="city" required class="form-control form--select" id="city">
 
                   <option value=""></option>
                   
@@ -217,7 +236,7 @@
 
               <div class="col-sm-4 mb-4">
                 <label for="neighbor">الحي</label>
-                <select name="neighbor" class="form-control form--select" id="neighbor">
+                <select name="neighbor" required class="form-control form--select" id="neighbor">
 
                   <option value=""></option>
 
@@ -232,7 +251,7 @@
 
               <div class="col-sm-4 mb-4">
                 <label for="bank">البنك</label>
-                <select name="bank" class="form-control form--select" id="bank">
+                <select name="bank" required class="form-control form--select" id="bank">
 
                   <option value=""></option>
 
@@ -314,5 +333,205 @@
   </div>
 </div>
 {{-- end modal --}}
+
+@foreach ($elevators as $elevator)
+    
+
+
+{{-- edit elevator modal --}}
+<div class="col-12">
+  <div class="modal fade edit-{{$elevator->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+
+        {{-- header --}}
+        <div class="modal-header mb-3">
+          <h4 class="modal-title fw-bold" id="new">تعديل مصعد</h4>
+          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+
+        {{-- form --}}
+        <form action="{{route('updateElevator')}}" method="post" enctype="multipart/form-data">
+          @csrf
+
+
+          <input type="hidden" name="id" value="{{$elevator->id}}" id="">
+          {{-- body --}}
+          <div class="modal-body">
+            <div class="row no-gutters mx-0">
+
+              <div class="col-sm-4 mb-4">
+                <label for="name">الأسم</label>
+                <input type="text" class="form-control" value="{{$elevator->name}}" name="name" id="name">
+              </div>
+
+              <div class="col-sm-4 mb-4">
+                <label for="image">الصورة</label>
+                <input type="file" class="form-control" name="image" id="image" accept="image/*">
+              </div>
+
+
+              {{-- empty --}}
+              <div class="col-12"></div>
+
+
+              <div class="col-sm-4 mb-4">
+                <label for="company">الشركة</label>
+                <input type="text" class="form-control" value="{{$elevator->company}}" name="company" id="company">
+              </div>
+
+
+              <div class="col-sm-4 mb-4">
+                <label for="nationality">بلد المنشأ</label>
+                <select name="nationality" class="form-control form--select" id="nationality">
+
+                  <option value="{{$elevator->nationality_id}}">{{$elevator->nationality->name}}</option>
+
+                  @foreach ($nationalities as $nation)
+                    <option value="{{$nation->id}}">{{$nation->name}}</option>
+                  @endforeach
+                  
+                </select>
+              </div>
+
+
+
+              {{-- empty --}}
+              <div class="col-12"></div>
+
+
+              <div class="col-sm-4 mb-4">
+                <label for="supplier_name">اسم المورد</label>
+                <input type="text" class="form-control" value="{{$elevator->supplier_name}}" name="supplier_name" id="supplier_name">
+              </div>
+
+              <div class="col-sm-4 mb-4">
+                <label for="supplier_phone">هاتف المورد</label>
+                <input type="text" class="form-control text-start" value="{{$elevator->supplier_phone}}" name="supplier_phone" id="supplier_phone" dir="ltr">
+              </div>
+
+              <div class="col-sm-4 mb-4">
+                <label for="supplier_email">البريد الالكتروني للمورد</label>
+                <input type="email" class="form-control" value="{{$elevator->supplier_email}}" name="supplier_email" id="supplier_email">
+              </div>
+
+
+
+              {{-- hr --}}
+              <div class="col-12 mb-4 mt-2">
+                <hr>
+              </div>
+
+
+              <div class="col-sm-4 mb-4">
+                <label for="region">المقاطعة</label>
+                <select name="region" class="form-control form--select" id="region">
+
+                  <option value="{{$elevator->region_id}}">{{$elevator->region->name_ar}}</option>
+
+                  @foreach ($regions as $region)
+                    <option value="{{$region->id}}">{{$region->name_ar}}</option>
+                  @endforeach
+
+                </select>
+              </div>
+
+
+
+              <div class="col-sm-4 mb-4">
+                <label for="province">المحافظة</label>
+                <select name="province" class="form-control form--select" id="province">
+
+                  <option value="{{$elevator->province_id}}">{{$elevator->province->name_ar}}</option>
+
+                  @foreach ($provinces as $province)
+                    <option value="{{$province->id}}">{{$province->name_ar}}</option>
+                  @endforeach
+
+                </select>
+              </div>
+
+
+
+              <div class="col-sm-4 mb-4">
+                <label for="city">المدينة</label>
+                <select name="city" class="form-control form--select" id="city">
+
+                  <option value="{{$elevator->city_id}}">{{$elevator->city->name_ar}}</option>
+                  
+                  @foreach ($cities as $city)
+                    <option value="{{$city->id}}">{{$city->name_ar}}</option>
+                  @endforeach
+
+                </select>
+              </div>
+
+
+              <div class="col-sm-4 mb-4">
+                <label for="neighbor">الحي</label>
+                <select name="neighbor" class="form-control form--select" id="neighbor">
+
+                  <option value="{{$elevator->neighbor_id}}">{{$elevator->neighbor->name_ar}}</option>
+
+                  @foreach ($neighbors as $neighbor)
+                    <option value="{{$neighbor->id}}">{{$neighbor->name_ar}}</option>
+                  @endforeach
+
+                </select>
+              </div>
+
+
+
+              <div class="col-sm-4 mb-4">
+                <label for="bank">البنك</label>
+                <select name="bank" class="form-control form--select" id="bank">
+
+                  <option value="{{$elevator->bank_id}}">{{$elevator->bank->name}}</option>
+
+                  @foreach ($banks as $bank)
+                    <option value="{{$bank->id}}">{{$bank->name}}</option>
+                  @endforeach
+
+                </select>
+              </div>
+
+              <div class="col-sm-4 mb-4">
+                <label for="bank_account">رقم الحساب</label>
+                <input type="text" class="form-control" value="{{$elevator->bank_account}}" name="bank_account" id="bank_account">
+              </div>
+
+
+              <div class="col-sm-4 mb-4">
+                <label for="iban">IBAN</label>
+                <input type="text" class="form-control" value="{{$elevator->iban}}" name="iban" id="iban">
+              </div>
+
+
+            </div>
+
+          </div>
+          {{-- end body --}}
+
+
+          {{-- footer --}}
+          <div class="modal-footer mx-3">
+            <button  class="btn btn-none text-danger px-3 btn--close" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
+            <button class="btn btn-primary px-5">حفظ</button>
+          </div>
+          {{-- end footer --}}
+
+        </form>
+        {{-- end form --}}
+
+      </div>
+    </div>
+  </div>
+</div>
+{{-- end modal --}}
+@endforeach
+
+
 
 @endsection
