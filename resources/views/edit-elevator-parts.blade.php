@@ -54,11 +54,11 @@
 
 
     {{-- confirm / return buttons --}}
-    <div class="d-flex align-items-center justify-content-between mt-3">
+    <div class="d-flex align-items-center justify-content-between mt-3 border-top pt-3">
 
       <button class="btn btn-primary">حفظ التغييرات</button>
 
-      <a href="{{route('elevators')}}" class='me-4 scale--2'>
+      <a href="{{route('elevators')}}" class='scale--2'>
         <button class="btn btn-outline-danger">الرجوع الى المصاعد<i class="fa fa-angle-double-left ms-2"></i></button>
       </a>
 
