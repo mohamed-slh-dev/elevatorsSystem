@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateElevatorPartsTable extends Migration
+class CreateMaintenanceBillPartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,17 @@ class CreateElevatorPartsTable extends Migration
      */
     public function up()
     {
-        Schema::create('elevator_parts', function (Blueprint $table) {
+        Schema::create('maintenance_bill_parts', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('elevator_id')->unsigned()->nullable();
-            $table->foreign('elevator_id')->references('id')->on('elevators')->onDelete('cascade');
+            $table->bigInteger('maintenance_bill_id')->unsigned()->nullable();
+            $table->foreign('maintenance_bill_id')->references('id')->on('maintenance_bills')->onDelete('cascade');
 
-            
             $table->bigInteger('part_id')->unsigned()->nullable();
             $table->foreign('part_id')->references('id')->on('parts')->onDelete('cascade');
+            
+            $table->double('price', 11, 2)->nullable();
+
 
             $table->timestamps();
         });
@@ -34,6 +36,6 @@ class CreateElevatorPartsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('elevator_parts');
+        Schema::dropIfExists('maintenance_bill_parts');
     }
 }

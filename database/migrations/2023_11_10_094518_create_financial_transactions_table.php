@@ -24,14 +24,18 @@ class CreateFinancialTransactionsTable extends Migration
             $table->double('amount', 11, 2)->nullable();
             $table->integer('amount_in_days')->nullable();
             $table->double('remaining_amount', 11, 2)->nullable();
-            $table->string('note')->nullable();
-            $table->date('date')->nullable();
 
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('payment_with')->nullable();
             $table->string('payment_type')->nullable();
+
+            $table->string('note')->nullable();
+            $table->date('date')->nullable();
+            $table->string('reference')->nullable();
+
+
 
             $table->timestamps();
         });

@@ -104,10 +104,8 @@
                   <select name="type" class="form-control form--select" id="type">
 
                       <option value=""></option>
-                      <option value="نوع 1">نوع 1</option>
-                      <option value="نوع 2">نوع 2</option>
-                      <option value="نوع 3">نوع 3</option>
-
+                      <option value="كهربائي">كهربائي</option>
+                      <option value="ميكانيكي">ميكانيكي</option>
                   </select>
                 </div>
 

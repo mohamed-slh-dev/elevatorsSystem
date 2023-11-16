@@ -146,7 +146,7 @@
                 </ul>
               </li> --}}
               <li class="onhover-dropdown p-0">
-                <button class="btn btn-primary-light" type="button"><a href="{{route('login')}}"><i data-feather="log-out"></i>تسجيل خروج</a></button>
+                <button class="btn btn-primary-light" type="button"><a href="{{route('logout')}}"><i data-feather="log-out"></i>تسجيل خروج</a></button>
               </li>
             </ul>
           </div>
@@ -219,7 +219,42 @@
                       <i data-feather="user"></i><span>المستخدمين </span>
                     </a>
                   </li>
+
+
+                  <li class="dropdown">
+                    <a class="nav-link menu-title link-nav" href="{{route('users')}}">
+                      <i data-feather="user"></i><span>أعمال التركيب </span>
+                    </a>
+                  </li>
+
+                  <li class="dropdown">
+                    <a class="nav-link menu-title link-nav" href="{{route('users')}}">
+                      <i data-feather="user"></i><span>أعمال الصيانة </span>
+                    </a>
+                  </li>
+
+
+                  {{-- installment type : quotation or bill --}}
+                  {{-- apply to all : modal for the inital data (without parts) then after confirm / redirect to another page with elevators parts / checkbox for selecting the parts then add price to it (default price val is latest pricing from db) --}}
                   
+                  <li class="dropdown">
+                    <a class="nav-link menu-title link-nav" href="{{route('users')}}">
+                      <i data-feather="user"></i><span>المالية </span>
+                    </a>
+                  </li>
+
+                  {{-- 
+                    
+                    type: for hr / maintenance / installation
+
+                    1- no. type (salary / bonus / khasm) / days / emp id / note / payment w (cash / bank) / payment type (full amount / installment ) / code (customInput like ref) / date
+
+
+                    2- amount / note / pw / pt / code / date
+                    
+                    --}}
+
+
                 
                 </ul>
               </div>
