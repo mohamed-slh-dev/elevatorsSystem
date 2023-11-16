@@ -40,7 +40,7 @@
 
 
     {{-- uthmanTaha font (ar) / Roboto (en) --}}
-    <link rel="stylesheet" href="{{asset('assets/fonts/Tajawal/styles.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/fonts/NotoSans/styles.css')}}">
     <link rel="stylesheet" href="{{asset('assets/fonts/Roboto/styles.css')}}">
 
     

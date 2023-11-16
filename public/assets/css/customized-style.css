@@ -24,10 +24,10 @@
 
 /* general override */
 body {
-    font-family: "Tajawal", "Roboto";
-    letter-spacing: 0.5px;
+    font-family: "Noto Sans Arabic", "Roboto";
+    letter-spacing: 0.3px;
     color: #222;
-    font-weight: 500;
+    font-weight: 400;
     transition: 0.4s all ease-in-out;
 }
 
@@ -111,13 +111,13 @@ th {
 }
 
 td {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
 }
 
 label {
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 5px !important;
     letter-spacing: 0.8px;
 }
@@ -169,7 +169,8 @@ input[type="file"] {
     .select2-selection--single
     .select2-selection__rendered {
     line-height: 36px;
-    font-weight: 500;
+    font-weight: 400;
+    font-size: 13px;
 }
 
 .select2-container--default
@@ -179,7 +180,7 @@ input[type="file"] {
 }
 
 .selection .select2-selection {
-    font-family: "Tajawal", "Roboto";
+    font-family: "Noto Sans Arabic", "Roboto";
 }
 
 .select2-container--default
@@ -215,11 +216,11 @@ input[type="file"] {
 }
 
 input {
-    font-size: 14px;
+    font-size: 13px;
     height: 46px;
     outline: none;
     box-shadow: none !important;
-    font-weight: 500 !important;
+    font-weight: 400 !important;
 }
 
 input[type="checkbox"] {
