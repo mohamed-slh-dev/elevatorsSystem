@@ -50,7 +50,7 @@
 
               {{-- supplier info --}}
               <td class='position-relative'>{{$elevator->supplier_name}}
-                  <a class="example-popover btn btn-none p-0 ms-1" tabindex="0" role="button" data-bs-toggle="tooltip" data-bs-trigger="focus" data-bs-html="true" data-bs-placement="bottom" title="{{'هاتف : '  . $elevator->supplier_phone . '<br />' . 'البريد الالكتروني : '  . $elevator->supplier_email}}">
+                  <a class="example-popover btn btn-none p-0 ms-1 scale--2" tabindex="0" role="button" data-bs-toggle="tooltip" data-bs-trigger="focus" data-bs-html="true" data-bs-placement="bottom" title="{{'هاتف : '  . $elevator->supplier_phone . '<br />' . 'البريد الالكتروني : '  . $elevator->supplier_email}}">
                     <i class='fa fa-info-circle fs-5 text-theme'></i>
                   </a>
               </td>
@@ -78,7 +78,7 @@
 
 
                 {{-- show parts --}}
-                <button class="btn btn--table btn-outline-light" tabindex="0" role="button" data-bs-toggle="tooltip" data-bs-trigger="focus" data-bs-html="true" data-bs-placement="bottom" title="{{$allParts}}">أجزاء المصعد</button>
+                <button class="btn btn--table btn-outline-light " tabindex="0" role="button" data-bs-toggle="tooltip" data-bs-trigger="focus" data-bs-html="true" data-bs-placement="bottom" title="{{$allParts}}">أجزاء المصعد</button>
 
 
                 
