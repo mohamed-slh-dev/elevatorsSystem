@@ -19,12 +19,12 @@
       <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
-            <th scope="col" class='min-w-130px'>الأسم</th>
+            <th scope="col" class='min-w-150px'>الأسم</th>
             <th scope="col">النوع</th>
             <th scope="col" class='min-w-130px'>الوصف</th>
             <th scope="col" class='min-w-110px'>سعر الشراء</th>
             <th scope="col" class='min-w-110px'>سعر البيع</th>
-            <th scope="col" class='min-w-110px'>تغيير السعر</th>
+            <th scope="col" class='min-w-110px'></th>
           </tr>
         </thead>
         <tbody>
@@ -34,7 +34,7 @@
         @foreach ($parts as $part)
           <tr>         
 
-            <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/parts/'.$part->image)}}" alt="part image">{{$part->name}}</td>
+            <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/parts/'.$part->image)}}" alt="part image"><span class='fw-bold border-bottom'>{{$part->name}}</span></td>
 
             <td>{{$part->type}}</td>
             <td>{{$part->desc}}</td>
@@ -84,12 +84,12 @@
           <div class="modal-body">
               <div class="row no-gutters mx-0">
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="name">الأسم </label>
                   <input type="text" class="form-control" name="name" id="name">
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="image">الصورة</label>
                   <input type="file" class="form-control" name="image" id="image" accept="image/*" required>
                 </div>
@@ -99,7 +99,7 @@
                 <div class="col-12"></div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="type">النوع</label>
                   <select name="type" class="form-control form--select" id="type">
 
@@ -111,18 +111,18 @@
                   </select>
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="purchase_price">سعر الشراء</label>
                   <input type="number" class="form-control" min="0" step=".1" name="purchase_price" id="purchase_price">
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="sell_price">سعر البيع</label>
                   <input type="number" class="form-control" min="0" step=".1" name="sell_price" id="sell_price">
                 </div>
 
 
-                <div class="col-sm-12 mb-4">
+                <div class="col-sm-12 mb-20">
                   <label for="desc">الوصف</label>
                   <input type="text" class="form-control" name="desc" id="desc">
                 </div>

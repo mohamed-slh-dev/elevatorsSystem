@@ -21,17 +21,15 @@
     <table class="table table-bordered">
       <thead class="bg-primary">
         <tr>
-          <th scope="col" class='min-w-130px'>الأسم</th>
+          <th scope="col" class='min-w-200px'>أسم العميل</th>
           <th scope="col" class='min-w-130px'>البريد الإلكتروني</th>
-
-          <th scope="col" class='min-w-100px'>نوع الهوية</th>
-          <th scope="col" class="min-w-100px">رقم الهوية</th>
+          <th scope="col" class="min-w-110px">الهاتف</th>
+          <th scope="col" class='min-w-120px'>الهوية</th>
 
           {{-- <th scope="col" class='min-w-90px'>تاريخ الميلاد</th> --}}
           {{-- <th scope="col">الجنسية</th> --}}
 
-          <th scope="col" class="min-w-110px">رقم الهاتف</th>
-          <th scope="col" class="min-w-120px">العنوان</th>
+          <th scope="col" class="min-w-130px">العنوان</th>
 
           <th scope="col">البنك</th>
           <th scope="col">الحساب</th>
@@ -44,22 +42,21 @@
       @foreach ($customers as $customer)
           
       <tr>
-        <td class='scale--2 text-center'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/customers/'.$customer->image)}}" alt="part image"> <br><br>
-          {{$customer->first_name. ' '. $customer->last_name}}</td>
+        <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle table--img me-2' src="{{asset('storage/customers/'.$customer->image)}}" alt="part image"><span class='fw-bold border-bottom'>{{$customer->first_name. ' '. $customer->last_name}}</span></td>
         <td>{{$customer->email}}</td>
-        <td>{{$customer->identity_type}}</td>
-        <td>{{$customer->identity_number}}</td>
+        <td>{{$customer->phone}}</td>
+
+        <td>{{$customer->identity_type}}<br>/ {{$customer->identity_number}}</td>
 
         {{-- <td class='fw-bold'>{{$customer->birthdate}}</td> --}}
         {{-- <td class='fw-bold'>{{$customer->nationality->name}}</td> --}}
 
-        <td>{{$customer->phone}}</td>
         <td>{{$customer->region->name_ar}} / {{$customer->province->name_ar}}, {{$customer->city->name_ar}}, {{$customer->neighbor->name_ar}}</td>
         <td>{{$customer->bank->name}}</td>
         <td>{{$customer->bank_account}}</td>
         <td>{{$customer->iban}}</td>
 
-        <td class='py-2 '>
+        <td>
             <button class="btn btn-primary-light btn--table" data-bs-toggle="modal" data-bs-target=".edit-{{$customer->id}}">تعديل</button>
         </td>
       </tr>
@@ -103,22 +100,22 @@
 
 
               
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="first_name"> الأسم الأول</label>
                   <input type="text" id="first_name" required name="first_name" class="form-control" >
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="last_name"> الأسم الأخير</label>
                   <input type="text" id="last_name" required name="last_name" class="form-control" >
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="email"> البريد الإلكتروني</label>
                   <input type="email" id="email"  name="email" class="form-control" >
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                     <label for="type">نوع العميل</label>
                     <select name="type" class="form-control form--select" id="type">
   
@@ -129,15 +126,10 @@
                     </select>
                   </div>
 
-                  <div class="col-sm-4 mb-4">
-                    <label for="image">الصورة</label>
-                    <input type="file" class="form-control" name="image" id="image" accept="image/*" >
-                  </div>
+         
 
 
-
-
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="identity_type">نوع الهوية</label>
                   <select name="identity_type" class="form-control form--select" id="identity_type">
 
@@ -151,12 +143,12 @@
                 </div>
 
                 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="identity_number">رقم الهوية</label>
                   <input type="text" id="identity_number" required name="identity_number" class="form-control" >
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="nationality">الجنسية</label>
                   <select name="nationality" required class="form-control form--select" id="nationality">
                     
@@ -169,19 +161,27 @@
                   </select>
                 </div>
 
+
+                <div class="col-sm-4 mb-20">
+                  <label for="image">الصورة</label>
+                  <input type="file" class="form-control" name="image" id="image" accept="image/*" required>
+                </div>
+
+
+
                 {{-- hr --}}
                 <div class="col-12 mb-4 mt-2">
                   <hr>
                 </div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="phone"> رقم الهاتف </label>
                   <input type="text" id="phone" required name="phone" class="form-control text-start" dir='ltr' >
                 </div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="region">المقاطعة</label>
                   <select name="region" required class="form--select col-sm-12" id="region">
                     <option value=""></option>
@@ -193,7 +193,7 @@
                   </select>
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="province">المحافظة</label>
                   <select name="province" required class="form-control form--select" id="province">
                     
@@ -206,7 +206,7 @@
                   </select>
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="city">المدينة</label>
                   <select name="city" required class="form-control form--select" id="city">
 
@@ -220,7 +220,7 @@
                 </div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="neighbor">الحي</label>
                   <select name="neighbor" required class="form-control form--select" id="neighbor">
 
@@ -233,7 +233,7 @@
                   </select>
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="bank">البنك</label>
                   <select name="bank" required class="form-control form--select form--select" id="bank">
 
@@ -246,13 +246,13 @@
                   </select>
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="bank_account">رقم الحساب</label>
                   <input type="text" class="form-control" name="bank_account" id="bank_account">
                 </div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="iban">IBAN</label>
                   <input type="text" class="form-control" name="iban" id="iban">
                 </div>
@@ -298,6 +298,7 @@
           <form action="{{route('updateCustomer')}}" method="post" enctype="multipart/form-data">
   
             <input type="hidden" name="id" value="{{$customer->id}}" id="">
+
             {{-- modal body --}}
             <div class="modal-body">
                 @csrf
@@ -306,22 +307,22 @@
   
   
                 
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="first_name"> الأسم الأول</label>
                     <input type="text" id="first_name" required name="first_name" value="{{$customer->first_name}}" class="form-control" >
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="last_name"> الأسم الأخير</label>
                     <input type="text" id="last_name" value="{{$customer->last_name}}" required name="last_name" class="form-control" >
                   </div>
 
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="email"> البريد الإلكتروني</label>
                     <input type="email" id="email" value="{{$customer->email}}" name="email" class="form-control" >
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                       <label for="type">نوع العميل</label>
                       <select name="type" class="form-control form--select" id="type">
     
@@ -334,15 +335,10 @@
                       </select>
                     </div>
   
-                    <div class="col-sm-4 mb-4">
-                      <label for="image">الصورة</label>
-                      <input type="file" class="form-control" name="image" id="image" accept="image/*" >
-                    </div>
+         
   
   
-  
-  
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="identity_type">نوع الهوية</label>
                     <select name="identity_type" class="form-control form--select" id="identity_type">
   
@@ -357,12 +353,12 @@
                   </div>
   
                   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="identity_number">رقم الهوية</label>
                     <input type="text" id="identity_number" value="{{$customer->identity_number}}" required name="identity_number" class="form-control" >
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="nationality">الجنسية</label>
                     <select name="nationality" class="form-control form--select" id="nationality">
                       
@@ -374,20 +370,29 @@
   
                     </select>
                   </div>
-  
+                  
+
+                  <div class="col-sm-4 mb-20">
+                    <label for="image">الصورة</label>
+                    <input type="file" class="form-control" name="image" id="image" accept="image/*" >
+                  </div>
+
+
+
+
                   {{-- hr --}}
                   <div class="col-12 mb-4 mt-2">
                     <hr>
                   </div>
   
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="phone"> رقم الهاتف </label>
                     <input type="text" id="phone" required value="{{$customer->phone}}" name="phone" class="form-control text-start" dir='ltr' >
                   </div>
   
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="region">المقاطعة</label>
                     <select name="region" class="form--select col-sm-12" id="region">
                       <option value="{{$customer->region_id}}">{{$customer->region->name_ar}}</option>
@@ -399,7 +404,7 @@
                     </select>
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="province">المحافظة</label>
                     <select name="province" class="form-control form--select" id="province">
                       
@@ -412,7 +417,7 @@
                     </select>
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="city">المدينة</label>
                     <select name="city" class="form-control form--select" id="city">
   
@@ -426,7 +431,7 @@
                   </div>
   
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="neighbor">الحي</label>
                     <select name="neighbor" class="form-control form--select" id="neighbor">
   
@@ -439,7 +444,7 @@
                     </select>
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="bank">البنك</label>
                     <select name="bank" class="form-control form--select form--select" id="bank">
   
@@ -452,13 +457,13 @@
                     </select>
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="bank_account">رقم الحساب</label>
                     <input type="text" class="form-control" value="{{$customer->bank_account}}" name="bank_account" id="bank_account">
                   </div>
   
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="iban">IBAN</label>
                     <input type="text" class="form-control" value="{{$customer->iban}}" name="iban" id="iban">
                   </div>
@@ -471,7 +476,7 @@
             {{-- footer --}}
             <div class="modal-footer">
               <button  class="btn btn-none text-danger px-3 btn--close" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
-              <button class="btn btn-primary px-5">حفظ </button>
+              <button class="btn btn-primary px-5">حفظ</button>
             </div>
             {{-- end footer --}}
   

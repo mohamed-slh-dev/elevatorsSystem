@@ -49,9 +49,11 @@ Route::post('/update-elevator-parts', [ElevatorsController::class, 'updateElevat
 //users
 Route::get('/users', [UsersController::class, 'users'])->name('users');
 Route::post('/add-user', [UsersController::class, 'addUser'])->name('addUser');
+Route::post('/update-user', [UsersController::class, 'updateUser'])->name('updateUser');
 
 
 //customers
 Route::get('/customers', [CustomersController::class, 'customers'])->name('customers');
 Route::post('/add-customer', [CustomersController::class, 'addCustomer'])->name('addCustomer');
 Route::post('/update-customer', [CustomersController::class, 'updateCustomer'])->name('updateCustomer');
+

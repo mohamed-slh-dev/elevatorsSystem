@@ -96,7 +96,7 @@
           <div class="modal-body">
               <div class="row no-gutters mx-0">
                 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="title">المسمى الوظيفي</label>
                   <select name="title" class="form-control form--select" id="title">
 
@@ -108,22 +108,22 @@
                   </select>
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="date">تاريخ العقد</label>
                   <input type="date" class="form-control" name="date" id="date">
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="end_date">تاريخ الإنتهاء</label>
                   <input type="date" class="form-control" name="end_date" id="end_date">
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="salary">المرتب</label>
                   <input type="number" class="form-control" name="salary" id="salary">
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="status">الحالة</label>
                   <select name="status" class="form-control form--select" id="status">
                       <option value=""></option>
@@ -133,7 +133,7 @@
                   </select>
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="reference">المرجع</label>
                   <input type="text" class="form-control" name="reference" id="reference">
                 </div>
@@ -172,7 +172,7 @@
       <div class="modal-dialog modal-sm">
 
         {{-- content --}}
-        <div class="modal-content">
+        <div class="modal-content modal--remove">
 
 
           {{-- form --}}

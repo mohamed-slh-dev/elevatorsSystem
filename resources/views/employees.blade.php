@@ -22,20 +22,20 @@
       <thead class="bg-primary">
         <tr>
           <th scope="col" class='min-w-130px'>الأسم</th>
-          <th scope="col" class='min-w-100px'>نوع الهوية</th>
-          <th scope="col" class="min-w-100px">رقم الهوية</th>
+          <th scope="col" class="min-w-110px">الهاتف</th>
+
+          <th scope="col" class='min-w-130px'>الهوية</th>
 
           {{-- <th scope="col" class='min-w-90px'>تاريخ الميلاد</th> --}}
           {{-- <th scope="col">الجنسية</th> --}}
 
-          <th scope="col" class="min-w-110px">رقم الهاتف</th>
           <th scope="col" class="min-w-120px">العنوان</th>
 
           <th scope="col">البنك</th>
           <th scope="col">الحساب</th>
           <th scope="col">IBAN</th>
           <th scope="col"></th>
-          <th scope="col">تعديل</th>
+          <th scope="col"></th>
 
         </tr>
       </thead>
@@ -44,14 +44,14 @@
       @foreach ($employees as $employee)
           
       <tr>
-        <td >{{$employee->first_name .' '. $employee->last_name}}</td>
-        <td>{{$employee->identity_type}}</td>
-        <td>{{$employee->identity_number}}</td>
+        <td><span class='fw-bold border-bottom'>{{$employee->first_name .' '. $employee->last_name}}</span></td>
+        <td>{{$employee->phone}}</td>
+
+        <td>{{$employee->identity_type}}<br>/ {{$employee->identity_number}}</td>
 
         {{-- <td class='fw-bold'>{{$employee->birthdate}}</td> --}}
         {{-- <td class='fw-bold'>{{$employee->nationality->name}}</td> --}}
 
-        <td>{{$employee->phone}}</td>
         <td>{{$employee->region->name_ar}} / {{$employee->province->name_ar}}, {{$employee->city->name_ar}}, {{$employee->neighbor->name_ar}}</td>
         <td>{{$employee->bank->name}}</td>
         <td>{{$employee->bank_account}}</td>
@@ -65,8 +65,7 @@
 
         <td>
 
-          <button class="btn btn-outline-warning d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".edit-{{$employee->id}}">
-             تعديل</button>
+          <button class="btn btn-outline-light btn--table d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".edit-{{$employee->id}}">تعديل</button>
 
         </td>
       </tr>
@@ -108,17 +107,17 @@
 
               <div class="row no-gutters mx-0">
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="first_name"> الأسم الأول</label>
                   <input type="text" id="first_name" required name="first_name" class="form-control" >
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="last_name"> الأسم الأخير</label>
                   <input type="text" id="last_name" required name="last_name" class="form-control" >
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="identity_type">نوع الهوية</label>
                   <select name="identity_type" class="form-control form--select" id="identity_type">
 
@@ -132,12 +131,12 @@
                 </div>
 
                 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="identity_number">رقم الهوية</label>
                   <input type="text" id="identity_number" required name="identity_number" class="form-control" >
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="nationality">الجنسية</label>
                   <select name="nationality" required class="form-control form--select" id="nationality">
                     
@@ -152,7 +151,7 @@
 
 
                    
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="birthdate">تاريخ الميلاد</label>
                   <input type="date" id="birthdate" required name="birthdate" class="form-control" >
                 </div>
@@ -160,18 +159,18 @@
 
                 
                 {{-- hr --}}
-                <div class="col-12 mb-4 mt-2">
+                <div class="col-12 mb-20 mt-2">
                   <hr>
                 </div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="phone"> رقم الهاتف </label>
                   <input type="text" id="phone" required name="phone" class="form-control text-start" dir='ltr' >
                 </div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="region">المقاطعة</label>
                   <select name="region" required class="form--select col-sm-12" id="region">
                     <option value=""></option>
@@ -183,7 +182,7 @@
                   </select>
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="province">المحافظة</label>
                   <select name="province" required class="form-control form--select" id="province">
                     
@@ -196,7 +195,7 @@
                   </select>
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="city">المدينة</label>
                   <select name="city" required class="form-control form--select" id="city">
 
@@ -210,7 +209,7 @@
                 </div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="neighbor">الحي</label>
                   <select name="neighbor" required class="form-control form--select" id="neighbor">
 
@@ -223,7 +222,7 @@
                   </select>
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="bank">البنك</label>
                   <select name="bank" required class="form-control form--select form--select" id="bank">
 
@@ -236,13 +235,13 @@
                   </select>
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="bank_account">رقم الحساب</label>
                   <input type="text" class="form-control" name="bank_account" id="bank_account">
                 </div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="iban">IBAN</label>
                   <input type="text" class="form-control" name="iban" id="iban">
                 </div>
@@ -253,12 +252,12 @@
                   <hr>
                 </div>
 
-                <div class="col-12 mb-4">
+                <div class="col-12 mb-20">
                   <h5 class='fw-bold form--subheading d-inline-block'>معلومات العقد</h5>
                 </div>
 
                 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="title">المسمى الوظيفي</label>
                   <select name="title" class="form-control form--select" id="title">
 
@@ -272,23 +271,23 @@
                 </div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="date">تاريخ العقد</label>
                   <input type="date" class="form-control" name="date" id="date">
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="end_date">تاريخ الإنتهاء</label>
                   <input type="date" class="form-control" name="end_date" id="end_date">
                 </div>
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="salary">المرتب</label>
                   <input type="number" class="form-control" name="salary" id="salary">
                 </div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="status">الحالة</label>
 
                   <select name="status" class="form-control form--select" id="status">
@@ -300,7 +299,7 @@
                 </div>
 
 
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-20">
                   <label for="reference">المرجع</label>
                   <input type="text" class="form-control" name="reference" id="reference">
                 </div>
@@ -354,17 +353,17 @@
   
                 <div class="row no-gutters mx-0">
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="first_name"> الأسم الأول</label>
                     <input type="text" id="first_name" required value="{{$employee->first_name}}" name="first_name" class="form-control" >
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="last_name"> الأسم الأخير</label>
                     <input type="text" id="last_name" required value="{{$employee->last_name}}" name="last_name" class="form-control" >
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="identity_type">نوع الهوية</label>
                     <select name="identity_type" class="form-control form--select" id="identity_type">
   
@@ -379,12 +378,12 @@
                   </div>
   
                   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="identity_number">رقم الهوية</label>
                     <input type="text" id="identity_number" value="{{$employee->identity_number}}" required name="identity_number" class="form-control" >
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="nationality">الجنسية</label>
                     <select name="nationality"  class="form-control form--select" id="nationality">
                       
@@ -399,7 +398,7 @@
   
   
                      
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="birthdate">تاريخ الميلاد</label>
                     <input type="date" id="birthdate" value="{{$employee->birthdate}}" required name="birthdate" class="form-control" >
                   </div>
@@ -407,18 +406,18 @@
   
                   
                   {{-- hr --}}
-                  <div class="col-12 mb-4 mt-2">
+                  <div class="col-12 mb-20 mt-2">
                     <hr>
                   </div>
   
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="phone"> رقم الهاتف </label>
                     <input type="text" id="phone" required value="{{$employee->phone}}" name="phone" class="form-control text-start" dir='ltr' >
                   </div>
   
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="region">المقاطعة</label>
                     <select name="region" class="form--select col-sm-12" id="region">
                       <option value="{{$employee->region_id}}">{{$employee->region->name_ar}}</option>
@@ -430,7 +429,7 @@
                     </select>
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="province">المحافظة</label>
                     <select name="province" class="form-control form--select" id="province">
                       
@@ -443,7 +442,7 @@
                     </select>
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="city">المدينة</label>
                     <select name="city" class="form-control form--select" id="city">
   
@@ -457,7 +456,7 @@
                   </div>
   
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="neighbor">الحي</label>
                     <select name="neighbor" class="form-control form--select" id="neighbor">
   
@@ -470,7 +469,7 @@
                     </select>
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="bank">البنك</label>
                     <select name="bank" class="form-control form--select form--select" id="bank">
   
@@ -483,13 +482,13 @@
                     </select>
                   </div>
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="bank_account">رقم الحساب</label>
                     <input type="text" class="form-control" value="{{$employee->bank_account}}" name="bank_account" id="bank_account">
                   </div>
   
   
-                  <div class="col-sm-4 mb-4">
+                  <div class="col-sm-4 mb-20">
                     <label for="iban">IBAN</label>
                     <input type="text" class="form-control" value="{{$employee->iban}}"  name="iban" id="iban">
                   </div>

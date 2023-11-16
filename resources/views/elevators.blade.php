@@ -20,7 +20,7 @@
       <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
-            <th scope="col" class='min-w-130px'>الأسم</th>
+            <th scope="col" class='min-w-170px'>الأسم</th>
             <th scope="col">الشركة</th>
             <th scope="col">المنشأ</th>
             <th scope="col">المورد</th>
@@ -47,7 +47,7 @@
       
             <tr>         
     
-              <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/elevators/'.$elevator->image)}}" alt="evlevator image">{{$elevator->name}}</td>
+              <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-2 table--img' src="{{asset('storage/elevators/'.$elevator->image)}}" alt="evlevator image">{{$elevator->name}}</td>
           
               <td>{{$elevator->company}}</td>
               <td>{{$elevator->nationality->name}}</td>
@@ -127,12 +127,12 @@
           <div class="modal-body">
             <div class="row no-gutters mx-0">
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="name">الأسم</label>
                 <input type="text" class="form-control" name="name" id="name">
               </div>
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="image">الصورة</label>
                 <input type="file" class="form-control" name="image" id="image" accept="image/*">
               </div>
@@ -142,13 +142,13 @@
               <div class="col-12"></div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="company">الشركة</label>
                 <input type="text" class="form-control" name="company" id="company">
               </div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="nationality">بلد المنشأ</label>
                 <select name="nationality" required class="form-control form--select" id="nationality">
 
@@ -167,17 +167,17 @@
               <div class="col-12"></div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="supplier_name">اسم المورد</label>
                 <input type="text" class="form-control" name="supplier_name" id="supplier_name">
               </div>
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="supplier_phone">هاتف المورد</label>
                 <input type="text" class="form-control text-start" name="supplier_phone" id="supplier_phone" dir="ltr">
               </div>
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="supplier_email">البريد الالكتروني للمورد</label>
                 <input type="email" class="form-control" name="supplier_email" id="supplier_email">
               </div>
@@ -190,7 +190,7 @@
               </div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="region">المقاطعة</label>
                 <select name="region" required class="form-control form--select" id="region">
 
@@ -205,7 +205,7 @@
 
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="province">المحافظة</label>
                 <select name="province" required class="form-control form--select" id="province">
 
@@ -220,7 +220,7 @@
 
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="city">المدينة</label>
                 <select name="city" required class="form-control form--select" id="city">
 
@@ -234,7 +234,7 @@
               </div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="neighbor">الحي</label>
                 <select name="neighbor" required class="form-control form--select" id="neighbor">
 
@@ -249,7 +249,7 @@
 
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="bank">البنك</label>
                 <select name="bank" required class="form-control form--select" id="bank">
 
@@ -262,13 +262,13 @@
                 </select>
               </div>
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="bank_account">رقم الحساب</label>
                 <input type="text" class="form-control" name="bank_account" id="bank_account">
               </div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="iban">IBAN</label>
                 <input type="text" class="form-control" name="iban" id="iban">
               </div>
@@ -294,7 +294,7 @@
                   @foreach ($parts as $part)
 
                     {{-- single checkbox --}}
-                    <div class="checkbox checkbox-dark checkbox--item">
+                    <div class="checkbox checkbox-dark checkbox--item mb-3">
 
                       <input id="inline-{{$part->id}}" type="checkbox" name="elevator_parts[]" value="{{$part->id}}">
 
@@ -362,12 +362,12 @@
           <div class="modal-body">
             <div class="row no-gutters mx-0">
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="name">الأسم</label>
                 <input type="text" class="form-control" value="{{$elevator->name}}" name="name" id="name">
               </div>
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="image">الصورة</label>
                 <input type="file" class="form-control" name="image" id="image" accept="image/*">
               </div>
@@ -377,13 +377,13 @@
               <div class="col-12"></div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="company">الشركة</label>
                 <input type="text" class="form-control" value="{{$elevator->company}}" name="company" id="company">
               </div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="nationality">بلد المنشأ</label>
                 <select name="nationality" class="form-control form--select" id="nationality">
 
@@ -402,17 +402,17 @@
               <div class="col-12"></div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="supplier_name">اسم المورد</label>
                 <input type="text" class="form-control" value="{{$elevator->supplier_name}}" name="supplier_name" id="supplier_name">
               </div>
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="supplier_phone">هاتف المورد</label>
                 <input type="text" class="form-control text-start" value="{{$elevator->supplier_phone}}" name="supplier_phone" id="supplier_phone" dir="ltr">
               </div>
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="supplier_email">البريد الالكتروني للمورد</label>
                 <input type="email" class="form-control" value="{{$elevator->supplier_email}}" name="supplier_email" id="supplier_email">
               </div>
@@ -425,7 +425,7 @@
               </div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="region">المقاطعة</label>
                 <select name="region" class="form-control form--select" id="region">
 
@@ -440,7 +440,7 @@
 
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="province">المحافظة</label>
                 <select name="province" class="form-control form--select" id="province">
 
@@ -455,7 +455,7 @@
 
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="city">المدينة</label>
                 <select name="city" class="form-control form--select" id="city">
 
@@ -469,7 +469,7 @@
               </div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="neighbor">الحي</label>
                 <select name="neighbor" class="form-control form--select" id="neighbor">
 
@@ -484,7 +484,7 @@
 
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="bank">البنك</label>
                 <select name="bank" class="form-control form--select" id="bank">
 
@@ -497,13 +497,13 @@
                 </select>
               </div>
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="bank_account">رقم الحساب</label>
                 <input type="text" class="form-control" value="{{$elevator->bank_account}}" name="bank_account" id="bank_account">
               </div>
 
 
-              <div class="col-sm-4 mb-4">
+              <div class="col-sm-4 mb-20">
                 <label for="iban">IBAN</label>
                 <input type="text" class="form-control" value="{{$elevator->iban}}" name="iban" id="iban">
               </div>

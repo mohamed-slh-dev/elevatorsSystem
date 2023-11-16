@@ -1,5 +1,5 @@
 :root {
-    --text-main: #24695c;
+    --text-main: #2a474d;
 }
 
 ::-webkit-scrollbar {
@@ -31,6 +31,46 @@ body {
     transition: 0.4s all ease-in-out;
 }
 
+/* background color */
+
+.page-wrapper .page-body-wrapper {
+    background: transparent;
+}
+
+.page-wrapper .page-body-wrapper .page-body {
+    background-color: transparent;
+}
+
+.page-wrapper.compact-wrapper
+    .page-body-wrapper
+    header.main-nav
+    .main-navbar
+    .nav-menu
+    > li
+    .nav-link {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    border-radius: 3px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+/* modal edits */
+
+.modal-content {
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.modal--remove {
+    background-color: whitesmoke;
+}
+
+.rtl .modal-header .btn-close,
+.rtl .modal-footer .btn-close,
+.rtl .modal-content .btn-close {
+    top: 42px;
+}
+
 /* modal-sm */
 @media (min-width: 576px) {
     .modal-sm {
@@ -45,6 +85,14 @@ i {
     transition: 0.4s all ease-in-out;
 }
 
+tbody tr {
+    background-color: #fbfbfb;
+}
+
+.table-bordered td,
+.table-bordered th {
+    border-color: #f1f1f1 !important;
+}
 tr {
     vertical-align: middle !important;
 }
@@ -60,8 +108,10 @@ td {
 }
 
 label {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px !important;
+    letter-spacing: 0.8px;
 }
 
 input[type="date"] {
@@ -133,7 +183,7 @@ input[type="file"] {
 /* ------------------------- globals / custom */
 
 .form--subheading {
-    border-bottom: 2px solid var(--text-main);
+    border-bottom: 2px solid #ffc107;
     padding-bottom: 4px;
 }
 .btn--table {
@@ -147,7 +197,7 @@ input[type="file"] {
 }
 
 .table--img {
-    border: 2px solid var(--text-main);
+    border: 2px solid #ffc107;
     width: 50px;
     height: 50px;
 }
@@ -196,10 +246,26 @@ input[type="checkbox"] {
     min-width: 140px;
 }
 
+.min-w-150px {
+    min-width: 150px;
+}
+
+.min-w-170px {
+    min-width: 170px;
+}
+
+.min-w-180px {
+    min-width: 180px;
+}
+
+.min-w-200px {
+    min-width: 200px;
+}
+
 .rtl .customizer-links {
     display: none;
 }
 
 .mb-20 {
-    margin-bottom: 20px;
+    margin-bottom: 35px;
 }

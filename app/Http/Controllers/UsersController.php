@@ -41,7 +41,51 @@ class UsersController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'تم إضافة مستخدم بنجاح');
+    } //end function
 
 
-    }
-}
+
+
+
+
+
+    // ---------------------------------------------------------------------------------
+
+    public function updateUser(Request $request){
+
+        $user = User::find($request->id);
+
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+
+
+        // : update password if not empty
+        if (!empty($request->password)) {
+
+            $user->password = Hash::make($request->password);
+
+        } //end if
+
+
+
+        // : upload if available
+        if (!empty($request->file('image'))) {
+            
+            $image = 'elevator-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $path = $request->file('image')->storeAs('public/users',$image);
+    
+            $user->image = $image;
+            
+        } // end if
+
+
+        $user->save();
+
+
+        return redirect()->back()->with('success','تم تعديل المستخدم بنجاح');
+
+    } // end function
+
+
+} // end controller
