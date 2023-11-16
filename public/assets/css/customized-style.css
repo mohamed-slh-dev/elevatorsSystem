@@ -22,6 +22,10 @@
     scrollbar-width: thin;
 }
 
+.font--family {
+    font-family: "Noto Sans Arabic", "Roboto" !important;
+}
+
 /* general override */
 body {
     font-family: "Noto Sans Arabic", "Roboto";
