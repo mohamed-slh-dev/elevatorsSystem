@@ -19,7 +19,7 @@
       <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
-            <th scope="col" class='min-w-150px'>الأسم</th>
+            <th scope="col" class='min-w-200px'>الأسم</th>
             <th scope="col">النوع</th>
             <th scope="col" class='min-w-130px'>الوصف</th>
             <th scope="col" class='min-w-110px'>سعر الشراء</th>
@@ -180,9 +180,10 @@
           {{-- body --}}
           <div class="modal-body">
               <div class="row no-gutters mx-0">
-
+                
                 <input type="hidden" name="id" value="{{$part->id}}" id="">
 
+           
                 <div class="col-sm-4 mb-20">
                   <label for="purchase_price">سعر الشراء</label>
                   <input type="number" class="form-control" min="0" step=".1" name="purchase_price" id="purchase_price" value={{ $part->partPrices->sortByDesc('id')->first->purchase_price['purchase_price'] }}>
@@ -192,6 +193,7 @@
                   <label for="sell_price">سعر البيع</label>
                   <input type="number" class="form-control" min="0" step=".1" name="sell_price" id="sell_price" value={{$part->partPrices->sortByDesc('id')->first->purchase_price['sell_price']}}>
                 </div>
+
 
               </div>
           </div>

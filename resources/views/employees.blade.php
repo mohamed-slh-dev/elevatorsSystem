@@ -21,7 +21,7 @@
     <table class="table table-bordered">
       <thead class="bg-primary">
         <tr>
-          <th scope="col" class='min-w-130px'>الأسم</th>
+          <th scope="col" class='min-w-150px'>الأسم</th>
           <th scope="col" class="min-w-110px">الهاتف</th>
 
           <th scope="col" class='min-w-130px'>الهوية</th>

@@ -42,7 +42,7 @@
       @foreach ($customers as $customer)
           
       <tr>
-        <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle table--img me-2' src="{{asset('storage/customers/'.$customer->image)}}" alt="part image"><span class='fw-bold border-bottom'>{{$customer->first_name. ' '. $customer->last_name}}</span></td>
+        <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle table--img me-2' src="{{asset('storage/customers/'.$customer->image)}}" alt="part image"><span class='fw-bold border-bottom fs-13'>{{$customer->first_name. ' '. $customer->last_name}}</span></td>
         <td>{{$customer->email}}</td>
         <td>{{$customer->phone}}</td>
 

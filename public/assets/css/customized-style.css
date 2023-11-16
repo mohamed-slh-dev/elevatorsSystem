@@ -33,6 +33,14 @@ body {
 
 /* background color */
 
+.text-theme {
+    color: var(--text-main);
+}
+
+.tooltip-inner {
+    max-width: 500px !important;
+}
+
 .page-wrapper .page-body-wrapper {
     background: transparent;
 }

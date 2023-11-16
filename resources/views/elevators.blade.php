@@ -20,23 +20,17 @@
       <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
-            <th scope="col" class='min-w-170px'>الأسم</th>
+            <th scope="col" class='min-w-200px'>الأسم</th>
             <th scope="col">الشركة</th>
             <th scope="col">المنشأ</th>
-            <th scope="col">المورد</th>
-            <th scope="col" class='min-w-130px'>هاتف المورد</th>
-            <th scope="col">عنوان بريد المورد</th>
-            <th scope="col" class='min-w-130px'>العنوان</th>
+            <th scope="col" class='min-w-150px'>تفاصيل المورد</th>
+            <th scope="col" class='min-w-150px'>العنوان</th>
 
-            <th scope="col">البنك</th>
+            <th scope="col" class='min-w-130px'>البنك</th>
             <th scope="col">الحساب</th>
             <th scope="col">IBAN</th>
 
-            <th scope="col" class='min-w-140px'></th>
-
-            <th scope="col">تعديل</th>
-            <th scope="col">تعديل أجزاء المصعد</th>
-
+            <th scope="col" style="min-width: 370px;"></th>
 
           </tr>
         </thead>
@@ -45,15 +39,21 @@
         <tbody>
           @foreach ($elevators as $elevator)
       
-            <tr>         
+            <tr class='popover-main'>         
     
-              <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-2 table--img' src="{{asset('storage/elevators/'.$elevator->image)}}" alt="evlevator image">{{$elevator->name}}</td>
+              <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-2 table--img' src="{{asset('storage/elevators/'.$elevator->image)}}" alt="evlevator image">
+                <span class='fw-bold border-bottom fs-13'>{{$elevator->name}}</span>
+              </td>
           
               <td>{{$elevator->company}}</td>
               <td>{{$elevator->nationality->name}}</td>
-              <td>{{$elevator->supplier_name}}</td>
-              <td dir='ltr'>{{$elevator->supplier_phone}}</td>
-              <td>{{$elevator->supplier_email}}</td>
+
+              {{-- supplier info --}}
+              <td class='position-relative'>{{$elevator->supplier_name}}
+                  <a class="example-popover btn btn-none p-0 ms-1" tabindex="0" role="button" data-bs-toggle="tooltip" data-bs-trigger="focus" data-bs-html="true" data-bs-placement="bottom" title="{{'هاتف : '  . $elevator->supplier_phone . '<br />' . 'البريد الالكتروني : '  . $elevator->supplier_email}}">
+                    <i class='fa fa-info-circle fs-5 text-theme'></i>
+                  </a>
+              </td>
 
               <td>{{$elevator->region->name_ar}} / {{$elevator->province->name_ar}}, {{$elevator->city->name_ar}}, {{$elevator->neighbor->name_ar}}</td>
           
@@ -63,31 +63,36 @@
               <td>{{$elevator->iban}}</td>
 
 
-              {{-- parts --}}
+              {{-- parts / edit --}}
               <td>
-                @foreach ($elevator->elevatorParts  as $part)
-                  ( {{$part->part->name}} )
-                @endforeach
-                {{-- TODO: POPOVER --}}
-                {{-- <button class="btn btn--table btn-primary-light">أجزاء المصعد</button> --}}
-              </td>
-
-              <td>
-                 <button class="btn btn-outline-warning d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".edit-{{$elevator->id}}">تعديل</button>
-              </td>
+                @php
+                    $allParts = '';
+                    foreach ($elevator->elevatorParts  as $part)
+                      $allParts .= $part->part->name . '<br />';
+                @endphp
+                
 
 
-              <td>
+                {{-- edit --}}
+                <button class="btn btn-outline-light btn--table " data-bs-toggle="modal" data-bs-target=".edit-{{$elevator->id}}">تعديل</button>
+
+
+                {{-- show parts --}}
+                <button class="btn btn--table btn-outline-light" tabindex="0" role="button" data-bs-toggle="tooltip" data-bs-trigger="focus" data-bs-html="true" data-bs-placement="bottom" title="{{$allParts}}">أجزاء المصعد</button>
+
+
+                
                 <a href="{{route('editElevatorParts', $elevator->id)}}">
-
-                  <button class="btn btn-outline-warning d-inline-flex align-items-center scaleRotate--1">تعديل أجزاء المصعد</button>
-
+                  <button class="btn btn-primary-light btn--table">تعديل أجزاء المصعد</button>
                 </a>
-               
-             </td>
+
+              </td>
+
+
+
 
             </tr>
-            
+            {{-- end table row --}}
           @endforeach
           {{-- end loop --}}
           
@@ -534,4 +539,18 @@
 
 
 
+@endsection
+
+
+
+
+
+@section('scripts')
+
+<script>
+  $('[data-toggle="tooltip"]').tooltip({
+    trigger : 'hover'
+})
+</script>
+    
 @endsection
