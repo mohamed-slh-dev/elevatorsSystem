@@ -20,7 +20,7 @@
       <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
-            <th scope="col" class='min-w-200px'>الأسم</th>
+            <th scope="col" style="min-width: 240px;">الأسم</th>
             <th scope="col">الشركة</th>
             <th scope="col">المنشأ</th>
             <th scope="col" class='min-w-150px'>تفاصيل المورد</th>
