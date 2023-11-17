@@ -164,7 +164,7 @@
             </a> --}}
             <img class="img-90 rounded-circle" src="../assets/images/dashboard/1.png" alt="">
             <div class="badge-bottom"></div><a href="javascript:void(0);">
-              <h6 class="mt-3 f-14 f-w-600">محمد صلاح الدين</h6></a>
+              <h6 class="mt-3 f-14 f-w-600">{{ session('name') }}</h6></a>
               <p class="mb-0 font--family">مدير قسم التنمية البشرية</p>
          
           </div>
@@ -209,27 +209,27 @@
 
                   <li class="dropdown">
                     <a class="nav-link menu-title link-nav" href="{{route('customers')}}">
-                      <i data-feather="users"></i><span>العملاء </span>
+                      <i data-feather="user-plus"></i><span>العملاء </span>
                     </a>
                   </li>
 
 
                   <li class="dropdown">
                     <a class="nav-link menu-title link-nav" href="{{route('users')}}">
-                      <i data-feather="user"></i><span>المستخدمين </span>
+                      <i data-feather="users"></i><span>المستخدمين </span>
                     </a>
                   </li>
 
 
                   <li class="dropdown">
                     <a class="nav-link menu-title link-nav" href="{{route('users')}}">
-                      <i data-feather="user"></i><span>أعمال التركيب </span>
+                      <i data-feather="settings"></i><span>أعمال التركيب </span>
                     </a>
                   </li>
 
                   <li class="dropdown">
                     <a class="nav-link menu-title link-nav" href="{{route('users')}}">
-                      <i data-feather="user"></i><span>أعمال الصيانة </span>
+                      <i data-feather="shield"></i><span>أعمال الصيانة </span>
                     </a>
                   </li>
 
@@ -238,16 +238,16 @@
                   {{-- apply to all : modal for the inital data (without parts) then after confirm / redirect to another page with elevators parts / checkbox for selecting the parts then add price to it (default price val is latest pricing from db) --}}
                   
                   <li class="dropdown">
-                    <a class="nav-link menu-title link-nav" href="{{route('users')}}">
-                      <i data-feather="user"></i><span>المالية </span>
+                    <a class="nav-link menu-title link-nav" href="{{route('financials')}}">
+                      <i data-feather="dollar-sign"></i><span>المالية </span>
                     </a>
                   </li>
 
                   {{-- 
                     
-                    type: for hr / maintenance / installation
+                    type: 1- for hr / or 2- maintenance / or 3- installation
 
-                    1- no. type (salary / bonus / khasm) / days / emp id / note / payment w (cash / bank) / payment type (full amount / installment ) / code (customInput like ref) / date
+                    1- for hr:  no. type (salary / bonus / khasm) / days / emp id / note / payment w (cash / bank) / payment type (full amount / installment ) / code (customInput like ref) / date
 
 
                     2- amount / note / pw / pt / code / date

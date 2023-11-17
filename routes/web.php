@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\LoginController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,10 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('/update-customer', [CustomersController::class, 'updateCustomer'])->name('updateCustomer');
 
 
+
+    // * Financial
+    Route::get('/financials', [FinancialController::class, 'financials'])->name('financials');
+    Route::post('/add-financial', [FinancialController::class, 'addFinancial'])->name('addFinancial');
 
 
     // * Logout

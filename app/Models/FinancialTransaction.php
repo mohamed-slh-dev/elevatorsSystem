@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class FinancialTransaction extends Model
 {
     use HasFactory;
-}
+
+    public function employee() {
+        return $this->belongsTo('App\Models\Employee');
+    }
+
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
+
+} // end model
