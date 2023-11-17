@@ -24,7 +24,13 @@ class InstallationsController extends Controller
 
         return view('installations', compact('installation_bills', 'installation_quotations', 'customers', 'elevators'));
 
-    }
+    } // end function
+
+
+
+    // =======================================================================
+
+
 
 
     public function addInstallation(Request $request){
@@ -50,7 +56,7 @@ class InstallationsController extends Controller
 
             return view('add-installations-parts', compact('type', 'id', 'elevator'));
 
-        }else{
+        } else {
 
             $installation_bill = new InstallationBill();
 
@@ -70,8 +76,17 @@ class InstallationsController extends Controller
 
             return view('add-installations-parts', compact('type', 'id', 'elevator'));
 
-        }
-    }
+        } // end else
+    } // end function
+
+
+
+
+
+    // =======================================================================
+
+
+
 
 
     public function addInstallationParts(Request $request){
@@ -123,8 +138,132 @@ class InstallationsController extends Controller
 
         }
 
-        return redirect()->route('installations')->with('تم اضافة عرض سعر بنجاح');
+        return redirect()->route('installations')->with('success', 'تم اضافة عرض سعر بنجاح');
 
 
     }
-}
+
+
+
+
+
+
+
+    // =======================================================================
+
+
+
+
+    public function updateInstallation(Request $request){
+
+
+        // :init
+        $installation = null;
+        $installationResetLink = false;
+
+        if ($request->type == 'عرض سعر') {
+            
+            $installation = InstallationQuotation::find($request->id);
+
+            // ! check if elevator has changed
+            if ($installation->elevator_id != $request->elevator) 
+                $installationResetLink = 'quotation';
+
+
+        } else {
+
+            $installation = InstallationBill::find($request->id);
+
+            // ! check if elevator has changed
+            if ($installation->elevator_id != $request->elevator) 
+                $installationResetLink = 'bill';
+
+
+        } // end else
+
+
+
+        // : continue with common-inputs
+
+        $installation->customer_id = $request->customer;
+        $installation->elevator_id = $request->elevator;
+        $installation->date = $request->date;
+        $installation->reference = $request->reference;
+        $installation->user_id = session()->get('user_id');
+
+        $installation->save();
+
+
+
+        // : redirect to parts if it got a reset
+        if ($installationResetLink == 'quotation') {
+
+
+            // ! remove previous parts
+            InstallationQuotationPart::where('installation_quotation_id', $installation->id)->delete();
+
+            // : redirect to edit parts - page
+            return redirect()->route('editInstallationParts', [$installation->id, 'quotation']);
+
+
+        } elseif ($installationResetLink == 'bill') {
+
+
+            // ! remove previous parts
+            InstallationBillPart::where('installation_bill_id', $installation->id)->delete();
+
+            // : redirect to edit parts - page
+            return redirect()->route('editInstallationParts', [$installation->id, 'bill']);
+
+
+        // : redirect to previous page
+        } else {
+
+            return redirect()->route('installations')->with('success', 'تم تعديل بيانات عملية التركيب بنجاح');
+
+        } // end else
+
+
+    } // end function
+
+
+
+
+
+    // ========================================================================
+
+
+
+
+
+
+    public function editInstallationParts(Request $request, $id, $type){
+
+
+        // : init
+        $installation = null;
+        $parts = [];
+
+        // : determine type / + get parts
+        if ($type == 'quotation') {
+            
+            $installation = InstallationQuotation::find($id);
+            $parts = InstallationQuotationPart::where('installation_quotation_id', $installation->id)->get();
+
+
+        } else {
+
+            $installation = InstallationBill::find($id);
+            $parts = InstallationBillPart::where('installation_bill_id', $installation->id)->get();
+
+        } // end if
+
+
+        return view('edit-installations-parts', ['installation', 'parts', 'type']);
+
+
+    } // end function
+
+
+
+} //end function

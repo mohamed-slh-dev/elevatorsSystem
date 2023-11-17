@@ -45,11 +45,13 @@
             <td>{{$bill->price}}</td>
 
             <td>
-              {{-- <a href="{{route('editElevatorParts', $elevator->id)}}">
-                <button class="btn btn-primary-light btn--table">تعديل أجزاء المصعد</button>
-              </a> --}}
+        
+              <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-bill-{{$bill->id}}">تعديل</button>
+
+              <a href="{{route('editInstallationParts', [$bill->id, 'bill'])}}">
+                <button class="btn btn-outline-light btn--table">تعديل أجزاء المصعد</button>
+              </a>
   
-              <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-{{$bill->id}}">تعديل</button>
             </td>   
 
           </tr>
@@ -72,7 +74,7 @@
               <button class="btn btn-primary-light btn--table">تعديل أجزاء المصعد</button>
             </a> --}}
 
-            <button class="btn btn-primary-light btn--table">تعديل </button>
+            <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-bill-{{$quotation->id}}">تعديل</button>
 
           </td>   
           
@@ -222,6 +224,12 @@
         {{-- form --}}
         <form action="{{route('updateInstallation')}}" method="post">
           @csrf
+
+
+          {{-- id --}}
+          <input type="hidden" name="id" value='{{$bill->id}}'>
+
+
 
           {{-- body --}}
           <div class="modal-body">

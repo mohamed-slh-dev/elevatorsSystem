@@ -72,15 +72,19 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('/update-customer', [CustomersController::class, 'updateCustomer'])->name('updateCustomer');
 
 
-      // * Installation
+    // * Installation
     Route::get('/installations', [InstallationsController::class, 'installations'])->name('installations');
 
     Route::post('/add-installation', [InstallationsController::class, 'addInstallation'])->name('addInstallation');
+    Route::post('/add-installation-parts', [InstallationsController::class, 'addInstallationParts'])->name('addInstallationParts');
+
+    
+    // ! information update
     Route::post('/update-installation', [InstallationsController::class, 'updateInstallation'])->name('updateInstallation');
 
-    Route::post('/add-installation-parts', [InstallationsController::class, 'addInstallationParts'])->name('addInstallationParts');
-    Route::post('/update-installation-parts', [InstallationsController::class, 'updateInstallationParts'])->name('updateInstallationParts');
-
+    // ! parts update
+    Route::get('/edit-installation-parts/{id}/{type}', [InstallationsController::class, 'editInstallationParts'])->name('editInstallationParts');
+    Route::post('/update-installation-parts/{id}/{type}', [InstallationsController::class, 'updateInstallationParts'])->name('updateInstallationParts');
 
 
 
