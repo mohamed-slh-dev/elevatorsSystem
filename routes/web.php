@@ -9,6 +9,8 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\ElevatorsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\InstallationsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +71,10 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('/update-customer', [CustomersController::class, 'updateCustomer'])->name('updateCustomer');
 
 
+      // * Installation
+    Route::get('/installations', [InstallationsController::class, 'installations'])->name('installations');
+    Route::post('/add-installation', [InstallationsController::class, 'addInsallation'])->name('addInsallation');
+    Route::post('/add-installation-parts', [InstallationsController::class, 'addInsallationParts'])->name('addInsallationParts');
 
 
     // * Logout

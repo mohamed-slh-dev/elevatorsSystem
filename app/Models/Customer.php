@@ -41,4 +41,29 @@ class Customer extends Model
         return $this->belongsTo('App\Models\Bank');
     }
 
+    public function installationBills()
+    {
+        return $this->hasMany('App\Models\InstallationBill');
+    }
+
+
+    public function installationQuotations()
+    {
+        return $this->hasMany('App\Models\InstallationQuotation');
+    }
+
+
+    public function maintenanceBills()
+    {
+        return $this->hasMany('App\Models\MaintenanceBill');
+    }
+
+
+    public function maintenanceQuotations()
+    {
+        return $this->hasMany('App\Models\MaintenanceQuotation');
+    }
+
+
+
 }

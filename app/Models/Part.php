@@ -18,4 +18,30 @@ class Part extends Model
     {
         return $this->hasMany('App\Models\ElevatorPart');
     }
+
+
+    public function installationBillParts()
+    {
+        return $this->hasMany('App\Models\InstallationBillPart');
+    }
+
+    public function installationQuotationParts()
+    {
+        return $this->hasMany('App\Models\InstallationQuotationPart');
+    }
+
+
+    public function maintenanceBillParts()
+    {
+        return $this->hasMany('App\Models\MaintenanceBillPart');
+    }
+
+    public function maintenanceQuotationParts()
+    {
+        return $this->hasMany('App\Models\MaintenanceQuotationPart');
+    }
+
+   
+
+
 }

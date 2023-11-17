@@ -9,7 +9,7 @@ class InstallationBillPart extends Model
 {
     use HasFactory;
 
-    public function bill() {
+    public function installationBill() {
         return $this->belongsTo('App\Models\InstallationBill');
     }
 
