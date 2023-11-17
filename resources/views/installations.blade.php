@@ -20,11 +20,13 @@
       <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
-            <th scope="col" class='min-w-200px'>الأسم</th>
-            <th scope="col">النوع</th>
-            <th scope="col" class='min-w-130px'>الوصف</th>
-            <th scope="col" class='min-w-110px'>سعر الشراء</th>
-            <th scope="col" class='min-w-110px'>سعر البيع</th>
+            <th scope="col" class='min-w-200px'>النوع</th>
+            <th scope="col">العميل</th>
+            <th scope="col" class='min-w-130px'>المصعد</th>
+            <th scope="col" class='min-w-110px'> التاريخ</th>
+            <th scope="col" class='min-w-110px'> المرجع</th>
+            <th scope="col" class='min-w-110px'> السعر</th>
+
             <th scope="col" class='min-w-110px'></th>
           </tr>
         </thead>
@@ -32,23 +34,51 @@
           
 
         {{-- installations - loop --}}
-        @foreach ($parts as $part)
+        @foreach ($installation_bills as $bill)
           <tr>         
 
-            <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/parts/'.$part->image)}}" alt="part image"><span class='fw-bold border-bottom'>{{$part->name}}</span></td>
-
-            <td>{{$part->type}}</td>
-            <td>{{$part->desc}}</td>
-
-            <td>{{$part->partPrices->sortByDesc('id')->first->purchase_price['purchase_price']}}</td>
-            <td>{{$part->partPrices->sortByDesc('id')->first->purchase_price['sell_price']}}</td>
+            <td>فاتورة</td>
+            <td>{{$bill->customer->first_name. ' '. $bill->customer->last_name}}</td>
+            <td>{{$bill->elevator->name}}</td>
+            <td>{{$bill->date}}</td>
+            <td>{{$bill->reference}}</td>
+            <td>{{$bill->price}}</td>
 
             <td>
-              <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".new-price-{{$part->id}}">تغيير السعر</button>
-            </td>
+              {{-- <a href="{{route('editElevatorParts', $elevator->id)}}">
+                <button class="btn btn-primary-light btn--table">تعديل أجزاء المصعد</button>
+              </a> --}}
+  
+              <button class="btn btn-primary-light btn--table">تعديل </button>
+  
+            </td>   
 
           </tr>
         @endforeach
+        {{-- end loop --}}
+
+         {{-- quotations loop --}}
+        @foreach ($installation_quotations as $quotation)
+        <tr>         
+
+          <td>عرض سعر</td>
+          <td>{{$quotation->customer->first_name. ' '. $quotation->customer->last_name}}</td>
+          <td>{{$quotation->elevator->name}}</td>
+          <td>{{$quotation->date}}</td>
+          <td>{{$quotation->reference}}</td>
+          <td>{{$quotation->price}}</td>
+
+          <td>
+            {{-- <a href="{{route('editElevatorParts', $elevator->id)}}">
+              <button class="btn btn-primary-light btn--table">تعديل أجزاء المصعد</button>
+            </a> --}}
+
+            <button class="btn btn-primary-light btn--table">تعديل </button>
+
+          </td>   
+          
+        </tr>
+       @endforeach
         {{-- end loop --}}
           
         </tbody>
@@ -81,46 +111,54 @@
             {{-- body --}}
             <div class="modal-body">
                 <div class="row no-gutters mx-0">
-  
+
                   <div class="col-sm-4 mb-20">
-                    <label for="name">الأسم </label>
-                    <input type="text" class="form-control" name="name" id="name">
+                    <label for="type">النوع </label>
+                    <select name="type" required class="form-control form--select form--select" id="type">
+
+                      <option value="عرض سعر">عرض سعر</option>
+                      <option value="فاتورة">فاتورة</option>
+                    
+  
+                    </select>
                   </div>
+
   
                   <div class="col-sm-4 mb-20">
-                    <label for="image">الصورة</label>
-                    <input type="file" class="form-control" name="image" id="image" accept="image/*" required>
-                  </div>
+                    <label for="customer">العميل </label>
+                    <select name="customer" required class="form-control form--select form--select" id="customer">
+
+                      <option value=""></option>
   
+                      @foreach ($customers as $customer)
+                        <option value="{{$customer->id}}">{{$customer->first_name .' '. $customer->last_name}}</option>
+                      @endforeach
   
-                  {{-- empty --}}
-                  <div class="col-12"></div>
-  
-  
-                  <div class="col-sm-4 mb-20">
-                    <label for="type">النوع</label>
-                    <select name="type" class="form-control form--select" id="type">
-  
-                        <option value=""></option>
-                        <option value="كهربائي">كهربائي</option>
-                        <option value="ميكانيكي">ميكانيكي</option>
                     </select>
                   </div>
   
                   <div class="col-sm-4 mb-20">
-                    <label for="purchase_price">سعر الشراء</label>
-                    <input type="number" class="form-control" min="0" step=".1" name="purchase_price" id="purchase_price">
+                    <label for="elevator">المصعد</label>
+                    <select name="elevator" required class="form-control form--select form--select" id="elevator">
+
+                      <option value=""></option>
+  
+                      @foreach ($elevators as $elevator)
+                        <option value="{{$elevator->id}}">{{$elevator->name}}</option>
+                      @endforeach
+  
+                    </select>
                   </div>
   
                   <div class="col-sm-4 mb-20">
-                    <label for="sell_price">سعر البيع</label>
-                    <input type="number" class="form-control" min="0" step=".1" name="sell_price" id="sell_price">
+                    <label for="date">التاريخ</label>
+                    <input type="date" class="form-control" required name="date" id="date">
                   </div>
-  
-  
-                  <div class="col-sm-12 mb-20">
-                    <label for="desc">الوصف</label>
-                    <input type="text" class="form-control" name="desc" id="desc">
+
+
+                  <div class="col-sm-4 mb-20">
+                    <label for="reference">المرجع</label>
+                    <input type="text" class="form-control" name="reference" id="reference">
                   </div>
   
   

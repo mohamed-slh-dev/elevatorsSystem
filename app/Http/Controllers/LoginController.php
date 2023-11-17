@@ -39,8 +39,10 @@ class LoginController extends Controller {
             // :check password
             if (Hash::check($request->password, $user->password)) {
                 
-                // :make username session
+                // :make username and id session
                 $request->session()->put('username', $user->username);
+                $request->session()->put('user_id', $user->id);
+
 
                 return redirect()->route('dashboard');
 

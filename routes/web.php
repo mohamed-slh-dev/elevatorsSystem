@@ -73,8 +73,8 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 
       // * Installation
     Route::get('/installations', [InstallationsController::class, 'installations'])->name('installations');
-    Route::post('/add-installation', [InstallationsController::class, 'addInsallation'])->name('addInsallation');
-    Route::post('/add-installation-parts', [InstallationsController::class, 'addInsallationParts'])->name('addInsallationParts');
+    Route::post('/add-installation', [InstallationsController::class, 'addInstallation'])->name('addInstallation');
+    Route::post('/add-installation-parts', [InstallationsController::class, 'addInstallationParts'])->name('addInstallationParts');
 
 
     // * Logout

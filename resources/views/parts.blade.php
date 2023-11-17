@@ -34,7 +34,7 @@
         @foreach ($parts as $part)
           <tr>         
 
-            <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/parts/'.$part->image)}}" alt="part image"><span class='fw-bold border-bottom'>{{$part->name}}</span></td>
+            <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/parts/'.$part->image)}}" alt="image"><span class='fw-bold border-bottom'>{{$part->name}}</span></td>
 
             <td>{{$part->type}}</td>
             <td>{{$part->desc}}</td>
@@ -86,12 +86,12 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="name">الأسم </label>
-                  <input type="text" class="form-control" name="name" id="name">
+                  <input type="text" class="form-control" required name="name" id="name">
                 </div>
 
                 <div class="col-sm-4 mb-20">
                   <label for="image">الصورة</label>
-                  <input type="file" class="form-control" name="image" id="image" accept="image/*" required>
+                  <input type="file" class="form-control" name="image" id="image" accept="image/*">
                 </div>
 
 
@@ -101,7 +101,7 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="type">النوع</label>
-                  <select name="type" class="form-control form--select" id="type">
+                  <select name="type" class="form-control form--select" id="type" required>
 
                       <option value=""></option>
                       <option value="كهربائي">كهربائي</option>
@@ -111,12 +111,12 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="purchase_price">سعر الشراء</label>
-                  <input type="number" class="form-control" min="0" step=".1" name="purchase_price" id="purchase_price">
+                  <input type="number" class="form-control" required min="0" step=".1" name="purchase_price" id="purchase_price">
                 </div>
 
                 <div class="col-sm-4 mb-20">
                   <label for="sell_price">سعر البيع</label>
-                  <input type="number" class="form-control" min="0" step=".1" name="sell_price" id="sell_price">
+                  <input type="number" class="form-control" required min="0" step=".1" name="sell_price" id="sell_price">
                 </div>
 
 
