@@ -111,12 +111,12 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="purchase_price">سعر الشراء</label>
-                  <input type="number" class="form-control" required min="0" step=".1" name="purchase_price" id="purchase_price">
+                  <input type="number" class="form-control" required min="0" step="0.01" name="purchase_price" id="purchase_price">
                 </div>
 
                 <div class="col-sm-4 mb-20">
                   <label for="sell_price">سعر البيع</label>
-                  <input type="number" class="form-control" required min="0" step=".1" name="sell_price" id="sell_price">
+                  <input type="number" class="form-control" required min="0" step="0.01" name="sell_price" id="sell_price">
                 </div>
 
 
@@ -184,12 +184,12 @@
            
                 <div class="col-sm-4 mb-20">
                   <label for="purchase_price">سعر الشراء</label>
-                  <input type="number" class="form-control" min="0" step=".1" name="purchase_price" id="purchase_price" value={{ $part->partPrices->sortByDesc('id')->first->purchase_price['purchase_price'] }}>
+                  <input type="number" class="form-control" min="0" step="0.01" name="purchase_price" id="purchase_price" value={{ $part->partPrices->sortByDesc('id')->first->purchase_price['purchase_price'] }}>
                 </div>
 
                 <div class="col-sm-4 mb-20">
                   <label for="sell_price">سعر البيع</label>
-                  <input type="number" class="form-control" min="0" step=".1" name="sell_price" id="sell_price" value={{$part->partPrices->sortByDesc('id')->first->purchase_price['sell_price']}}>
+                  <input type="number" class="form-control" min="0" step="0.01" name="sell_price" id="sell_price" value={{$part->partPrices->sortByDesc('id')->first->purchase_price['sell_price']}}>
                 </div>
 
 

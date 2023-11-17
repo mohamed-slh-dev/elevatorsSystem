@@ -13,7 +13,7 @@ class FinancialController extends Controller
 
     public function financials() {
 
-        // :get financials
+        // :get finances
         $financials = FinancialTransaction::all();
 
         // :get dependencies
@@ -42,14 +42,23 @@ class FinancialController extends Controller
         if ($request->type == 'الموارد البشرية') {
 
             $financial->employee_id = !empty($request->employee) ? $request->employee : null;
-            $financial->type_desc = !empty($request->employee) ? $request->type_desc : null ;
-            $financial->amount_in_days = !empty($request->employee) ? $request->amountInDays : null ;
-            
-        } // end if
+            $financial->type_desc = !empty($request->type_desc) ? $request->type_desc : null ;
+            $financial->amount_in_days = !empty($request->amount_in_days) ? $request->amount_in_days : null ;
+
+            // : get employee data
+            $employee = Employee::find($request->employee);
+
+            $financial->amount = doubleval($employee->contracts->sortByDesc('created_at')->first()->salary / 30) * $request->amount_in_days;;
+
+        // :amount differ
+        } else {
+
+            $financial->amount = $request->amount;
+
+        } //end else
 
 
 
-        $financial->amount = $request->amount;
         $financial->user_id = session('user_id');
         
         $financial->payment_with = $request->payment_with;
@@ -72,6 +81,53 @@ class FinancialController extends Controller
     // =============================================
 
 
+
+
+
+
+
+    public function updateFinancial (Request $request){
+
+        $financial = FinancialTransaction::find($request->id);
+
+
+        
+        $financial->type = $request->type; // HR / Maintenance / Installation
+
+        if ($request->type == 'الموارد البشرية') {
+
+            $financial->employee_id = !empty($request->employee) ? $request->employee : null;
+            $financial->type_desc = !empty($request->type_desc) ? $request->type_desc : null ;
+            $financial->amount_in_days = !empty($request->amount_in_days) ? $request->amount_in_days : null ;
+
+            // : get employee data
+            $employee = Employee::find($request->employee);
+
+            $financial->amount = doubleval($employee->contracts->sortByDesc('created_at')->first()->salary / 30) * $request->amount_in_days;
+
+        // :amount differ
+        } else {
+
+            $financial->amount = $request->amount;
+
+        } //end else
+
+
+
+        $financial->user_id = session('user_id');
+        
+        $financial->payment_with = $request->payment_with;
+        $financial->payment_type = $request->payment_type;
+        $financial->note = $request->note;
+        $financial->date = $request->date;
+        $financial->reference = $request->reference;
+
+        $financial->save();
+
+
+        return redirect()->back()->with('success','تم تعديل الاجراء المالي بنجاح');
+
+    } // end function
 
 
 } // end controller

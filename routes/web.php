@@ -80,6 +80,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     // * Financial
     Route::get('/financials', [FinancialController::class, 'financials'])->name('financials');
     Route::post('/add-financial', [FinancialController::class, 'addFinancial'])->name('addFinancial');
+    Route::post('/update-financial', [FinancialController::class, 'updateFinancial'])->name('updateFinancial');
 
 
     // * Logout
