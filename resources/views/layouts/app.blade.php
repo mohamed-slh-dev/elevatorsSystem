@@ -222,7 +222,7 @@
 
 
                   <li class="dropdown">
-                    <a class="nav-link menu-title link-nav" href="{{route('users')}}">
+                    <a class="nav-link menu-title link-nav" href="{{route('installations')}}">
                       <i data-feather="settings"></i><span>أعمال التركيب </span>
                     </a>
                   </li>

@@ -9,7 +9,7 @@ class MaintenanceQuotationPart extends Model
 {
     use HasFactory;
 
-    public function bill() {
+    public function maintenanceQuotation() {
         return $this->belongsTo('App\Models\MaintenanceQuotation');
     }
 

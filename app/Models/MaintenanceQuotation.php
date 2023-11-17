@@ -9,12 +9,17 @@ class MaintenanceQuotation extends Model
 {
     use HasFactory;
 
-    public function employee() {
-        return $this->belongsTo('App\Models\Employee');
+    public function customer() {
+        return $this->belongsTo('App\Models\Customer');
     }
 
     public function elevator() {
         return $this->belongsTo('App\Models\Elevator');
+    }
+
+
+    public function maintenanceQuotationParts() {
+        return $this->hasMany('App\Models\MaintenanceQuotationPart');
     }
     
 }

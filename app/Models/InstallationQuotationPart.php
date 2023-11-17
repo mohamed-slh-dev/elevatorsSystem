@@ -9,7 +9,7 @@ class InstallationQuotationPart extends Model
 {
     use HasFactory;
 
-    public function bill() {
+    public function installationQuotation() {
         return $this->belongsTo('App\Models\InstallationQuotation');
     }
 

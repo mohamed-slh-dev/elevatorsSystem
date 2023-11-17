@@ -28,6 +28,10 @@ class CreateInstallationBillsTable extends Migration
             $table->date('date')->nullable();
             $table->string('reference')->nullable();
 
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+
             
             $table->timestamps();
         });

@@ -10,6 +10,8 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\ElevatorsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\InstallationsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +72,10 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('/update-customer', [CustomersController::class, 'updateCustomer'])->name('updateCustomer');
 
 
+      // * Installation
+    Route::get('/installations', [InstallationsController::class, 'installations'])->name('installations');
+    Route::post('/add-installation', [InstallationsController::class, 'addInstallation'])->name('addInstallation');
+    Route::post('/add-installation-parts', [InstallationsController::class, 'addInstallationParts'])->name('addInstallationParts');
 
     // * Financial
     Route::get('/financials', [FinancialController::class, 'financials'])->name('financials');
