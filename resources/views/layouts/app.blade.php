@@ -63,12 +63,12 @@
           <div class="main-header-left">
             <div class="logo-wrapper">
                 <a href="#">
-                    <h4 class='mb-0'  dir='ltr'>Elevators.</h4>
+                    <h4 class='mb-0'>نظام إدارة المصاعد.</h4>
                 </a>
             </div>
             <div class="dark-logo-wrapper">
                 <a href="#">
-                    <h4 class='mb-0' dir='ltr'>Elevators.</h4>
+                    <h4 class='mb-0'>نظام إدارة المصاعد.</h4>
                 </a>
             </div>
             <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="align-center" id="sidebar-toggle"></i></div>
