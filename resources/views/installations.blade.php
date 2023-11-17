@@ -49,8 +49,7 @@
                 <button class="btn btn-primary-light btn--table">تعديل أجزاء المصعد</button>
               </a> --}}
   
-              <button class="btn btn-primary-light btn--table">تعديل </button>
-  
+              <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-{{$bill->id}}">تعديل</button>
             </td>   
 
           </tr>
@@ -91,94 +90,210 @@
 
 
 
-{{-- new part modal --}}
+
+
+
+{{-- ============================================================== --}}
+
+
+
+
+
+{{-- new installation modal --}}
 <div class="col-12">
-    <div class="modal fade new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-  
-          {{-- heading --}}
-          <div class="modal-header mb-3">
-            <h4 class="modal-title fw-bold" id="new">إضافة عملية تركيب</h4>
-            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-  
-  
-          {{-- form --}}
-          <form action="{{route('addInstallation')}}" method="post">
-            @csrf
-  
-            {{-- body --}}
-            <div class="modal-body">
-                <div class="row no-gutters mx-0">
+  <div class="modal fade new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
 
-                  <div class="col-sm-4 mb-20">
-                    <label for="type">النوع </label>
-                    <select name="type" required class="form-control form--select form--select" id="type">
-
-                      <option value="عرض سعر">عرض سعر</option>
-                      <option value="فاتورة">فاتورة</option>
-                    
-  
-                    </select>
-                  </div>
-
-  
-                  <div class="col-sm-4 mb-20">
-                    <label for="customer">العميل </label>
-                    <select name="customer" required class="form-control form--select form--select" id="customer">
-
-                      <option value=""></option>
-  
-                      @foreach ($customers as $customer)
-                        <option value="{{$customer->id}}">{{$customer->first_name .' '. $customer->last_name}}</option>
-                      @endforeach
-  
-                    </select>
-                  </div>
-  
-                  <div class="col-sm-4 mb-20">
-                    <label for="elevator">المصعد</label>
-                    <select name="elevator" required class="form-control form--select form--select" id="elevator">
-
-                      <option value=""></option>
-  
-                      @foreach ($elevators as $elevator)
-                        <option value="{{$elevator->id}}">{{$elevator->name}}</option>
-                      @endforeach
-  
-                    </select>
-                  </div>
-  
-                  <div class="col-sm-4 mb-20">
-                    <label for="date">التاريخ</label>
-                    <input type="date" class="form-control" required name="date" id="date">
-                  </div>
-
-
-                  <div class="col-sm-4 mb-20">
-                    <label for="reference">المرجع</label>
-                    <input type="text" class="form-control" name="reference" id="reference">
-                  </div>
-  
-  
-                </div>
-            </div>
-            {{-- end body --}}
-  
-            {{-- footer --}}
-            <div class="modal-footer">
-              <button  class="btn btn-none text-danger px-3 btn--close" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
-              <button class="btn btn-primary px-5">حفظ</button>
-            </div>
-  
-          </form>
-          {{-- end form --}}
-  
+        {{-- heading --}}
+        <div class="modal-header mb-3">
+          <h4 class="modal-title fw-bold" id="new">إضافة عملية تركيب</h4>
+          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
+
+        {{-- form --}}
+        <form action="{{route('addInstallation')}}" method="post">
+          @csrf
+
+          {{-- body --}}
+          <div class="modal-body">
+              <div class="row no-gutters mx-0">
+
+                <div class="col-sm-4 mb-20">
+                  <label for="type">النوع </label>
+                  <select name="type" required class="form-control form--select form--select" id="type">
+
+                    <option value="عرض سعر">عرض سعر</option>
+                    <option value="فاتورة">فاتورة</option>
+                  
+
+                  </select>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="customer">العميل </label>
+                  <select name="customer" required class="form-control form--select form--select" id="customer">
+
+                    <option value=""></option>
+
+                    @foreach ($customers as $customer)
+                      <option value="{{$customer->id}}">{{$customer->first_name .' '. $customer->last_name}}</option>
+                    @endforeach
+
+                  </select>
+                </div>
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator">المصعد</label>
+                  <select name="elevator" required class="form-control form--select form--select" id="elevator">
+
+                    <option value=""></option>
+
+                    @foreach ($elevators as $elevator)
+                      <option value="{{$elevator->id}}">{{$elevator->name}}</option>
+                    @endforeach
+
+                  </select>
+                </div>
+
+                <div class="col-sm-4 mb-20">
+                  <label for="date">التاريخ</label>
+                  <input type="date" class="form-control" required name="date" id="date">
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="reference">المرجع</label>
+                  <input type="text" class="form-control" name="reference" id="reference">
+                </div>
+
+
+              </div>
+          </div>
+          {{-- end body --}}
+
+          {{-- footer --}}
+          <div class="modal-footer">
+            <button  class="btn btn-none text-danger px-3 btn--close" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
+            <button class="btn btn-primary px-5">حفظ</button>
+          </div>
+
+        </form>
+        {{-- end form --}}
+
       </div>
     </div>
   </div>
-  {{-- end modal --}}
+</div>
+{{-- end modal --}}
+
+
+
+
+
+
+
+
+{{-- ============================================================== --}}
+
+
+
+
+
+
+{{-- edit installation/bill modal --}}
+
+@foreach ($installation_bills as $bill)
+    
+<div class="col-12">
+  <div class="modal fade edit-bill-{{$bill->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        {{-- heading --}}
+        <div class="modal-header mb-3">
+          <h4 class="modal-title fw-bold" id="new">تعديل عملية تركيب</h4>
+          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+
+        {{-- form --}}
+        <form action="{{route('updateInstallation')}}" method="post">
+          @csrf
+
+          {{-- body --}}
+          <div class="modal-body">
+              <div class="row no-gutters mx-0">
+
+                <div class="col-sm-4 mb-20">
+                  <label for="type">النوع </label>
+                  <select name="type" required class="form-control form--select form--select" id="type">
+                    <option value="فاتورة" selected>فاتورة</option>
+                  </select>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="customer">العميل </label>
+                  <select name="customer" required class="form-control form--select form--select" id="customer" value='{{$bill->customer_id}}'>
+
+                    @foreach ($customers as $customer)
+                      <option value="{{$customer->id}}">{{$customer->first_name .' '. $customer->last_name}}</option>
+                    @endforeach
+
+                  </select>
+                </div>
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator">المصعد</label>
+                  <select name="elevator" required class="form-control form--select form--select" id="elevator" value='{{$bill->elevator_id}}'>
+
+                    @foreach ($elevators as $elevator)
+                      <option value="{{$elevator->id}}">{{$elevator->name}}</option>
+                    @endforeach
+
+                  </select>
+                </div>
+
+                <div class="col-sm-4 mb-20">
+                  <label for="date">التاريخ</label>
+                  <input type="date" class="form-control" required name="date" id="date" value='{{$bill->date}}'>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="reference">المرجع</label>
+                  <input type="text" class="form-control" name="reference" id="reference" value='{{$bill->reference}}'>
+                </div>
+
+
+              </div>
+          </div>
+          {{-- end body --}}
+
+          {{-- footer --}}
+          <div class="modal-footer">
+            <button  class="btn btn-none text-danger px-3 btn--close" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
+            <button class="btn btn-primary px-5">حفظ</button>
+          </div>
+
+        </form>
+        {{-- end form --}}
+
+      </div>
+    </div>
+  </div>
+</div>
+{{-- end modal --}}
+
+
+@endforeach
+{{-- end loop --}}
+
+
+
 
 @endsection
+{{-- end section --}}
