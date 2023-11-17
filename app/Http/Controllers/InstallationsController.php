@@ -77,6 +77,7 @@ class InstallationsController extends Controller
             return view('add-installations-parts', compact('type', 'id', 'elevator'));
 
         } // end else
+
     } // end function
 
 
@@ -91,9 +92,10 @@ class InstallationsController extends Controller
 
     public function addInstallationParts(Request $request){
 
+
+        
         if ($request->type == 'quotation') {
             
-
             if (!empty($request->elevator_parts)) {
            
                 for ($i=0; $i < count($request->elevator_parts) ; $i++) { 
@@ -108,11 +110,7 @@ class InstallationsController extends Controller
                     $quotation->save();
 
                     $quotation_part->save();
-
-                   
-         
-                 }
-    
+                }
             }
 
         }else{
@@ -188,6 +186,7 @@ class InstallationsController extends Controller
         $installation->customer_id = $request->customer;
         $installation->elevator_id = $request->elevator;
         $installation->date = $request->date;
+        if ($installationResetLink != false) $installation->price = 0; // ! reset price
         $installation->reference = $request->reference;
         $installation->user_id = session()->get('user_id');
 
@@ -230,14 +229,13 @@ class InstallationsController extends Controller
 
 
 
+
     // ========================================================================
 
 
 
 
-
-
-    public function editInstallationParts(Request $request, $id, $type){
+    public function editInstallationParts(Request $request, $id, $type) {
 
 
         // : init
@@ -259,11 +257,99 @@ class InstallationsController extends Controller
         } // end if
 
 
-        return view('edit-installations-parts', ['installation', 'parts', 'type']);
+
+        // : convert to array (for conditioning)
+        $partsArray = $parts->pluck('part_id')->toArray();
+
+        return view('edit-installations-parts', compact('installation', 'parts', 'partsArray', 'type'));
+
+    } // end function
+
+
+
+
+
+
+    // ========================================================================
+
+
+
+
+
+
+    public function updateInstallationParts(Request $request, $id, $type) {
+
+        // : 1- quotation parts
+        if ($type == 'quotation') {
+
+            // ! remove previous parts
+            InstallationQuotationPart::where('installation_quotation_id', $id)->delete();
+
+            // : reset installation price
+            $quotation = InstallationQuotation::find($id);
+            $quotation->price = 0;
+            $quotation->save();
+
+
+            // : add quo-parts
+            if (!empty($request->elevator_parts)) {
+                for ($i = 0; $i < count($request->elevator_parts) ; $i++) { 
+                    
+                    $quotation_part = new InstallationQuotationPart();
+                    $quotation_part->installation_quotation_id = $request->id;
+                    $quotation_part->part_id = $request->elevator_parts[$i];
+                    $quotation_part->price = $request->part_price[$request->elevator_parts[$i]][0];
+
+                    $quotation->price += $request->part_price[$request->elevator_parts[$i]][0];
+                    $quotation->save();
+
+                    $quotation_part->save();
+         
+                } // end loop
+            } // end if
+
+
+
+        // : add bill-parts
+        } else {
+
+
+            // ! remove previous parts
+            InstallationBillPart::where('installation_bill_id', $id)->delete();
+
+            // : reset installation price
+            $bill = InstallationBill::find($id);
+            $bill->price = 0;
+            $bill->save();
+
+
+
+            if (!empty($request->elevator_parts)) {
+                for ($i = 0; $i < count($request->elevator_parts) ; $i++) { 
+                
+                    $bill_part = new InstallationBillPart();
+                    $bill_part->installation_bill_id = $request->id;
+                    $bill_part->part_id = $request->elevator_parts[$i];
+                    $bill_part->price = $request->part_price[$request->elevator_parts[$i]][0];
+
+                    $bill->price += $request->part_price[$request->elevator_parts[$i]][0];
+                    $bill->save();
+
+                    $bill_part->save();
+         
+                } // end loop
+            } // end if
+
+        } // end else
+
+
+
+        // continue to main-page
+        return redirect()->route('installations')->with('success', 'تم تعديل بيانات عملية التركيب بنجاح');
 
 
     } // end function
 
 
 
-} //end function
+} //end controller

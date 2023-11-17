@@ -6,28 +6,26 @@
    
 <div class="col-3"></div>
 <div class="col-3 mb-5">
-    <input class='form-control text-center fw-bold' type="text" readonly value='{{$installation->elevator->name}}' style="pointer-events: none">
+    <input class='form-control text-center fw-bold' type="text" readonly value='{{$elevator->name}}' style="pointer-events: none">
 </div>
 
 
 
 <div class="col-12">
 
-  <form action="{{route('updateInstallationParts')}}" method="post">
-    @method('POST')
+  <form action="{{route('addInstallationParts')}}" method="post">
+
     @csrf
-
-
-    {{-- hidden: Type --}}
+    
+    <input type="hidden" name="id" value="{{$id}}" id="">
+    
     <input type="hidden" name="type" value="{{$type}}" id="">
     
-
-
     {{-- checkboxes wrapper --}}
     <div class="form-group m-checkbox-inline mb-0">
 
       {{-- loop - parts  --}}
-      @foreach ($installation->elevator->elevatorParts as $part)
+      @foreach ($elevator->elevatorParts as $part)
 
         
         {{-- single checkbox --}}

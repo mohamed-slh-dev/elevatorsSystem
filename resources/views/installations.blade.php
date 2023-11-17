@@ -70,11 +70,12 @@
           <td>{{$quotation->price}}</td>
 
           <td>
-            {{-- <a href="{{route('editElevatorParts', $elevator->id)}}">
-              <button class="btn btn-primary-light btn--table">تعديل أجزاء المصعد</button>
-            </a> --}}
 
-            <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-bill-{{$quotation->id}}">تعديل</button>
+            <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-quotation-{{$quotation->id}}">تعديل</button>
+
+            <a href="{{route('editInstallationParts', [$quotation->id, 'quotation'])}}">
+              <button class="btn btn-outline-light btn--table">تعديل أجزاء المصعد</button>
+            </a>
 
           </td>   
           
@@ -207,6 +208,119 @@
 
 {{-- edit installation/bill modal --}}
 
+@foreach ($installation_quotations as $quotation)
+    
+<div class="col-12">
+  <div class="modal fade edit-quotation-{{$quotation->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        {{-- heading --}}
+        <div class="modal-header mb-3">
+          <h4 class="modal-title fw-bold" id="new">تعديل عملية تركيب</h4>
+          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+
+        {{-- form --}}
+        <form action="{{route('updateInstallation')}}" method="post">
+          @csrf
+
+
+          {{-- id --}}
+          <input type="hidden" name="id" value='{{$quotation->id}}'>
+
+
+
+          {{-- body --}}
+          <div class="modal-body">
+              <div class="row no-gutters mx-0">
+
+                <div class="col-sm-4 mb-20">
+                  <label for="type">النوع </label>
+                  <select name="type" required class="form-control form--select form--select" id="type">
+                    <option value="عرض سعر" selected>عرض سعر</option>
+                  </select>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="customer">العميل </label>
+                  <select name="customer" required class="form-control form--select form--select" id="customer" value='{{$quotation->customer_id}}'>
+
+                    @foreach ($customers as $customer)
+                      <option value="{{$customer->id}}">{{$customer->first_name .' '. $customer->last_name}}</option>
+                    @endforeach
+
+                  </select>
+                </div>
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator">المصعد</label>
+                  <select name="elevator" required class="form-control form--select form--select" id="elevator" value='{{$quotation->elevator_id}}'>
+
+                    @foreach ($elevators as $elevator)
+                      <option value="{{$elevator->id}}">{{$elevator->name}}</option>
+                    @endforeach
+
+                  </select>
+                </div>
+
+                <div class="col-sm-4 mb-20">
+                  <label for="date">التاريخ</label>
+                  <input type="date" class="form-control" required name="date" id="date" value='{{$quotation->date}}'>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="reference">المرجع</label>
+                  <input type="text" class="form-control" name="reference" id="reference" value='{{$quotation->reference}}'>
+                </div>
+
+
+              </div>
+          </div>
+          {{-- end body --}}
+
+          {{-- footer --}}
+          <div class="modal-footer">
+            <button  class="btn btn-none text-danger px-3 btn--close" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
+            <button class="btn btn-primary px-5">حفظ</button>
+          </div>
+
+        </form>
+        {{-- end form --}}
+
+      </div>
+    </div>
+  </div>
+</div>
+{{-- end modal --}}
+
+
+
+
+@endforeach
+{{-- end loop --}}
+
+
+
+
+
+
+
+
+
+
+{{-- ============================================================== --}}
+
+
+
+
+
+
+{{-- edit installation/quotations modal --}}
+
 @foreach ($installation_bills as $bill)
     
 <div class="col-12">
@@ -295,6 +409,7 @@
   </div>
 </div>
 {{-- end modal --}}
+
 
 
 @endforeach
