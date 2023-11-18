@@ -209,6 +209,15 @@ input[type="file"] {
     border-radius: 0px;
 }
 
+.table--heading {
+    margin: 1px;
+    background-color: var(--text-main);
+    color: #ffc107;
+    margin-bottom: 0px;
+    padding: 13px 0px;
+    letter-spacing: 0.8px;
+}
+
 .table--img {
     border: 2px solid #ffc107;
     width: 50px;
