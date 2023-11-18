@@ -28,6 +28,10 @@
             <th scope="col" class='min-w-110px'> السعر</th>
 
             <th scope="col" class='min-w-110px'></th>
+            <th scope="col" class='min-w-110px'></th>
+
+            <th scope="col" class='min-w-110px'>حذف</th>
+
           </tr>
         </thead>
         <tbody>
@@ -48,11 +52,25 @@
         
               <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-bill-{{$bill->id}}">تعديل</button>
 
+            </td>
+
+            <td>
               <a href="{{route('editInstallationParts', [$bill->id, 'bill'])}}">
                 <button class="btn btn-outline-light btn--table">تعديل أجزاء المصعد</button>
               </a>
   
             </td>   
+
+            <td>
+              <a href="{{route('deleteInstallation', [$bill->id , 'bill'])}}">
+
+                <button  class="btn btn-none text-danger btn--table  scale--2" >
+                  <i class='fa fa-trash fs-5'></i>
+                </button>
+
+              </a>
+             
+            </td>
 
           </tr>
         @endforeach
@@ -73,11 +91,27 @@
 
             <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-quotation-{{$quotation->id}}">تعديل</button>
 
+          </td>
+
+          <td>
+           
             <a href="{{route('editInstallationParts', [$quotation->id, 'quotation'])}}">
               <button class="btn btn-outline-light btn--table">تعديل أجزاء المصعد</button>
             </a>
 
-          </td>   
+          </td> 
+          
+          <td>
+            <a href="{{route('deleteInstallation', [$quotation->id , 'quotation'])}}">
+
+              <button  class="btn btn-none text-danger btn--table  scale--2" >
+                <i class='fa fa-trash fs-5'></i>
+              </button>
+
+            </a>
+           
+
+          </td>
           
         </tr>
        @endforeach
@@ -414,8 +448,6 @@
 
 @endforeach
 {{-- end loop --}}
-
-
 
 
 @endsection

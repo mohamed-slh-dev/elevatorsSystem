@@ -352,4 +352,40 @@ class MaintenanceController extends Controller
 
 
 
+    public function deleteMaintenance($id, $type){
+
+        if ($type == 'bill') {
+            
+            $installation = MaintenanceBill::find($id);
+
+            foreach ($installation->maintenanceBillParts as $part) {
+                
+                $part->delete();
+
+            }
+
+
+            $installation->delete();
+
+        } else {
+
+             $installation = MaintenanceQuotation::find($id);
+
+            foreach ($installation->maintenanceQuotationParts as $part) {
+                
+                $part->delete();
+
+            }
+
+
+            $installation->delete();
+           
+        }
+
+        return redirect()->route('maintenance')->with('success', 'تم  حذف عملية الصيانة بنجاح');
+
+        
+        
+    }
+
 } //end controller

@@ -19,7 +19,7 @@ class MaintenanceBill extends Model
 
 
     public function maintenanceBillParts() {
-        return $this->belongsTo('App\Models\MainteneceBillPart');
+        return $this->hasMany('App\Models\MaintenanceBillPart');
     }
 
     
