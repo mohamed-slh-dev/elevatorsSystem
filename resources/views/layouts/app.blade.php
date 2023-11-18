@@ -162,10 +162,10 @@
               {{-- <a class="setting-primary" href="javascript:void(0)">
               <i data-feather="settings"></i>
             </a> --}}
-            <img class="img-90 rounded-circle" src="../assets/images/dashboard/1.png" alt="">
+            <img class="rounded-circle of-contain" style="height: 80px; width: 80px" src="{{asset('storage/users/'.session('user_img'))}}" alt="">
             <div class="badge-bottom"></div><a href="javascript:void(0);">
               <h6 class="mt-3 f-14 f-w-600">{{ session('name') }}</h6></a>
-              <p class="mb-0 font--family">مدير قسم التنمية البشرية</p>
+              <p class="mb-0 font--family">{{ session('email') }}</p>
          
           </div>
           <nav>

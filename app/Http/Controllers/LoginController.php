@@ -40,7 +40,7 @@ class LoginController extends Controller {
             if (Hash::check($request->password, $user->password)) {
                 
                 // :make username session
-                $request->session()->put(['name' => $user->name, 'username'=> $user->username, 'user_id'=> $user->id]);
+                $request->session()->put(['name' => $user->name, 'username'=> $user->username, 'user_id'=> $user->id, 'email'=> $user->email, 'user_img'=> $user->image ]);
 
                 return redirect()->route('dashboard');
 
@@ -72,7 +72,7 @@ class LoginController extends Controller {
         // ? session still active
         if (session('username')) {
 
-            $request->session()->forget(['name', 'username', 'user_id']);
+            $request->session()->forget(['name', 'username', 'user_id', 'email', 'user_img']);
 
         } // end if
 
