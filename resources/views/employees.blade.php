@@ -35,7 +35,7 @@
           <th scope="col">الحساب</th>
           <th scope="col">IBAN</th>
           <th scope="col"></th>
-          <th scope="col"></th>
+          <th scope="col" class="min-w-200px"></th>
 
         </tr>
       </thead>
@@ -66,6 +66,9 @@
         <td>
 
           <button class="btn btn-outline-light btn--table d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".edit-{{$employee->id}}">تعديل</button>
+
+          <button class="btn btn-outline-light btn--table d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".new-transaction-{{$employee->id}}">إضافة مالية</button>
+
 
         </td>
       </tr>
@@ -326,11 +329,169 @@
 {{-- end modal --}}
 
 
+
+
+
+
+
+
+
+{{-- ===================================================================== --}}
+
+
+
+
+
 @foreach ($employees as $employee)
     
 
 
-{{-- modal --}}
+
+{{-- add transaction modal --}}
+<div class="col-12">
+  <div class="modal fade new-transaction-{{$employee->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        {{-- heading --}}
+        <div class="modal-header mb-3">
+          <h4 class="modal-title fw-bold" id="new">إضافة إجراء</h4>
+          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+
+        {{-- form --}}
+        <form action="{{route('addFinancial')}}" method="post" enctype="multipart/form-data">
+          @csrf
+
+
+          {{-- :hidden type --}}
+          <input type="hidden" name="type" value='الموارد البشرية''>
+          
+          {{-- body --}}
+          <div class="modal-body">
+              <div class="row no-gutters mx-0">
+
+                {{-- fixated: employee --}}
+                <div class="col-sm-4 mb-20">
+                  <label for="employee">الموظف</label>
+                  <select name="employee" class="form-control form--select" id="employee" readonly>
+
+                      <option value="{{$employee->id}}" selected>{{$employee->first_name . ' ' . $employee->last_name}}</option>
+                      
+                  </select>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="reference">رقم الإجراء </label>
+                  <input type="text" class="form-control" name="reference" id="reference">
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="date">التاريخ</label>
+                  <input type="date" class="form-control" name="date" id="date">
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="type">النوع</label>
+                  <select name="type_desc" class="form-control form--select" id="type_desc">
+
+                      <option value=""></option>
+                      <option value="مرتب">مرتب</option>
+                      <option value="مكافأة">مكافأة</option>
+                      <option value="خصم">خصم</option>
+                  </select>
+                </div>
+
+
+                
+                <div class="col-sm-4 mb-20">
+                  <label for="amount_in_days">عدد الأيام</label>
+                  <input type="number" class="form-control" min="0" step="0.01" name="amount_in_days" id="amount_in_days">
+                </div>
+
+
+                {{-- empty --}}
+                <div class="col-12"></div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="payment_type">طريقة الدفع</label>
+                  <select name="payment_type" class="form-control form--select payment-select" id="payment_type" data-form='add-{{$employee->id}}'>
+
+                      <option value=""></option>
+                      <option value="المبلغ كامل">المبلغ كامل</option>
+                      <option value="تقصيد المبلغ">تقصيد المبلغ</option>
+                  </select>
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20 payment-select-col d-none" data-form='add-{{$employee->id}}'>
+                  <label for="remaining_amount">المبلغ المتبقي</label>
+                  <input type="number" min='0' step='0.01' class="form-control" name="remaining_amount" id="remaining_amount">
+                </div>
+
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="payment_with">آلية الدفع</label>
+                  <select name="payment_with" class="form-control form--select" id="payment_with">
+
+                      <option value=""></option>
+                      <option value="تحويل بنكي">تحويل بنكي</option>
+                      <option value="كاش">كاش</option>
+                  </select>
+                </div>
+
+
+
+                <div class="col-sm-12 mb-20">
+                  <label for="note">ملاحظة</label>
+                  <input type="text" class="form-control" name="note" id="note">
+                </div>
+
+
+              </div>
+          </div>
+          {{-- end body --}}
+
+          {{-- footer --}}
+          <div class="modal-footer">
+            <button  class="btn btn-none text-danger px-3 btn--close" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
+            <button class="btn btn-primary px-5">حفظ</button>
+          </div>
+
+        </form>
+        {{-- end form --}}
+
+      </div>
+    </div>
+  </div>
+</div>
+{{-- end modal --}}
+
+
+
+
+
+
+
+{{-- ===================================================================== --}}
+
+
+
+
+
+
+{{-- edit employee modal --}}
+
+
 <div class="col-12">
   <div class="modal fade edit-{{$employee->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -515,5 +676,53 @@
   {{-- end modal --}}
 
 @endforeach
+{{-- end loop --}}
+
+
+
 
 @endsection
+{{-- end content section --}}
+
+
+
+
+
+
+
+
+{{-- ======================================================= --}}
+
+
+{{-- scripts --}}
+@section('scripts')
+
+
+<script>
+
+
+  $('div').on('change', '.payment-select', function() {
+
+    // : get dataForm / value
+    dataForm = $(this).attr('data-form');
+    inputVal = $(this).val();
+
+
+    if (inputVal == 'تقصيد المبلغ') {
+
+      $(`.payment-select-col[data-form=${dataForm}]`).removeClass('d-none');
+
+    } else {
+
+      $(`.payment-select-col[data-form=${dataForm}]`).addClass('d-none');
+
+    } // end if
+
+
+  }); // end function
+
+</script>
+
+    
+@endsection
+
