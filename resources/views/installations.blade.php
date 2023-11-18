@@ -62,14 +62,9 @@
             </td>   
 
             <td>
-              <a href="{{route('deleteInstallation', [$bill->id , 'bill'])}}">
-
-                <button  class="btn btn-none text-danger btn--table  scale--2" >
-                  <i class='fa fa-trash fs-5'></i>
-                </button>
-
-              </a>
-             
+              <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scale--2 remove--btn" data-id="{{$bill->id}}" data-type='bill'>
+                <i class='fa fa-trash fs-5'></i>
+              </button>
             </td>
 
           </tr>
@@ -102,14 +97,10 @@
           </td> 
           
           <td>
-            <a href="{{route('deleteInstallation', [$quotation->id , 'quotation'])}}">
 
-              <button  class="btn btn-none text-danger btn--table  scale--2" >
-                <i class='fa fa-trash fs-5'></i>
-              </button>
-
-            </a>
-           
+            <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scale--2 remove--btn" data-id="{{$quotation->id}}" data-type='quotation'>
+              <i class='fa fa-trash fs-5'></i>
+            </button>
 
           </td>
           
@@ -445,10 +436,93 @@
 {{-- end modal --}}
 
 
-
 @endforeach
 {{-- end loop --}}
 
 
+
+
+
+
+
+
+
+{{-- ============================================================== --}}
+
+
+
+{{-- confirmation modal --}}
+<div class="col-12 justify-content-center">
+  <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+
+        {{-- content --}}
+        <div class="modal-content modal--remove">
+
+
+          {{-- form --}}
+          <form action="{{route('deleteInstallation')}}" method="post">
+            @csrf
+            
+            <input type="hidden" name="id" value="" id="modal-assign-id">
+            <input type="hidden" name="type" value="" id="modal-assign-type">
+
+
+
+            {{-- body --}}
+            <div class="modal-body">
+    
+                <div class="row no-gutters mx-0">
+                  <div class="col-12 text-center">
+                    
+                    {{-- main title --}}
+                    <h5 class="modal-title fw-bold form--subheading d-inline-block mb-4" id="delete">حذف عقد</h5>
+
+                    {{-- desc --}}
+                    <h6 class='mb-3'>هل أنت متأكد من حذف هذا العقد؟</h6>
+
+                    {{-- actions --}}
+                    <div class="d-block text-center">
+                      <button  class="btn btn-none py-1 px-3" data-bs-dismiss="modal" aria-label="Close">إلغاء</button>
+                      <button class="btn btn-danger py-1 px-3">حذف</button>
+                    </div>
+
+                  </div>
+                </div>
+
+            </div>
+            {{-- end body --}}
+            
+          </form>
+          {{-- end form --}}
+  
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
 @endsection
 {{-- end section --}}
+
+
+
+
+
+@section('scripts')
+
+<script>
+
+  $('.remove--btn').click(function() {
+
+    $('#modal-assign-id').val($(this).attr('data-id'));
+    $('#modal-assign-type').val($(this).attr('data-type'));
+
+  });
+
+</script>
+    
+@endsection
+

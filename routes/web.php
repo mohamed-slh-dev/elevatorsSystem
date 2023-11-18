@@ -90,7 +90,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('/update-installation-parts/{id}/{type}', [InstallationsController::class, 'updateInstallationParts'])->name('updateInstallationParts');
 
     // ! delete
-    Route::get('/delete-installation/{id}/{type}', [InstallationsController::class, 'deleteInstallation'])->name('deleteInstallation');
+    Route::post('/delete-installation', [InstallationsController::class, 'deleteInstallation'])->name('deleteInstallation');
 
 
 
