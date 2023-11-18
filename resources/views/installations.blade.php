@@ -479,7 +479,7 @@
                     <h5 class="modal-title fw-bold form--subheading d-inline-block mb-4" id="delete">حذف عقد</h5>
 
                     {{-- desc --}}
-                    <h6 class='mb-3'>هل أنت متأكد من حذف هذا العقد؟</h6>
+                    <h6 class='mb-3'>هل أنت متأكد من حذف هذه العملية؟</h6>
 
                     {{-- actions --}}
                     <div class="d-block text-center">

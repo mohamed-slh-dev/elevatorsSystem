@@ -351,11 +351,11 @@ class InstallationsController extends Controller
     } // end function
 
 
-    public function deleteInstallation($id, $type){
+    public function deleteInstallation(Request $request){
 
-        if ($type == 'bill') {
+        if ($request->type == 'bill') {
             
-            $installation = InstallationBill::find($id);
+            $installation = InstallationBill::find($request->id);
 
             foreach ($installation->installationBillParts as $part) {
                 
@@ -368,7 +368,7 @@ class InstallationsController extends Controller
 
         } else {
 
-             $installation = InstallationQuotation::find($id);
+             $installation = InstallationQuotation::find($request->id);
 
             foreach ($installation->installationQuotationParts as $part) {
                 

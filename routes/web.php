@@ -114,7 +114,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('/update-maintenance-parts/{id}/{type}', [MaintenanceController::class, 'updateMaintenanceParts'])->name('updateMaintenanceParts');
    
     // ! delete
-    Route::get('/delete-maintenance/{id}/{type}', [MaintenanceController::class, 'deleteMaintenance'])->name('deleteMaintenance');
+    Route::post('/delete-maintenance', [MaintenanceController::class, 'deleteMaintenance'])->name('deleteMaintenance');
 
        
 
