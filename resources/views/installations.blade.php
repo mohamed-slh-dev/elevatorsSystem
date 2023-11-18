@@ -20,17 +20,16 @@
       <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
-            <th scope="col" class='min-w-200px'>النوع</th>
-            <th scope="col">العميل</th>
+            <th scope="col">النوع</th>
+            <th scope="col" class='min-w-140px'>العميل</th>
             <th scope="col" class='min-w-130px'>المصعد</th>
-            <th scope="col" class='min-w-110px'> التاريخ</th>
-            <th scope="col" class='min-w-110px'> المرجع</th>
-            <th scope="col" class='min-w-110px'> السعر</th>
+            <th scope="col"> التاريخ</th>
+            <th scope="col"> المرجع</th>
+            <th scope="col"> السعر</th>
 
-            <th scope="col" class='min-w-110px'></th>
-            <th scope="col" class='min-w-110px'></th>
-
-            <th scope="col" class='min-w-110px'>حذف</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
 
           </tr>
         </thead>

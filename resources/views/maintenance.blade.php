@@ -20,17 +20,17 @@
       <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
-            <th scope="col" class='min-w-200px'>النوع</th>
-            <th scope="col">العميل</th>
+            <th scope="col">النوع</th>
+            <th scope="col" class='min-w-140px'>العميل</th>
             <th scope="col" class='min-w-130px'>المصعد</th>
-            <th scope="col" class='min-w-110px'> التاريخ</th>
-            <th scope="col" class='min-w-110px'> المرجع</th>
-            <th scope="col" class='min-w-110px'> السعر</th>
+            <th scope="col"> التاريخ</th>
+            <th scope="col"> المرجع</th>
+            <th scope="col"> السعر</th>
 
-            <th scope="col" class='min-w-110px'></th>
-            <th scope="col" class='min-w-110px'></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
 
-            <th scope="col" class='min-w-110px'>حذف</th>
+            <th scope="col"></th>
 
           </tr>
         </thead>
@@ -49,7 +49,6 @@
             <td>{{$bill->price}}</td>
 
             <td>
-        
               <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-bill-{{$bill->id}}">تعديل</button>
             </td>
 
@@ -58,14 +57,12 @@
               <a href="{{route('editMaintenanceParts', [$bill->id, 'bill'])}}">
                 <button class="btn btn-outline-light btn--table">تعديل أجزاء المصعد</button>
               </a>
-  
             </td> 
             
             <td>
               <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scale--2 remove--btn" data-id="{{$bill->id}}" data-type='quotation'>
                 <i class='fa fa-trash fs-5'></i>
               </button>
-             
             </td>
 
           </tr>

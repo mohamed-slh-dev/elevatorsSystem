@@ -22,8 +22,188 @@
 
 
 
+
+
+
+
+
+
+
+{{-- table of installations --}}
+<div class="col-sm-12 col-lg-6 col-xl-6 mb-5">
+    <div class="table-responsive">
+
+        <h5 class='fw-bold text-center table--heading'>أعمال التركيب</h5>
+
+        <table class="table table-bordered">
+
+            {{-- thead --}}
+            <thead class="bg-primary">
+                <tr>
+                    <th scope="col">النوع</th>
+                    <th scope="col">العميل</th>
+                    <th scope="col">المصعد</th>
+                    <th scope="col" class='min-w-110px'> التاريخ</th>
+                    <th scope="col" class='min-w-110px'> السعر</th>
+
+                </tr>
+            </thead>
+            {{-- end thead --}}
+
+
+
+            
+            {{-- tbody --}}
+            <tbody>
+            
+
+                {{-- installations - loop --}}
+                @foreach ($installationBills as $bill)
+
+                    <tr>         
+
+                        <td>فاتورة</td>
+                        <td>{{$bill->customer->first_name. ' '. $bill->customer->last_name}}</td>
+                        <td>{{$bill->elevator->name}}</td>
+                        <td>{{$bill->date}}</td>
+                        <td>{{$bill->price}}</td>
+
+                    </tr>
+
+                @endforeach
+                {{-- end loop --}}
+
+
+
+
+                {{-- ------------------------------- --}}
+
+
+                {{-- quotations loop --}}
+                @foreach ($installationQuotations as $quotation)
+
+                    <tr>         
+                        <td>عرض سعر</td>
+                        <td>{{$quotation->customer->first_name. ' '. $quotation->customer->last_name}}</td>
+                        <td>{{$quotation->elevator->name}}</td>
+                        <td>{{$quotation->date}}</td>
+                        <td>{{$quotation->price}}</td>
+                    </tr>
+
+
+                @endforeach
+                {{-- end loop --}}
+            
+            </tbody>
+        </table>
+    </div>
+</div>
+{{-- end table --}}
+
+
+
+
+{{-- ============================================================= --}}
+
+
+
+
+
+
+{{-- table of maintenance --}}
+<div class="col-sm-12 col-lg-6 col-xl-6 mb-5">
+    <div class="table-responsive">
+
+        <h5 class='fw-bold text-center table--heading'>أعمال الصيانة</h5>
+
+        <table class="table table-bordered">
+
+            {{-- thead --}}
+            <thead class="bg-primary">
+                <tr>
+                    <th scope="col">النوع</th>
+                    <th scope="col">العميل</th>
+                    <th scope="col">المصعد</th>
+                    <th scope="col" class='min-w-110px'> التاريخ</th>
+                    <th scope="col" class='min-w-110px'> السعر</th>
+
+                </tr>
+            </thead>
+            {{-- end thead --}}
+
+
+
+            
+            {{-- tbody --}}
+            <tbody>
+            
+
+                {{-- maintenance - bills loop --}}
+                @foreach ($maintenanceBills as $bill)
+
+                    <tr>         
+
+                        <td>فاتورة</td>
+                        <td>{{$bill->customer->first_name. ' '. $bill->customer->last_name}}</td>
+                        <td>{{$bill->elevator->name}}</td>
+                        <td>{{$bill->date}}</td>
+                        <td>{{$bill->price}}</td>
+
+                    </tr>
+
+                @endforeach
+                {{-- end loop --}}
+
+
+
+
+                {{-- ------------------------------- --}}
+
+
+                {{-- maintenance - quotes loop --}}
+                @foreach ($maintenanceQuotations as $quotation)
+
+                    <tr>         
+                        <td>عرض سعر</td>
+                        <td>{{$quotation->customer->first_name. ' '. $quotation->customer->last_name}}</td>
+                        <td>{{$quotation->elevator->name}}</td>
+                        <td>{{$quotation->date}}</td>
+                        <td>{{$quotation->price}}</td>
+                    </tr>
+
+
+                @endforeach
+                {{-- end loop --}}
+            
+            </tbody>
+        </table>
+    </div>
+</div>
+{{-- end table --}}
+
+
+
+
+
+
+{{-- ============================================================== --}}
+
+
+
+<div class="col-12 mb-4">
+    <hr>
+</div>
+
+
+{{-- ============================================================== --}}
+
+
+
+
+
+
 {{-- elevators table --}}
-<div class="col-sm-12 col-lg-6 col-xl-6">
+<div class="col-sm-12 col-lg-6 col-xl-6 mb-5">
 
     <div class="table-responsive">
 

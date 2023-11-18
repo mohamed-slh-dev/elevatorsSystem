@@ -211,11 +211,12 @@ input[type="file"] {
 
 .table--heading {
     margin: 1px;
-    background-color: var(--text-main);
-    color: #ffc107;
+    background-color: #fbfbfb;
+    color: var(--text-main);
     margin-bottom: 0px;
     padding: 13px 0px;
     letter-spacing: 0.8px;
+    font-size: 16px;
 }
 
 .table--img {
