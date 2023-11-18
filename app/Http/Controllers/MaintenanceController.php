@@ -352,11 +352,11 @@ class MaintenanceController extends Controller
 
 
 
-    public function deleteMaintenance($id, $type){
+    public function deleteMaintenance(Request $request){
 
-        if ($type == 'bill') {
+        if ($request->type == 'bill') {
             
-            $installation = MaintenanceBill::find($id);
+            $installation = MaintenanceBill::find($request->id);
 
             foreach ($installation->maintenanceBillParts as $part) {
                 
@@ -369,7 +369,7 @@ class MaintenanceController extends Controller
 
         } else {
 
-             $installation = MaintenanceQuotation::find($id);
+             $installation = MaintenanceQuotation::find($request->id);
 
             foreach ($installation->maintenanceQuotationParts as $part) {
                 
