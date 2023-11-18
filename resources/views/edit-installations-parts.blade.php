@@ -90,7 +90,7 @@
 
       <a href="{{route('installations')}}">
 
-        <button class="btn btn-outline-danger">إلغاء</button>
+        <button class="btn btn-outline-danger">الرجوع <i class="fa fa-angle-double-left ms-2"></i></button>
 
       </a>
 

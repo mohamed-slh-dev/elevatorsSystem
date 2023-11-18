@@ -74,6 +74,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('/update-customer', [CustomersController::class, 'updateCustomer'])->name('updateCustomer');
 
 
+
     // * Installation
     Route::get('/installations', [InstallationsController::class, 'installations'])->name('installations');
 
@@ -88,22 +89,32 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/edit-installation-parts/{id}/{type}', [InstallationsController::class, 'editInstallationParts'])->name('editInstallationParts');
     Route::post('/update-installation-parts/{id}/{type}', [InstallationsController::class, 'updateInstallationParts'])->name('updateInstallationParts');
 
+    // ! delete
+    Route::get('/delete-installation/{id}/{type}', [InstallationsController::class, 'deleteInstallation'])->name('deleteInstallation');
 
 
-       // * Maintenance
-       Route::get('/maintenance', [MaintenanceController::class, 'maintenance'])->name('maintenance');
 
-       Route::post('/add-maintenance', [MaintenanceController::class, 'addMaintenance'])->name('addMaintenance');
-       Route::post('/add-maintenance-parts', [MaintenanceController::class, 'addMaintenanceParts'])->name('addMaintenanceParts');
+
+
+
+
+
+    // * Maintenance
+    Route::get('/maintenance', [MaintenanceController::class, 'maintenance'])->name('maintenance');
+
+    Route::post('/add-maintenance', [MaintenanceController::class, 'addMaintenance'])->name('addMaintenance');
+    Route::post('/add-maintenance-parts', [MaintenanceController::class, 'addMaintenanceParts'])->name('addMaintenanceParts');
    
        
-       // ! information update
-       Route::post('/update-maintenance', [MaintenanceController::class, 'updateMaintenance'])->name('updateMaintenance');
+    // ! information update
+    Route::post('/update-maintenance', [MaintenanceController::class, 'updateMaintenance'])->name('updateMaintenance');
    
-       // ! parts update
-       Route::get('/edit-maintenance-parts/{id}/{type}', [MaintenanceController::class, 'editMaintenanceParts'])->name('editMaintenanceParts');
-       Route::post('/update-maintenance-parts/{id}/{type}', [MaintenanceController::class, 'updateMaintenanceParts'])->name('updateMaintenanceParts');
+    // ! parts update
+    Route::get('/edit-maintenance-parts/{id}/{type}', [MaintenanceController::class, 'editMaintenanceParts'])->name('editMaintenanceParts');
+    Route::post('/update-maintenance-parts/{id}/{type}', [MaintenanceController::class, 'updateMaintenanceParts'])->name('updateMaintenanceParts');
    
+    // ! delete
+    Route::get('/delete-maintenance/{id}/{type}', [MaintenanceController::class, 'deleteMaintenance'])->name('deleteMaintenance');
 
        
 

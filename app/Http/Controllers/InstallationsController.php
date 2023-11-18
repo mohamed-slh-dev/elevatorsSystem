@@ -351,5 +351,40 @@ class InstallationsController extends Controller
     } // end function
 
 
+    public function deleteInstallation($id, $type){
+
+        if ($type == 'bill') {
+            
+            $installation = InstallationBill::find($id);
+
+            foreach ($installation->installationBillParts as $part) {
+                
+                $part->delete();
+
+            }
+
+
+            $installation->delete();
+
+        } else {
+
+             $installation = InstallationQuotation::find($id);
+
+            foreach ($installation->installationQuotationParts as $part) {
+                
+                $part->delete();
+
+            }
+
+
+            $installation->delete();
+           
+        }
+
+        return redirect()->route('installations')->with('success', 'تم  حذف عملية التركيب بنجاح');
+
+        
+        
+    }
 
 } //end controller
