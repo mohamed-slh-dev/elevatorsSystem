@@ -39,6 +39,7 @@ class FinancialController extends Controller
 
         $financial->type = $request->type; // HR / Maintenance / Installation
 
+
         if ($request->type == 'الموارد البشرية') {
 
             $financial->employee_id = !empty($request->employee) ? $request->employee : null;
@@ -66,6 +67,11 @@ class FinancialController extends Controller
         $financial->note = $request->note;
         $financial->date = $request->date;
         $financial->reference = $request->reference;
+        $financial->remaining_amount = 0; // default remaining
+
+        if ($request->payment_type == 'تقصيد المبلغ')
+            $financial->remaining_amount = $request->remaining_amount;
+
 
         $financial->save();
 
@@ -90,8 +96,6 @@ class FinancialController extends Controller
 
         $financial = FinancialTransaction::find($request->id);
 
-
-        
         $financial->type = $request->type; // HR / Maintenance / Installation
 
         if ($request->type == 'الموارد البشرية') {
@@ -121,6 +125,12 @@ class FinancialController extends Controller
         $financial->note = $request->note;
         $financial->date = $request->date;
         $financial->reference = $request->reference;
+        $financial->remaining_amount = 0; // default remaining
+
+        if ($request->payment_type == 'تقصيد المبلغ')
+            $financial->remaining_amount = $request->remaining_amount;
+
+
 
         $financial->save();
 

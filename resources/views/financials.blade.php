@@ -187,13 +187,21 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="payment_type">طريقة الدفع</label>
-                  <select name="payment_type" class="form-control form--select" id="payment_type">
+                  <select name="payment_type" class="form-control form--select payment-select" id="payment_type" data-form='add'>
 
                       <option value=""></option>
                       <option value="المبلغ كامل">المبلغ كامل</option>
                       <option value="تقصيد المبلغ">تقصيد المبلغ</option>
                   </select>
                 </div>
+
+
+
+                <div class="col-sm-4 mb-20 payment-select-col d-none" data-form='add'>
+                  <label for="remaining_amount">المبلغ المتبقي</label>
+                  <input type="number" min='0' step='0.01' class="form-control" name="remaining_amount" id="remaining_amount">
+                </div>
+
 
 
 
@@ -357,12 +365,19 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="payment_type">طريقة الدفع</label>
-                  <select name="payment_type" class="form-control form--select" id="payment_type" value='{{$financial->payment_type}}'>
+                  <select name="payment_type" class="form-control form--select payment-select" data-form='edit-{{$financial->id}}' id="payment_type" value='{{$financial->payment_type}}'>
 
                       <option value=""></option>
                       <option value="المبلغ كامل">المبلغ كامل</option>
                       <option value="تقصيد المبلغ">تقصيد المبلغ</option>
                   </select>
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20 payment-select-col {{$financial->payment_type != 'تقصيد المبلغ' ? 'd-none' : ''}}" data-form='edit-{{$financial->id}}'>
+                  <label for="remaining_amount">المبلغ المتبقي</label>
+                  <input type="number" min='0' step='0.01' class="form-control" name="remaining_amount" id="remaining_amount" value='{{$financial->remaining_amount}}'>
                 </div>
 
 
@@ -450,6 +465,29 @@
 
   }); // end function
 
+
+
+
+
+  $('div').on('change', '.payment-select', function() {
+
+    // : get dataForm / value
+    dataForm = $(this).attr('data-form');
+    inputVal = $(this).val();
+
+
+    if (inputVal == 'تقصيد المبلغ') {
+
+      $(`.payment-select-col[data-form=${dataForm}]`).removeClass('d-none');
+
+    } else {
+
+      $(`.payment-select-col[data-form=${dataForm}]`).addClass('d-none');
+
+    } // end if
+
+
+  }); // end function
 
 </script>
 
