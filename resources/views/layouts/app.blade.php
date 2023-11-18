@@ -349,6 +349,13 @@
     <script src="{{asset('assets/js/select2/select2-init.js')}}"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
+    
+    <script src="{{asset('assets/js/clipboard/clipboard.min.js')}}"></script>
+    <script src="{{asset('assets/js/counter/jquery.waypoints.min.js')}}"></script>
+
+    <script src="{{asset('assets/js/counter/jquery.counterup.min.js')}}"></script>
+    <script src="{{asset('assets/js/counter/counter-custom.js')}}"></script>
+
     <script src="{{asset('assets/js/script.js')}}"></script>
     <script src="{{asset('assets/js/theme-customizer/customizer.js')}}"></script>
     <!-- login js-->

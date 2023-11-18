@@ -11,6 +11,37 @@
         align-items: start;
     }
 
+    .widget-joins:after {
+        content: none;
+    }
+
+    .widget-joins .media .details {
+        padding-left: 0px !important;
+    }
+
+
+    .widget-joins .media {
+        padding: 20px 20px;
+    }
+
+    .widget-joins .media .media-body > span {
+        font-weight: 700;
+        font-size: 14px;
+        color: #222;
+        letter-spacing: 0.7px;
+    }
+
+    .widget-joins .media h5 {
+        margin-top: 5px;
+        font-size: 24px;
+        color: #bf8f00
+    }
+
+    .widget-joins .media .media-body svg {
+        margin-right: 0px !important;
+        width: 50px;
+        height: 50px;
+    }
 </style>
 
 
@@ -25,12 +56,58 @@
 
 
 
+<div class="col-xl-7 box-col-7">
+    <div class="widget-joins card" style="border: 2px solid #e9f0ee; border-radius: 5px;">
+        <div class="row">
+        <div class="col-sm-6 pe-0">
+            <div class="media border-after-xs">
+            <div class="align-self-center me-3 fw-bold fs-5">
+                68%<i class="fa fa-angle-up ms-2"></i>
+            </div>
+            <div class="media-body details ps-3 text-center">
+                <span class="mb-1">أعمال التركيب</span>
+                <h5 class="mb-0 counter">35</h5>
+            </div>
+            <div class="media-body align-self-center">
+                <i
+                class="font-primary float-end ms-2"
+                data-feather="settings"></i>
+            </div>
+            </div>
+        </div>
+        <div class="col-sm-6 ps-0">
+            <div class="media">
+            <div class="align-self-center me-3 fw-bold fs-5">
+                12%<i class="fa fa-angle-down ms-2"></i>
+            </div>
+            <div class="media-body details ps-3 text-center">
+                <span class="mb-1">أعمال الصيانة</span>
+                <h5 class="mb-0 counter">14</h5>
+            </div>
+            <div class="media-body align-self-center">
+                <i
+                class="font-primary float-end ms-3"
+                data-feather="shield"></i>
+            </div>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+</div>
+
+
+
+
+{{-- ========================================================= --}}
+
+
 
 
 
 
 {{-- table of installations --}}
-<div class="col-sm-12 col-lg-6 col-xl-6 mb-5">
+<div class="col-sm-12 col-lg-6 col-xl-6 mb-5 d-none">
     <div class="table-responsive">
 
         <h5 class='fw-bold text-center table--heading'>أعمال التركيب</h5>
@@ -111,7 +188,7 @@
 
 
 {{-- table of maintenance --}}
-<div class="col-sm-12 col-lg-6 col-xl-6 mb-5">
+<div class="col-sm-12 col-lg-6 col-xl-6 mb-5 d-none">
     <div class="table-responsive">
 
         <h5 class='fw-bold text-center table--heading'>أعمال الصيانة</h5>
@@ -190,7 +267,7 @@
 
 
 
-<div class="col-12 mb-4">
+<div class="col-12 mb-4 d-none">
     <hr>
 </div>
 
@@ -203,7 +280,7 @@
 
 
 {{-- elevators table --}}
-<div class="col-sm-12 col-lg-6 col-xl-6 mb-5">
+<div class="col-sm-12 col-lg-6 col-xl-6 mb-5 d-none">
 
     <div class="table-responsive">
 
@@ -261,7 +338,7 @@
 
 
 {{-- customers table --}}
-<div class="col-sm-12 col-lg-6 col-xl-6">
+<div class="col-sm-12 col-lg-6 col-xl-6 d-none">
 
     <div class="table-responsive">
 
