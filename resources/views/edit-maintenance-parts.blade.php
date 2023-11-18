@@ -6,14 +6,14 @@
    
 <div class="col-3"></div>
 <div class="col-3 mb-5">
-    <input class='form-control text-center fw-bold' type="text" readonly value='{{$installation->elevator->name}}' style="pointer-events: none">
+    <input class='form-control text-center fw-bold' type="text" readonly value='{{$maintenance->elevator->name}}' style="pointer-events: none">
 </div>
 
 
 
 <div class="col-12">
 
-  <form action="{{route('updateInstallationParts', [$installation->id, $type])}}" method="post">
+  <form action="{{route('updateMaintenanceParts', [$maintenance->id, $type])}}" method="post">
     @method('POST')
     @csrf
 
@@ -22,7 +22,7 @@
     <div class="form-group m-checkbox-inline mb-0">
 
       {{-- loop - parts  --}}
-      @foreach ($installation->elevator->elevatorParts as $part)
+      @foreach ($maintenance->elevator->elevatorParts as $part)
 
         
         {{-- : single checkbox --}}
@@ -88,7 +88,7 @@
 
       <button class="btn btn-primary">حفظ التغييرات</button>
 
-      <a href="{{route('installations')}}">
+      <a href="{{route('maintenance')}}">
 
         <button class="btn btn-outline-danger">إلغاء</button>
 

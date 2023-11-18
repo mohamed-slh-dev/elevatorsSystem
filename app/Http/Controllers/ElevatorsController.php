@@ -60,6 +60,33 @@ class ElevatorsController extends Controller
 
     }
 
+
+    public function updatePart(Request $request){
+
+        $part = Part::find($request->id);
+
+        $part->name = $request->name;
+        $part->type = $request->type;
+        $part->desc = $request->desc;
+
+        if (!empty($request->file('image'))) {
+            
+            $image = 'part-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+
+            $path = $request->file('image')->storeAs('public/parts',$image);
+    
+            $part->image = $image;
+
+        }
+
+
+        $part->save();
+        
+        return redirect()->back()->with('success', 'تم تعديل القطعة بنجاح');
+       
+
+    }
+
     public function addPartPrice(Request $request){
 
 

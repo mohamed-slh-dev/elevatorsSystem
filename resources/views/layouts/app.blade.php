@@ -228,7 +228,7 @@
                   </li>
 
                   <li class="dropdown">
-                    <a class="nav-link menu-title link-nav" href="{{route('users')}}">
+                    <a class="nav-link menu-title link-nav" href="{{route('maintenance')}}">
                       <i data-feather="shield"></i><span>أعمال الصيانة </span>
                     </a>
                   </li>

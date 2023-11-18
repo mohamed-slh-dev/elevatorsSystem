@@ -13,7 +13,7 @@
 
 <div class="col-12">
 
-  <form action="{{route('addInstallationParts')}}" method="post">
+  <form action="{{route('addMaintenanceParts')}}" method="post">
 
     @csrf
     

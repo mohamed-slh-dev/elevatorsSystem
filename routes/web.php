@@ -11,6 +11,8 @@ use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\ElevatorsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\InstallationsController;
+use App\Http\Controllers\MaintenanceController;
+
 
 
 /*
@@ -87,6 +89,23 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('/update-installation-parts/{id}/{type}', [InstallationsController::class, 'updateInstallationParts'])->name('updateInstallationParts');
 
 
+
+       // * Maintenance
+       Route::get('/maintenance', [MaintenanceController::class, 'maintenance'])->name('maintenance');
+
+       Route::post('/add-maintenance', [MaintenanceController::class, 'addMaintenance'])->name('addMaintenance');
+       Route::post('/add-maintenance-parts', [MaintenanceController::class, 'addMaintenanceParts'])->name('addMaintenanceParts');
+   
+       
+       // ! information update
+       Route::post('/update-maintenance', [MaintenanceController::class, 'updateMaintenance'])->name('updateMaintenance');
+   
+       // ! parts update
+       Route::get('/edit-maintenance-parts/{id}/{type}', [MaintenanceController::class, 'editMaintenanceParts'])->name('editMaintenanceParts');
+       Route::post('/update-maintenance-parts/{id}/{type}', [MaintenanceController::class, 'updateMaintenanceParts'])->name('updateMaintenanceParts');
+   
+
+       
 
     // * Financial
     Route::get('/financials', [FinancialController::class, 'financials'])->name('financials');
