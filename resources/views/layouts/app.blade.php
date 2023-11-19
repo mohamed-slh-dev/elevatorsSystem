@@ -203,7 +203,7 @@
 
                   <li class="dropdown">
                     <a class="nav-link menu-title link-nav" href="{{route('elevators')}}">
-                      <i data-feather="layout"></i><span>المصاعد </span>
+                      <i data-feather="codepen"></i><span>المصاعد </span>
                     </a>
                   </li>
 
