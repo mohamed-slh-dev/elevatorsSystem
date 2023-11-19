@@ -25,6 +25,7 @@
             <th scope="col" class='min-w-110px'>سعر الشراء</th>
             <th scope="col" class='min-w-110px'>سعر البيع</th>
             <th scope="col" class='min-w-130px'>تعديل</th>
+            <th scope="col" class='min-w-130px'>عرض الأسعار السابقة</th>
             <th scope="col" class='min-w-110px'></th>
           </tr>
         </thead>
@@ -49,6 +50,14 @@
 
 
             </td>
+
+            <td>
+
+              <button class="btn btn-outline-light btn--table d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".price-history-{{$part->id}}">عرض الأسعار السابقة</button>
+
+
+            </td>
+
             <td>
               <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".new-price-{{$part->id}}">تغيير السعر</button>
             </td>
@@ -300,6 +309,83 @@
     
 @endforeach
 {{-- end parts - loop --}}
+
+
+
+{{-- ============================================================== --}}
+
+
+@foreach ($parts as $part)
+    
+{{-- edit part modal --}}
+<div class="col-12">
+  <div class="modal fade price-history-{{$part->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        {{-- heading --}}
+        <div class="modal-header mb-3">
+          <h4 class="modal-title fw-bold" id="new">أسعار الجزء</h4>
+          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+          <div class="modal-body">
+              <div class="row no-gutters mx-0">
+
+
+               <div class="col-sm-12 col-lg-12 col-xl-12">
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead class="bg-primary">
+                        <tr>
+                        
+                          <th scope="col" class='min-w-130px'>سعر البيع</th>
+                          <th scope="col" class='min-w-110px'>سعر الشراء</th>
+                          <th scope="col" class='min-w-110px'> تاريخ الإنشاء</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+
+                      {{-- parts - loop --}}
+                      @foreach ($part->partPrices->sortByDesc('id') as $price)
+                        <tr>         
+
+                          <td>{{$price->purchase_price}}</td>
+                          <td>{{$price->sell_price}}</td>
+                          <td>{{$price->created_at}}</td>
+                          
+
+                        </tr>
+                      @endforeach
+                      {{-- end loop --}}
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+{{-- end table --}}
+
+
+              </div>
+          </div>
+          {{-- end body --}}
+
+          {{-- footer --}}
+          <div class="modal-footer">
+           
+          </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+{{-- end modal --}}
+
+@endforeach
+
 
 
 @endsection
