@@ -32,7 +32,6 @@
 
             <th scope="col" class='min-w-110px'>النوع</th>
             <th scope="col" class='min-w-110px'>الموظف</th>
-            <th scope="col">الايام</th>
 
             <th scope="col">التاريخ</th>
             <th scope="col">الملاحظات</th>
@@ -55,7 +54,6 @@
 
             <td>{{$financial->type_desc}}</td>
             <td>{{ (!empty($financial->employee)) ? $financial->employee->first_name . ' ' . $financial->employee->last_name : ' '}}</td>
-            <td>{{$financial->amount_in_days}}</td>
 
             <td>{{ date('d-m-Y', strtotime($financial->date))}}</td>
             <td>{{$financial->note}}</td>

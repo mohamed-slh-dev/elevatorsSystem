@@ -24,9 +24,9 @@
             <th scope="col" class='min-w-130px'>الوصف</th>
             <th scope="col" class='min-w-110px'>سعر الشراء</th>
             <th scope="col" class='min-w-110px'>سعر البيع</th>
-            <th scope="col" class='min-w-130px'>تعديل</th>
-            <th scope="col" class='min-w-130px'>عرض الأسعار السابقة</th>
-            <th scope="col" class='min-w-110px'></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
