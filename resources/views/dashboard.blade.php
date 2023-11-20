@@ -126,6 +126,68 @@
 
 
         </div>
+
+
+
+
+
+        {{-- ===================================================== --}}
+
+        <div class="row">
+
+
+            {{-- maintenance --}}
+            <div class="col-xl-6">
+                <div class="card o-hidden">
+                <div class="chart-widget-top">
+                    <div class="row card-body">
+                    <div class="col-7">
+                        <h6 class="f-w-600 font-dark fs-4 fw-bold">صيانة المصاعد</h6>
+                        <span class="num fw-bold fs-5"
+                        ><span class="counter">2</span>%<i
+                            class="icon-angle-up f-12 ms-2"></i
+                        ></span>
+                    </div>
+                    <div class="col-5 text-end">
+                        <h4 class="num total-value counter fw-bold fs-3">{{$maintenanceBills->count()}}</h4>
+                    </div>
+                    </div>
+                    <div id="chart-widget2">
+                    <div
+                        class="flot-chart-placeholder"
+                        id="chart-widget-top-second"></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card o-hidden">
+                <div class="chart-widget-top">
+                    <div class="row card-body">
+                    <div class="col-8">
+                        <h6 class="f-w-600 font-success fs-4 fw-bold">تركيب المصاعد</h6>
+                        <span class="num fw-bold fs-5"
+                        ><span class="counter">5</span>%<i
+                            class="icon-angle-up f-12 ms-2"></i
+                        ></span>
+                    </div>
+                    <div class="col-4 text-end">
+                        <h4 class="num total-value">
+                        <span class="counter fw-bold fs-3">{{$installationBills->count()}}</span>
+                        </h4>
+                    </div>
+                    </div>
+                    <div id="chart-widget3">
+                    <div
+                        class="flot-chart-placeholder"
+                        id="chart-widget-top-third"></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
 
