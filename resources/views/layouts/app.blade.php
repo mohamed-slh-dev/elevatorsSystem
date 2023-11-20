@@ -63,12 +63,15 @@
           <div class="main-header-left">
             <div class="logo-wrapper">
                 <a href="#">
-                    <h4 class='mb-0'>نظام إدارة المصاعد.</h4>
+                    <h4 class='mb-0 text-center'>
+                      <img src="{{asset('assets/images/logo/main-logo.png')}}" alt="" class='logo--app'>
+                    </h4>
                 </a>
             </div>
             <div class="dark-logo-wrapper">
                 <a href="#">
-                    <h4 class='mb-0'>نظام إدارة المصاعد.</h4>
+                    {{-- <h4 class='mb-0'>نظام إدارة المصاعد.</h4> --}}
+                    <img src="{{asset('assets/images/logo/main-logo.png')}}" alt="" class='logo--app'>
                 </a>
             </div>
             <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="align-center" id="sidebar-toggle"></i></div>

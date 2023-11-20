@@ -1,16 +1,16 @@
 :root {
-    --text-main: #2a474d;
+    --text-main: #1b6d5b;
 }
 
 ::-webkit-scrollbar {
-    height: 8px;
-    width: 8px;
+    height: 4px;
+    width: 4px;
     background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
     background: #dedede;
-    -webkit-border-radius: 100px;
+    -webkit-border-radius: 2px;
 }
 
 ::-webkit-scrollbar-corner {
@@ -30,7 +30,7 @@
 body {
     font-family: "Noto Sans Arabic", "Roboto";
     letter-spacing: 0.3px;
-    color: #222;
+    color: #1e252d;
     font-weight: 400;
     transition: 0.4s all ease-in-out;
 }
@@ -125,11 +125,9 @@ label {
     margin-bottom: 5px !important;
     letter-spacing: 0.8px;
 }
-
 input[type="date"] {
     text-align: center;
 }
-
 input[type="file"] {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -180,7 +178,7 @@ input[type="file"] {
 .select2-container--default
     .select2-selection--single
     .select2-selection__rendered {
-    color: #222;
+    color: #1e252d;
 }
 
 .selection .select2-selection {
@@ -195,8 +193,23 @@ input[type="file"] {
 
 /* ------------------------- globals / custom */
 
+.logo--login {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    object-fit: contain;
+}
+
+.logo--app {
+    width: 100%;
+    height: 56px;
+    object-fit: contain;
+}
+
 .form--subheading {
-    border-bottom: 2px solid #ffc107;
+    border-bottom: 2px solid #1b6d5b;
     padding-bottom: 4px;
 }
 .btn--table {
@@ -220,7 +233,7 @@ input[type="file"] {
 }
 
 .table--img {
-    border: 2px solid #ffc107;
+    border: 2px solid #1b6d5b;
     width: 50px;
     height: 50px;
 }

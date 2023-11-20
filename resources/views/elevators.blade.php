@@ -302,7 +302,6 @@
                     <div class="checkbox checkbox-dark checkbox--item mb-3">
 
                       <input id="inline-{{$part->id}}" type="checkbox" name="elevator_parts[]" value="{{$part->id}}">
-
                       <label for="inline-{{$part->id}}">{{ $part->name}}
                         <span class='fs-12 fw-bold' style="color:rgb(125, 106, 0)">
                           ({{$part->partPrices->sortByDesc('id')->first->purchase_price['sell_price'] . ' ريال'}})
