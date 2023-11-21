@@ -90,7 +90,7 @@
                             </div>
                             <div class="media-body">
                                 <span class="m-0 fw-bold  overview--title">أعمال التركيب</span>
-                                <h4 class="mb-0 counter fs-3">{{$installationBills->count()}}</h4>
+                                <h4 class="mb-0 counter fs-3">{{$installationBills->count() + $installationQuotations->count()  }}</h4>
                                 <i class="icon-bg" data-feather="settings"></i>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                             </div>
                             <div class="media-body">
                                 <span class="m-0 fw-bold  overview--title">أعمال الصيانة</span>
-                                <h4 class="mb-0 counter fs-3">{{$maintenanceBills->count()}}</h4>
+                                <h4 class="mb-0 counter fs-3">{{$maintenanceBills->count() + $maintenanceQuotations->count() }}</h4>
                                 <i class="icon-bg" data-feather="shield"></i>
                             </div>
                         </div>

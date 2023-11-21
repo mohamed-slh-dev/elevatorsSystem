@@ -402,7 +402,7 @@ class MaintenanceController extends Controller
 
            $type = 'فاتورة';
            $maintenance = MaintenanceBill::find($id);
-           $parts = MaintenanceBillPart::where('installation_bill_id', $maintenance->id)->get();
+           $parts = MaintenanceBillPart::where('maintenance_bill_id', $maintenance->id)->get();
 
        } // end if
 
