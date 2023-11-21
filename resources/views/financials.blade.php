@@ -27,6 +27,8 @@
             <th scope="col" class='min-w-140px'>الاجراء</th>
             <th scope="col">رقم الاجراء</th>
             <th scope="col">المبلغ</th>
+            <th scope="col">المبلغ المتبقي</th>
+
             <th scope="col" class='min-w-110px'>طريقة الدفع</th>
             <th scope="col" class='min-w-110px'>آلية الدفع</th>
 
@@ -48,6 +50,8 @@
             <td>{{$financial->reference}}</td>
 
             <td>{{$financial->amount}}</td>
+            <td>{{$financial->remaining_amount}}</td>
+
             <td>{{$financial->payment_type}}</td>
             <td>{{$financial->payment_with}}</td>
 
