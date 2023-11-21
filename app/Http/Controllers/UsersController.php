@@ -77,6 +77,11 @@ class UsersController extends Controller
     
             $user->image = $image;
             
+
+            // :update user_img session
+            session()->put('user_img',$user->image);
+
+            
         } // end if
 
 
