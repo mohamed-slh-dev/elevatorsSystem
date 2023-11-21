@@ -69,8 +69,9 @@
             </td>
 
             <td>
+   
               <a href="{{route('printInstallation', [$bill->id, 'bill'])}}">
-                <button class="btn btn-outline-light btn--table"> <i class='fa fa-trash fs-5'></i> طباعة  </button>
+                <button class="btn btn-outline-light btn--table d-flex align-items-center">طباعة<i data-feather="printer" style='width: 17px;' class='ms-2'></i></button>
               </a>
   
             </td>
@@ -114,7 +115,7 @@
 
           <td>
             <a href="{{route('printInstallation', [$quotation->id, 'quotation'])}}">
-              <button class="btn btn-outline-light btn--table"> <i class='fa fa-trash fs-5'></i> طباعة    </button>
+              <button class="btn btn-outline-light btn--table d-flex align-items-center">طباعة<i data-feather="printer" style='width: 17px;' class='ms-2'></i></button>
             </a>
           </td>
           
