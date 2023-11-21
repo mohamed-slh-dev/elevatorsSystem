@@ -30,6 +30,8 @@
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
+
 
           </tr>
         </thead>
@@ -60,10 +62,17 @@
   
             </td>   
 
-            <td>
+            <td class="text-center">
               <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scale--2 remove--btn" data-id="{{$bill->id}}" data-type='bill'>
                 <i class='fa fa-trash fs-5'></i>
               </button>
+            </td>
+
+            <td>
+              <a href="{{route('printInstallation', [$bill->id, 'bill'])}}">
+                <button class="btn btn-outline-light btn--table"> <i class='fa fa-trash fs-5'></i> طباعة  </button>
+              </a>
+  
             </td>
 
           </tr>
@@ -95,12 +104,18 @@
 
           </td> 
           
-          <td>
+          <td class="text-center">
 
             <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scale--2 remove--btn" data-id="{{$quotation->id}}" data-type='quotation'>
               <i class='fa fa-trash fs-5'></i>
             </button>
 
+          </td>
+
+          <td>
+            <a href="{{route('printInstallation', [$quotation->id, 'quotation'])}}">
+              <button class="btn btn-outline-light btn--table"> <i class='fa fa-trash fs-5'></i> طباعة    </button>
+            </a>
           </td>
           
         </tr>

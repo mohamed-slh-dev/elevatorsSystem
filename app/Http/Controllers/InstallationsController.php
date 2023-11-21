@@ -387,4 +387,28 @@ class InstallationsController extends Controller
         
     }
 
+
+    public function printInstallation($id, $type){
+
+         // : determine type / + get parts
+         if ($type == 'quotation') {
+            
+            $type = 'عرض سعر';
+            $installation = InstallationQuotation::find($id);
+            $parts = InstallationQuotationPart::where('installation_quotation_id', $installation->id)->get();
+           
+        } else {
+
+            $type = 'فاتورة';
+            $installation = InstallationBill::find($id);
+            $parts = InstallationBillPart::where('installation_bill_id', $installation->id)->get();
+
+        } // end if
+
+        return view('print-installation', compact('installation', 'parts', 'type'));
+
+    }//end of printInstallation
+
+
+
 } //end controller

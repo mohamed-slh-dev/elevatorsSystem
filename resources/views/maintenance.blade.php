@@ -31,6 +31,8 @@
             <th scope="col"></th>
 
             <th scope="col"></th>
+            <th scope="col"></th>
+
 
           </tr>
         </thead>
@@ -59,10 +61,17 @@
               </a>
             </td> 
             
-            <td>
+            <td class="text-center">
               <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scale--2 remove--btn" data-id="{{$bill->id}}" data-type='quotation'>
                 <i class='fa fa-trash fs-5'></i>
               </button>
+            </td>
+
+            <td>
+              <a href="{{route('printMaintenance', [$bill->id, 'bill'])}}">
+                <button class="btn btn-outline-light btn--table"> <i class='fa fa-trash fs-5'></i> طباعة  </button>
+              </a>
+  
             </td>
 
           </tr>
@@ -95,13 +104,20 @@
 
           </td>  
           
-          <td>
+          <td class="text-center">
             <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scale--2 remove--btn" data-id="{{$quotation->id}}" data-type='quotation'>
               <i class='fa fa-trash fs-5'></i>
             </button>
            
           </td>
           
+          <td>
+            <a href="{{route('printMaintenance', [$quotation->id, 'quotation'])}}">
+              <button class="btn btn-outline-light btn--table"> <i class='fa fa-trash fs-5'></i> طباعة  </button>
+            </a>
+
+          </td>
+
         </tr>
        @endforeach
         {{-- end loop --}}

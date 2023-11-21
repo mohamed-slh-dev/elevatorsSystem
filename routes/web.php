@@ -91,6 +91,9 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 
     // ! delete
     Route::post('/delete-installation', [InstallationsController::class, 'deleteInstallation'])->name('deleteInstallation');
+    
+    // ! print
+    Route::get('/print-installation/{id}/{type}', [InstallationsController::class, 'printInstallation'])->name('printInstallation');
 
 
 
@@ -115,6 +118,9 @@ Route::middleware([AdminMiddleware::class])->group(function () {
    
     // ! delete
     Route::post('/delete-maintenance', [MaintenanceController::class, 'deleteMaintenance'])->name('deleteMaintenance');
+
+     // ! print
+    Route::get('/print-maintenance/{id}/{type}', [MaintenanceController::class, 'printMaintenance'])->name('printMaintenance');
 
        
 

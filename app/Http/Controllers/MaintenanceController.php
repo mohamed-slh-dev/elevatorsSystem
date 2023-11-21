@@ -388,4 +388,26 @@ class MaintenanceController extends Controller
         
     }
 
+
+    public function printMaintenance($id, $type){
+
+        // : determine type / + get parts
+        if ($type == 'quotation') {
+           
+           $type = 'عرض سعر';
+           $maintenance = MaintenanceQuotation::find($id);
+           $parts = MaintenanceQuotationPart::where('maintenance_quotation_id', $maintenance->id)->get();
+          
+       } else {
+
+           $type = 'فاتورة';
+           $maintenance = MaintenanceBill::find($id);
+           $parts = MaintenanceBillPart::where('installation_bill_id', $maintenance->id)->get();
+
+       } // end if
+
+       return view('print-maintenance', compact('maintenance', 'parts', 'type'));
+
+   }//end of printMaintenance
+
 } //end controller
