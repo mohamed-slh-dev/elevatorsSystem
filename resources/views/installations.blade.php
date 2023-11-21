@@ -62,19 +62,20 @@
   
             </td>   
 
+
+            <td class='text-center'>
+              <a href="{{route('printInstallation', [$bill->id, 'bill'])}}" class='text-center d-inline-block'>
+                <button class="btn btn-none btn--table d-flex align-items-center scale--2 remove--btn"><i data-feather="printer" style='width: 17px;'></i></button>
+              </a>
+            </td>
+
+
             <td class="text-center">
               <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scale--2 remove--btn" data-id="{{$bill->id}}" data-type='bill'>
                 <i class='fa fa-trash fs-5'></i>
               </button>
             </td>
-
-            <td>
-   
-              <a href="{{route('printInstallation', [$bill->id, 'bill'])}}">
-                <button class="btn btn-outline-light btn--table d-flex align-items-center">طباعة<i data-feather="printer" style='width: 17px;' class='ms-2'></i></button>
-              </a>
-  
-            </td>
+            
 
           </tr>
         @endforeach
@@ -105,6 +106,14 @@
 
           </td> 
           
+
+          <td class='text-center'>
+            <a href="{{route('printInstallation', [$quotation->id, 'quotation'])}}" class='text-center d-inline-block'>
+              <button class="btn btn-none btn--table d-flex align-items-center scale--2 remove--btn"><i data-feather="printer" style='width: 17px;'></i></button>
+            </a>
+          </td>
+
+
           <td class="text-center">
 
             <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scale--2 remove--btn" data-id="{{$quotation->id}}" data-type='quotation'>
@@ -113,11 +122,7 @@
 
           </td>
 
-          <td>
-            <a href="{{route('printInstallation', [$quotation->id, 'quotation'])}}">
-              <button class="btn btn-outline-light btn--table d-flex align-items-center">طباعة<i data-feather="printer" style='width: 17px;' class='ms-2'></i></button>
-            </a>
-          </td>
+        
           
         </tr>
        @endforeach
