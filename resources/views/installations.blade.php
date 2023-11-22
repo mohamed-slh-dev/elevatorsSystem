@@ -172,9 +172,9 @@
                   <label for="type">النوع </label>
                   <select name="type" required class="form-control form--select form--select" id="type">
 
-                    <option value="عرض سعر">عرض سعر</option>
+                    <option value=""></option>
                     <option value="فاتورة">فاتورة</option>
-                  
+                    <option value="عرض سعر">عرض سعر</option>
 
                   </select>
                 </div>
@@ -206,9 +206,21 @@
                   </select>
                 </div>
 
+
+
+
+
                 <div class="col-sm-4 mb-20">
-                  <label for="date">التاريخ</label>
-                  <input type="date" class="form-control" required name="date" id="date">
+                  <label for="status">الحالة</label>
+                  <select name="status" required class="form-control form--select form--select" id="status">
+
+                    <option value=""></option>
+
+                    @foreach ($statuses as $status)
+                      <option value="{{$status}}">{{$status}}</option>
+                    @endforeach
+
+                  </select>
                 </div>
 
 
@@ -216,7 +228,19 @@
                   <label for="reference">المرجع</label>
                   <input type="text" class="form-control" name="reference" id="reference">
                 </div>
+                
 
+
+                <div class="col-sm-4 mb-20">
+                  <label for="date">التاريخ</label>
+                  <input type="date" class="form-control" required name="date" id="date">
+                </div>
+
+
+                <div class="col-sm-12 mb-20">
+                  <label for="desc">الوصف</label>
+                  <input type="text" class="form-control" name="desc" id="desc">
+                </div>
 
               </div>
           </div>
@@ -311,16 +335,43 @@
                   </select>
                 </div>
 
+
+
+
+
                 <div class="col-sm-4 mb-20">
-                  <label for="date">التاريخ</label>
-                  <input type="date" class="form-control" required name="date" id="date" value='{{$quotation->date}}'>
+                  <label for="status">الحالة</label>
+                  <select name="status" required class="form-control form--select form--select" id="status" value='{{$quotation->status}}'>
+
+                    <option value=""></option>
+
+                    @foreach ($statuses as $status)
+                      <option value="{{$status}}">{{$status}}</option>
+                    @endforeach
+
+                  </select>
                 </div>
+                
 
 
                 <div class="col-sm-4 mb-20">
                   <label for="reference">المرجع</label>
                   <input type="text" class="form-control" name="reference" id="reference" value='{{$quotation->reference}}'>
                 </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="date">التاريخ</label>
+                  <input type="date" class="form-control" required name="date" id="date" value='{{$quotation->date}}'>
+                </div>
+
+
+
+                <div class="col-sm-12 mb-20">
+                  <label for="desc">الوصف</label>
+                  <input type="text" class="form-control" name="desc" id="desc" value='{{$quotation->desc}}'>
+                </div>
+
 
 
               </div>
@@ -424,17 +475,40 @@
                   </select>
                 </div>
 
+
+
                 <div class="col-sm-4 mb-20">
-                  <label for="date">التاريخ</label>
-                  <input type="date" class="form-control" required name="date" id="date" value='{{$bill->date}}'>
+                  <label for="status">الحالة</label>
+                  <select name="status" required class="form-control form--select form--select" id="status" value='{{$bill->status}}'>
+
+                    <option value=""></option>
+
+                    @foreach ($statuses as $status)
+                      <option value="{{$status}}">{{$status}}</option>
+                    @endforeach
+
+                  </select>
                 </div>
+                
 
 
                 <div class="col-sm-4 mb-20">
                   <label for="reference">المرجع</label>
                   <input type="text" class="form-control" name="reference" id="reference" value='{{$bill->reference}}'>
                 </div>
+                
+                
 
+                <div class="col-sm-4 mb-20">
+                  <label for="date">التاريخ</label>
+                  <input type="date" class="form-control" required name="date" id="date" value='{{$bill->date}}'>
+                </div>
+
+
+                <div class="col-sm-12 mb-20">
+                  <label for="desc">الوصف</label>
+                  <input type="text" class="form-control" name="desc" id="desc" value='{{$bill->desc}}'>
+                </div>
 
               </div>
           </div>

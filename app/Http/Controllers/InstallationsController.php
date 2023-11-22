@@ -16,13 +16,15 @@ class InstallationsController extends Controller
 {
     public function installations(){
 
+        // dependencies
+        $statuses = ['مقبول', 'مرفوض', 'يفاوض', 'متردد', 'اخرى'];
         $installation_bills = InstallationBill::all();
         $installation_quotations = InstallationQuotation::all();
 
         $customers = Customer::all();
         $elevators = Elevator::all();
 
-        return view('installations', compact('installation_bills', 'installation_quotations', 'customers', 'elevators'));
+        return view('installations', compact('installation_bills', 'installation_quotations', 'customers', 'elevators', 'statuses'));
 
     } // end function
 
@@ -33,7 +35,7 @@ class InstallationsController extends Controller
 
 
 
-    public function addInstallation(Request $request){
+    public function addInstallation(Request $request) {
 
 
         if ($request->type == 'عرض سعر') {
@@ -43,8 +45,11 @@ class InstallationsController extends Controller
             $installation_quotation->customer_id = $request->customer;
             $installation_quotation->elevator_id = $request->elevator;
             $installation_quotation->price = 0;
+            $installation_quotation->status = $request->status;
             $installation_quotation->date = $request->date;
             $installation_quotation->reference = $request->reference;
+            $installation_quotation->desc = $request->desc;
+
             $installation_quotation->user_id = session()->get('user_id');
 
             $installation_quotation->save();
@@ -63,8 +68,11 @@ class InstallationsController extends Controller
             $installation_bill->customer_id = $request->customer;
             $installation_bill->elevator_id = $request->elevator;
             $installation_bill->price = 0;
+            $installation_bill->status = $request->status;
             $installation_bill->date = $request->date;
             $installation_bill->reference = $request->reference;
+            $installation_bill->desc = $request->desc;
+
             $installation_bill->user_id = session()->get('user_id');
 
             $installation_bill->save();

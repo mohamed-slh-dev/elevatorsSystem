@@ -118,10 +118,11 @@
                 <div class="col-sm-4 mb-20">
                     <label for="type">نوع العميل</label>
                     <select name="type" class="form-control form--select" id="type">
-  
+                      
+                      <option value=""></option>
+                      <option value="عميل">عميل</option>
                       <option value="عميل جديد">عميل جديد</option>
                       <option value="عميل محتمل">عميل محتمل</option>
-                      <option value="عميل">عميل</option>
   
                     </select>
                   </div>
@@ -279,6 +280,18 @@
 {{-- end modal --}}
 
 
+
+
+
+
+
+{{-- =============================================================== --}}
+
+
+
+
+
+
 @foreach ($customers as $customer)
 
 {{-- modal --}}
@@ -324,13 +337,13 @@
   
                   <div class="col-sm-4 mb-20">
                       <label for="type">نوع العميل</label>
-                      <select name="type" class="form-control form--select" id="type">
-    
-                        <option value="{{$customer->type}}">{{$customer->type}}</option>
+                      <select name="type" class="form-control form--select" id="type" value='{{$customer->type}}'>
+                        
+                        <option value=""></option>
 
+                        <option value="عميل">عميل</option>
                         <option value="عميل جديد">عميل جديد</option>
                         <option value="عميل محتمل">عميل محتمل</option>
-                        <option value="عميل">عميل</option>
     
                       </select>
                     </div>
@@ -340,10 +353,8 @@
   
                   <div class="col-sm-4 mb-20">
                     <label for="identity_type">نوع الهوية</label>
-                    <select name="identity_type" class="form-control form--select" id="identity_type">
+                    <select name="identity_type" class="form-control form--select" id="identity_type" value="{{$customer->identity_type}}">
   
-                      <option value="{{$customer->identity_type}}">{{$customer->identity_type}}</option>
-
                       <option value="إقامة">إقامة</option>
                       <option value="هوية وطنية">هوية وطنية</option>
                       <option value="هوية خليجية">هوية خليجية</option>
@@ -360,10 +371,10 @@
   
                   <div class="col-sm-4 mb-20">
                     <label for="nationality">الجنسية</label>
-                    <select name="nationality" class="form-control form--select" id="nationality">
+                    <select name="nationality" class="form-control form--select" id="nationality" value="{{$customer->nationality_id}}">
                       
-                      <option value="{{$customer->nationality_id}}">{{$customer->nationality->name}}</option>
-  
+                      <option value=""></option>
+
                       @foreach ($nationalities as $nation)
                           <option value="{{$nation->id}}">{{$nation->name}}</option>
                       @endforeach
@@ -394,9 +405,10 @@
   
                   <div class="col-sm-4 mb-20">
                     <label for="region">المقاطعة</label>
-                    <select name="region" class="form--select col-sm-12" id="region">
-                      <option value="{{$customer->region_id}}">{{$customer->region->name_ar}}</option>
-  
+                    <select name="region" class="form--select col-sm-12" id="region" value="{{$customer->region_id}}">
+                      
+                      <option value=""></option>
+
                       @foreach ($regions as $region)
                         <option value="{{$region->id}}">{{$region->name_ar}}</option>
                       @endforeach
@@ -406,23 +418,25 @@
   
                   <div class="col-sm-4 mb-20">
                     <label for="province">المحافظة</label>
-                    <select name="province" class="form-control form--select" id="province">
+                    <select name="province" class="form-control form--select" id="province" value="{{$customer->province_id}}">
                       
-                      <option value="{{$customer->province_id}}">{{$customer->province->name_ar}}</option>
-  
+                      <option value=""></option>
+
                       @foreach ($provinces as $province)
                         <option value="{{$province->id}}">{{$province->name_ar}}</option>
                       @endforeach
   
                     </select>
                   </div>
+
+
   
                   <div class="col-sm-4 mb-20">
                     <label for="city">المدينة</label>
-                    <select name="city" class="form-control form--select" id="city">
+                    <select name="city" class="form-control form--select" id="city" value="{{$customer->city_id}}">
   
-                      <option value="{{$customer->city_id}}">{{$customer->city->name_ar}}</option>
-  
+                        <option value=""></option>
+
                         @foreach ($cities as $city)
                           <option value="{{$city->id}}">{{$city->name_ar}}</option>
                         @endforeach
@@ -433,10 +447,10 @@
   
                   <div class="col-sm-4 mb-20">
                     <label for="neighbor">الحي</label>
-                    <select name="neighbor" class="form-control form--select" id="neighbor">
+                    <select name="neighbor" class="form-control form--select" id="neighbor" value="{{$customer->neighbor_id}}">
   
-                      <option value="{{$customer->neighbor_id}}">{{$customer->neighbor->name_ar}}</option>
-  
+                      <option value=""></option>
+
                       @foreach ($neighbors as $neighbor)
                         <option value="{{$neighbor->id}}">{{$neighbor->name_ar}}</option>
                       @endforeach
@@ -446,10 +460,10 @@
   
                   <div class="col-sm-4 mb-20">
                     <label for="bank">البنك</label>
-                    <select name="bank" class="form-control form--select form--select" id="bank">
+                    <select name="bank" class="form-control form--select form--select" id="bank" value="{{$customer->bank_id}}">
   
-                      <option value="{{$customer->bank_id}}">{{$customer->bank->name}}</option>
-  
+                      <option value=""></option>
+
                       @foreach ($banks as $bank)
                         <option value="{{$bank->id}}">{{$bank->name}}</option>
                       @endforeach
@@ -490,5 +504,7 @@
   {{-- end modal --}}
     
 @endforeach
+{{-- end loop --}}
 
 @endsection
+{{-- end section --}}
