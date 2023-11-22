@@ -22,7 +22,7 @@
           <tr>
             <th scope="col">النوع</th>
             <th scope="col" class='min-w-140px'>العميل</th>
-            <th scope="col" class='min-w-130px'>المصعد</th>
+            <th scope="col" class='min-w-130px'>الحالة</th>
             <th scope="col"> التاريخ</th>
             <th scope="col"> المرجع</th>
             <th scope="col"> السعر</th>
@@ -44,7 +44,8 @@
 
             <td>فاتورة</td>
             <td>{{$bill->customer->first_name. ' '. $bill->customer->last_name}}</td>
-            <td>{{$bill->elevator->name}}</td>
+            <td>{{$bill->status}}
+              {{ ($bill->status_alt != '' ? ' / ' .$bill->status_alt: '')}}</td>
             <td>{{$bill->date}}</td>
             <td>{{$bill->reference}}</td>
             <td>{{$bill->price}}</td>
@@ -87,7 +88,8 @@
 
           <td>عرض سعر</td>
           <td>{{$quotation->customer->first_name. ' '. $quotation->customer->last_name}}</td>
-          <td>{{$quotation->elevator->name}}</td>
+          <td>{{$quotation->status}}
+            {{ ($quotation->status_alt != '' ? ' / ' .$quotation->status_alt: '')}}</td>
           <td>{{$quotation->date}}</td>
           <td>{{$quotation->reference}}</td>
           <td>{{$quotation->price}}</td>
