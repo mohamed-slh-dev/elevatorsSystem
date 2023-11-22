@@ -24,8 +24,10 @@ class CreateInstallationQuotationsTable extends Migration
             $table->foreign('elevator_id')->references('id')->on('elevators')->onDelete('cascade');
             
             $table->double('price', 11, 2)->nullable();
+            $table->string('desc')->nullable();
 
             $table->date('date')->nullable();
+            $table->string('status')->nullable();
             $table->string('reference')->nullable();
 
 

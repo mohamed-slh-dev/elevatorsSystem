@@ -19,6 +19,10 @@ class CreateFinancialTransactionsTable extends Migration
             $table->bigInteger('employee_id')->unsigned()->nullable();
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
 
+            $table->bigInteger('supplier_id')->unsigned()->nullable();
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
+
+
             $table->string('type')->nullable();
             $table->string('type_desc')->nullable();
             $table->double('amount', 11, 2)->nullable();

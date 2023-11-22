@@ -16,6 +16,9 @@ class CreateInstallationBillPartsTable extends Migration
         Schema::create('installation_bill_parts', function (Blueprint $table) {
             $table->id();
 
+            $table->string('name')->nullable();
+
+            
             $table->bigInteger('installation_bill_id')->unsigned()->nullable();
             $table->foreign('installation_bill_id')->references('id')->on('installation_bills')->onDelete('cascade');
 
@@ -23,7 +26,10 @@ class CreateInstallationBillPartsTable extends Migration
             $table->foreign('part_id')->references('id')->on('parts')->onDelete('cascade');
             
             $table->double('price', 11, 2)->nullable();
-
+            
+            
+            $table->bigInteger('supplier_id')->unsigned()->nullable();
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
 
             $table->timestamps();
         });

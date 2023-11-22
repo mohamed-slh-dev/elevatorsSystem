@@ -24,9 +24,13 @@ class CreateInstallationBillsTable extends Migration
             $table->foreign('elevator_id')->references('id')->on('elevators')->onDelete('cascade');
             
             $table->double('price', 11, 2)->nullable();
+            $table->string('desc')->nullable();
 
             $table->date('date')->nullable();
+            $table->string('status')->nullable();
             $table->string('reference')->nullable();
+            
+
 
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

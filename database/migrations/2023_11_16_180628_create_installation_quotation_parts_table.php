@@ -16,6 +16,8 @@ class CreateInstallationQuotationPartsTable extends Migration
         Schema::create('installation_quotation_parts', function (Blueprint $table) {
             $table->id();
 
+            $table->string('name')->nullable();
+
             $table->bigInteger('installation_quotation_id')->unsigned()->nullable();
             $table->foreign('installation_quotation_id')->references('id')->on('installation_quotations')->onDelete('cascade');
 
@@ -23,6 +25,7 @@ class CreateInstallationQuotationPartsTable extends Migration
             $table->foreign('part_id')->references('id')->on('parts')->onDelete('cascade');
             
             $table->double('price', 11, 2)->nullable();
+
 
             $table->timestamps();
         });

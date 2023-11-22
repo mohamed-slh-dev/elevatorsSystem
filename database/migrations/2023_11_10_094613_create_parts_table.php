@@ -16,11 +16,18 @@ class CreatePartsTable extends Migration
         Schema::create('parts', function (Blueprint $table) {
             $table->id();
 
+            $table->bigInteger('nationality_id')->unsigned()->nullable();
+            $table->foreign('nationality_id')->references('id')->on('nationalities')->onDelete('cascade');
+
+            
             $table->string('name')->nullable();
             $table->string('image')->nullable();
             $table->string('type')->nullable();
             $table->string('desc')->nullable();
-
+            $table->string('usage')->nullable();
+            $table->double('quantity', 11, 2)->nullable();
+            $table->double('consumed_quantity', 11, 2)->nullable();
+            
             $table->timestamps();
         });
     }
@@ -30,8 +37,7 @@ class CreatePartsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('parts');
     }
 }
