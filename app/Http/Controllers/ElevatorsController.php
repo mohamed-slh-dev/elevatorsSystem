@@ -16,15 +16,24 @@ use App\Models\Bank;
 use App\Models\Nationality;
 
 
-class ElevatorsController extends Controller
-{
+class ElevatorsController extends Controller {
+
+
     public function parts(){
 
         $parts = Part::all();
 
         return view('parts',compact('parts'));
         
-    }
+    } // end controller
+
+
+
+    // =============================================
+
+
+
+    
 
     public function addPart(Request $request){
 
@@ -37,17 +46,20 @@ class ElevatorsController extends Controller
         if (!empty($request->file('image'))) {
             
             $image = 'part-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-
             $path = $request->file('image')->storeAs('public/parts',$image);
     
             $part->image = $image;
 
-        }
+        } // end if
        
 
+
+        // :save instance
         $part->save();
 
 
+
+        // :create price
         $price = new PartPrice();
 
         $price->part_id = $part->id;
@@ -58,7 +70,17 @@ class ElevatorsController extends Controller
 
         return redirect()->back()->with('success', 'تم إضافة قطعة بنجاح');
 
-    }
+    } // end function
+
+
+    
+
+
+    // =============================================
+
+
+
+
 
 
     public function updatePart(Request $request){
@@ -72,23 +94,33 @@ class ElevatorsController extends Controller
         if (!empty($request->file('image'))) {
             
             $image = 'part-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-
             $path = $request->file('image')->storeAs('public/parts',$image);
     
             $part->image = $image;
 
-        }
+        } // end if
 
 
+        // :save instance
         $part->save();
         
         return redirect()->back()->with('success', 'تم تعديل القطعة بنجاح');
        
 
-    }
+    } // end function
+
+
+
+
+
+
+    // =============================================
+
+
+
+
 
     public function addPartPrice(Request $request){
-
 
         $price = new PartPrice();
 
@@ -101,64 +133,65 @@ class ElevatorsController extends Controller
         return redirect()->back()->with('success', 'تم تغيير سعر القطعة بنجاح');
 
 
-    }
+    } // end function
 
 
-    public function elevators(){
 
+
+
+
+    // =============================================
+
+
+
+
+
+    public function elevators() {
+
+        // dependencies
         $elevators = Elevator::all();
-
         $elevators_parts = [];
 
         $parts = Part::all();
 
-        $regions = Region::all();
-        $provinces = Province::all();
-        $cities = City::all();
-        $neighbors = Neighbor::all();
+        return view('elevators', compact('elevators', 'elevators_parts', 'parts'));
 
-        $nationalities = Nationality::all();
+    } // end function
 
-        $banks = Bank::all();
 
-        return view('elevators', compact('elevators', 'parts', 'regions', 'provinces', 'cities', 'neighbors', 'banks', 'nationalities', 'elevators_parts'));
 
-    }
 
-    public function addElevator(Request $request){
+
+    // =============================================
+    
+
+
+
+
+    public function addElevator(Request $request) {
 
         $elevator = new Elevator();
 
         $elevator->name = $request->name;
-        $elevator->company = $request->company;
-
 
          if (!empty($request->file('image'))) {
             
             $image = 'elevator-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-
             $path = $request->file('image')->storeAs('public/elevators',$image);
     
             $elevator->image = $image;
 
-        }
+        } // end if
 
-        $elevator->nationality_id = $request->nationality;
 
-        $elevator->supplier_name = $request->supplier_name;
-        $elevator->supplier_phone = $request->supplier_phone;
-        $elevator->supplier_email = $request->supplier_email;
-
-        $elevator->region_id = $request->region;
-        $elevator->province_id = $request->province;
-        $elevator->city_id = $request->city;
-        $elevator->neighbor_id = $request->neighbor;
-        $elevator->bank_id = $request->bank;
-        $elevator->bank_account = $request->bank_account;
-        $elevator->iban = $request->iban;
-
+        
+        // :save instance
         $elevator->save();
 
+
+
+
+        // :add parts if available
         if (!empty($request->elevator_parts)) {
            
             for ($i=0; $i < count($request->elevator_parts) ; $i++) { 
@@ -169,89 +202,113 @@ class ElevatorsController extends Controller
      
                 $elevator_part->save();
      
-             }
+             } // end loop
 
-        }
+        } // end if
       
 
         return redirect()->back()->with('success', 'تم إضافة مصعد بنجاح');
 
+    } // end function
 
-    }
+
+
+
+
+
+    // =============================================
+
+
+
+
+
 
 
     public function updateElevator(Request $request){
 
-
         $elevator = Elevator::find($request->id);
 
         $elevator->name = $request->name;
-        $elevator->company = $request->company;
-
 
          if (!empty($request->file('image'))) {
             
             $image = 'elevator-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-
             $path = $request->file('image')->storeAs('public/elevators',$image);
     
             $elevator->image = $image;
 
-        }
+        } // end if
 
-        $elevator->nationality_id = $request->nationality;
 
-        $elevator->supplier_name = $request->supplier_name;
-        $elevator->supplier_phone = $request->supplier_phone;
-        $elevator->supplier_email = $request->supplier_email;
 
-        $elevator->region_id = $request->region;
-        $elevator->province_id = $request->province;
-        $elevator->city_id = $request->city;
-        $elevator->neighbor_id = $request->neighbor;
-        $elevator->bank_id = $request->bank;
-        $elevator->bank_account = $request->bank_account;
-        $elevator->iban = $request->iban;
-
+        // :save instance
         $elevator->save();
 
         return redirect()->back()->with('success', 'تم تعديل المصعد بنجاح');
 
 
-    }
+    } // end function
 
 
-    public function editElevatorParts($id){
 
+
+
+
+
+    // =============================================
+
+
+
+
+
+
+    public function editElevatorParts($id) {
+
+        // :get elevator / selected parts
         $elevator = Elevator::find($id);
-
-        $parts = Part::all();
-
         $elevator_parts = [];
 
         foreach ($elevator->elevatorParts as $part) {
            
             $elevator_parts [] = $part->part->id;
 
-        }
+        } // end loop
+
+
+        // dependencies
+        $parts = Part::all();
 
 
         return view('edit-elevator-parts', compact('elevator', 'elevator_parts','parts'));
-    }
+        
+    } // end function
 
-    public function updateElevatorParts(Request $request){
+
+
+
+
+    // =============================================
+
+
+
+
+
+
+    public function updateElevatorParts(Request $request) {
 
         $elevator = Elevator::find($request->id);
 
-        //delete all the old parts
+        // :delete all the old parts
         foreach ($elevator->elevatorParts as $part) {
             
             $part->delete();
 
-        }
+        } // end loop
 
 
-        //add the new parts
+
+
+        // :add the new parts
         if (!empty($request->elevator_parts)) {
            
             for ($i=0; $i < count($request->elevator_parts) ; $i++) { 
@@ -262,11 +319,13 @@ class ElevatorsController extends Controller
      
                 $elevator_part->save();
      
-             }
+             } // end loop
 
-        }//end of if !empty($request->elevator_parts
+        } // :end if
 
         return redirect()->route('elevators');
-    }
 
-}
+        
+    } // end function
+
+} // end controller

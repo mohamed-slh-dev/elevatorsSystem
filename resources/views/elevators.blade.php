@@ -21,16 +21,8 @@
         <thead class="bg-primary">
           <tr>
             <th scope="col" style="min-width: 240px;">الأسم</th>
-            <th scope="col">الشركة</th>
-            <th scope="col">المنشأ</th>
-            <th scope="col" class='min-w-150px'>تفاصيل المورد</th>
-            <th scope="col" class='min-w-150px'>العنوان</th>
 
-            <th scope="col" class='min-w-130px'>البنك</th>
-            <th scope="col">الحساب</th>
-            <th scope="col">IBAN</th>
-
-            <th scope="col" style="min-width: 370px;"></th>
+            <th scope="col" colspan="3"></th>
 
           </tr>
         </thead>
@@ -45,54 +37,39 @@
                 <span class='fw-bold border-bottom fs-13'>{{$elevator->name}}</span>
               </td>
           
-              <td>{{$elevator->company}}</td>
-              <td>{{$elevator->nationality->name}}</td>
 
-              {{-- supplier info --}}
-              <td class='position-relative'>{{$elevator->supplier_name}}
-                  <a class="example-popover btn btn-none p-0 ms-1 scale--2" tabindex="0" role="button" data-bs-toggle="tooltip" data-bs-trigger="focus" data-bs-html="true" data-bs-placement="bottom" title="{{'هاتف : '  . $elevator->supplier_phone . '<br />' . 'البريد الالكتروني : '  . $elevator->supplier_email}}">
-                    <i class='fa fa-info-circle fs-5 text-theme'></i>
-                  </a>
+              {{-- edit --}}
+              <td class='text-center'>
+                <button class="btn btn-outline-light btn--table " data-bs-toggle="modal" data-bs-target=".edit-{{$elevator->id}}">تعديل</button>
               </td>
 
-              <td>{{$elevator->region->name_ar}} / {{$elevator->province->name_ar}}, {{$elevator->city->name_ar}}, {{$elevator->neighbor->name_ar}}</td>
-          
-              
-              <td>{{$elevator->bank->name}}</td>
-              <td>{{$elevator->bank_account}}</td>
-              <td>{{$elevator->iban}}</td>
 
+              {{-- ::extract parts --}}
+              @php
+                  $allParts = '';
+                  foreach ($elevator->elevatorParts  as $part)
+                    $allParts .= $part->part->name . '<br />';
+              @endphp
 
-              {{-- parts / edit --}}
-              <td>
-                @php
-                    $allParts = '';
-                    foreach ($elevator->elevatorParts  as $part)
-                      $allParts .= $part->part->name . '<br />';
-                @endphp
-                
-
-
-                {{-- edit --}}
-                <button class="btn btn-outline-light btn--table " data-bs-toggle="modal" data-bs-target=".edit-{{$elevator->id}}">تعديل</button>
-
-
-                {{-- show parts --}}
-                <button class="btn btn--table btn-outline-light " tabindex="0" role="button" data-bs-toggle="tooltip" data-bs-trigger="focus" data-bs-html="true" data-bs-placement="bottom" title="{{$allParts}}">أجزاء المصعد</button>
-
+              {{-- show parts --}}
+              <td class='text-center'>
+                  <button class="btn btn--table btn-outline-light " tabindex="0" role="button" data-bs-toggle="tooltip" data-bs-trigger="focus" data-bs-html="true" data-bs-placement="bottom" title="{{$allParts}}">أجزاء المصعد</button>
+              </td>
 
                 
+
+              {{-- edit parts --}}
+              <td class='text-center'>
                 <a href="{{route('editElevatorParts', $elevator->id)}}">
                   <button class="btn btn-primary-light btn--table">تعديل أجزاء المصعد</button>
                 </a>
-
               </td>
-
 
 
 
             </tr>
             {{-- end table row --}}
+
           @endforeach
           {{-- end loop --}}
           
@@ -143,181 +120,45 @@
               </div>
 
 
-              {{-- empty --}}
-              <div class="col-12"></div>
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="company">الشركة</label>
-                <input type="text" class="form-control" name="company" id="company">
-              </div>
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="nationality">بلد المنشأ</label>
-                <select name="nationality" required class="form-control form--select" id="nationality">
-
-                  <option value=""></option>
-
-                  @foreach ($nationalities as $nation)
-                    <option value="{{$nation->id}}">{{$nation->name}}</option>
-                  @endforeach
-                  
-                </select>
-              </div>
-
-
-
-              {{-- empty --}}
-              <div class="col-12"></div>
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="supplier_name">اسم المورد</label>
-                <input type="text" class="form-control" name="supplier_name" id="supplier_name">
-              </div>
-
-              <div class="col-sm-4 mb-20">
-                <label for="supplier_phone">هاتف المورد</label>
-                <input type="text" class="form-control text-start" name="supplier_phone" id="supplier_phone" dir="ltr">
-              </div>
-
-              <div class="col-sm-4 mb-20">
-                <label for="supplier_email">البريد الالكتروني للمورد</label>
-                <input type="email" class="form-control" name="supplier_email" id="supplier_email">
-              </div>
-
-
 
               {{-- hr --}}
-              <div class="col-12 mb-4 mt-2">
-                <hr>
+              <div class="col-12 mb-3">
+                <hr class='mt-0'>
               </div>
 
-
-              <div class="col-sm-4 mb-20">
-                <label for="region">المقاطعة</label>
-                <select name="region" required class="form-control form--select" id="region">
-
-                  <option value=""></option>
-
-                  @foreach ($regions as $region)
-                    <option value="{{$region->id}}">{{$region->name_ar}}</option>
-                  @endforeach
-
-                </select>
+              <div class="col-12">
+                  <h6 class="text-bold fw-bold form--subheading d-inline-block pb-2 mb-4">إضافة قطع المصعد</h6>
               </div>
 
+                
+              <div class="col-12 mb-3">
+                  <div class="form-group m-checkbox-inline mb-0">
 
+                    {{-- loop - parts  --}}
+                    @foreach ($parts as $part)
 
-              <div class="col-sm-4 mb-20">
-                <label for="province">المحافظة</label>
-                <select name="province" required class="form-control form--select" id="province">
+                      {{-- single checkbox --}}
+                      <div class="checkbox checkbox-dark checkbox--item mb-3">
 
-                  <option value=""></option>
+                        <input id="inline-{{$part->id}}" type="checkbox" name="elevator_parts[]" value="{{$part->id}}">
+                        <label for="inline-{{$part->id}}">{{ $part->name}}
+                          <span class='fs-12 fw-bold' style="color:rgb(125, 106, 0)">
+                            ({{$part->partPrices->sortByDesc('id')->first->purchase_price['sell_price'] . ' ريال'}})
+                          </span>
+                        </label>
 
-                  @foreach ($provinces as $province)
-                    <option value="{{$province->id}}">{{$province->name_ar}}</option>
-                  @endforeach
+                      </div>
+                      {{-- end single checkbox --}}
 
-                </select>
+                    @endforeach
+                    {{-- end loop --}}
+
+                  </div>
               </div>
-
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="city">المدينة</label>
-                <select name="city" required class="form-control form--select" id="city">
-
-                  <option value=""></option>
-                  
-                  @foreach ($cities as $city)
-                    <option value="{{$city->id}}">{{$city->name_ar}}</option>
-                  @endforeach
-
-                </select>
-              </div>
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="neighbor">الحي</label>
-                <select name="neighbor" required class="form-control form--select" id="neighbor">
-
-                  <option value=""></option>
-
-                  @foreach ($neighbors as $neighbor)
-                    <option value="{{$neighbor->id}}">{{$neighbor->name_ar}}</option>
-                  @endforeach
-
-                </select>
-              </div>
-
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="bank">البنك</label>
-                <select name="bank" required class="form-control form--select" id="bank">
-
-                  <option value=""></option>
-
-                  @foreach ($banks as $bank)
-                    <option value="{{$bank->id}}">{{$bank->name}}</option>
-                  @endforeach
-
-                </select>
-              </div>
-
-              <div class="col-sm-4 mb-20">
-                <label for="bank_account">رقم الحساب</label>
-                <input type="text" class="form-control" name="bank_account" id="bank_account">
-              </div>
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="iban">IBAN</label>
-                <input type="text" class="form-control" name="iban" id="iban">
-              </div>
-
-
-            </div>
-
-
-            {{-- hr --}}
-            <div class="col-12 mb-4">
-              <hr>
-            </div>
-
-            <div class="col-12">
-                <h4 class="text-bold fw-bold form--subheading d-inline-block pb-2 mb-4">إضافة قطع المصعد</h4>
-            </div>
-
               
-            <div class="col-12 mb-3">
-                <div class="form-group m-checkbox-inline mb-0">
 
-                  {{-- loop - parts  --}}
-                  @foreach ($parts as $part)
 
-                    {{-- single checkbox --}}
-                    <div class="checkbox checkbox-dark checkbox--item mb-3">
-
-                      <input id="inline-{{$part->id}}" type="checkbox" name="elevator_parts[]" value="{{$part->id}}">
-                      <label for="inline-{{$part->id}}">{{ $part->name}}
-                        <span class='fs-12 fw-bold' style="color:rgb(125, 106, 0)">
-                          ({{$part->partPrices->sortByDesc('id')->first->purchase_price['sell_price'] . ' ريال'}})
-                        </span>
-                      </label>
-
-                    </div>
-                    {{-- end single checkbox --}}
-
-                  @endforeach
-                  {{-- end loop --}}
-
-                </div>
             </div>
-            
-
           </div>
           {{-- end body --}}
 
@@ -337,6 +178,20 @@
   </div>
 </div>
 {{-- end modal --}}
+
+
+
+
+
+
+{{-- ============================================================ --}}
+
+
+
+
+
+
+
 
 @foreach ($elevators as $elevator)
     
@@ -362,6 +217,8 @@
 
 
           <input type="hidden" name="id" value="{{$elevator->id}}" id="">
+
+
           {{-- body --}}
           <div class="modal-body">
             <div class="row no-gutters mx-0">
@@ -374,142 +231,6 @@
               <div class="col-sm-4 mb-20">
                 <label for="image">الصورة</label>
                 <input type="file" class="form-control" name="image" id="image" accept="image/*">
-              </div>
-
-
-              {{-- empty --}}
-              <div class="col-12"></div>
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="company">الشركة</label>
-                <input type="text" class="form-control" value="{{$elevator->company}}" name="company" id="company">
-              </div>
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="nationality">بلد المنشأ</label>
-                <select name="nationality" class="form-control form--select" id="nationality">
-
-                  <option value="{{$elevator->nationality_id}}">{{$elevator->nationality->name}}</option>
-
-                  @foreach ($nationalities as $nation)
-                    <option value="{{$nation->id}}">{{$nation->name}}</option>
-                  @endforeach
-                  
-                </select>
-              </div>
-
-
-
-              {{-- empty --}}
-              <div class="col-12"></div>
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="supplier_name">اسم المورد</label>
-                <input type="text" class="form-control" value="{{$elevator->supplier_name}}" name="supplier_name" id="supplier_name">
-              </div>
-
-              <div class="col-sm-4 mb-20">
-                <label for="supplier_phone">هاتف المورد</label>
-                <input type="text" class="form-control text-start" value="{{$elevator->supplier_phone}}" name="supplier_phone" id="supplier_phone" dir="ltr">
-              </div>
-
-              <div class="col-sm-4 mb-20">
-                <label for="supplier_email">البريد الالكتروني للمورد</label>
-                <input type="email" class="form-control" value="{{$elevator->supplier_email}}" name="supplier_email" id="supplier_email">
-              </div>
-
-
-
-              {{-- hr --}}
-              <div class="col-12 mb-4 mt-2">
-                <hr>
-              </div>
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="region">المقاطعة</label>
-                <select name="region" class="form-control form--select" id="region">
-
-                  <option value="{{$elevator->region_id}}">{{$elevator->region->name_ar}}</option>
-
-                  @foreach ($regions as $region)
-                    <option value="{{$region->id}}">{{$region->name_ar}}</option>
-                  @endforeach
-
-                </select>
-              </div>
-
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="province">المحافظة</label>
-                <select name="province" class="form-control form--select" id="province">
-
-                  <option value="{{$elevator->province_id}}">{{$elevator->province->name_ar}}</option>
-
-                  @foreach ($provinces as $province)
-                    <option value="{{$province->id}}">{{$province->name_ar}}</option>
-                  @endforeach
-
-                </select>
-              </div>
-
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="city">المدينة</label>
-                <select name="city" class="form-control form--select" id="city">
-
-                  <option value="{{$elevator->city_id}}">{{$elevator->city->name_ar}}</option>
-                  
-                  @foreach ($cities as $city)
-                    <option value="{{$city->id}}">{{$city->name_ar}}</option>
-                  @endforeach
-
-                </select>
-              </div>
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="neighbor">الحي</label>
-                <select name="neighbor" class="form-control form--select" id="neighbor">
-
-                  <option value="{{$elevator->neighbor_id}}">{{$elevator->neighbor->name_ar}}</option>
-
-                  @foreach ($neighbors as $neighbor)
-                    <option value="{{$neighbor->id}}">{{$neighbor->name_ar}}</option>
-                  @endforeach
-
-                </select>
-              </div>
-
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="bank">البنك</label>
-                <select name="bank" class="form-control form--select" id="bank">
-
-                  <option value="{{$elevator->bank_id}}">{{$elevator->bank->name}}</option>
-
-                  @foreach ($banks as $bank)
-                    <option value="{{$bank->id}}">{{$bank->name}}</option>
-                  @endforeach
-
-                </select>
-              </div>
-
-              <div class="col-sm-4 mb-20">
-                <label for="bank_account">رقم الحساب</label>
-                <input type="text" class="form-control" value="{{$elevator->bank_account}}" name="bank_account" id="bank_account">
-              </div>
-
-
-              <div class="col-sm-4 mb-20">
-                <label for="iban">IBAN</label>
-                <input type="text" class="form-control" value="{{$elevator->iban}}" name="iban" id="iban">
               </div>
 
 
@@ -534,14 +255,21 @@
   </div>
 </div>
 {{-- end modal --}}
-@endforeach
 
+
+@endforeach
+{{-- end loop --}}
 
 
 @endsection
+{{-- end content section --}}
 
 
 
+
+
+
+{{-- ========================================================= --}}
 
 
 @section('scripts')
@@ -549,7 +277,7 @@
 <script>
   $('[data-toggle="tooltip"]').tooltip({
     trigger : 'hover'
-})
+  });
 </script>
     
 @endsection
