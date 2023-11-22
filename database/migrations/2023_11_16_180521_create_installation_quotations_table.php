@@ -27,7 +27,10 @@ class CreateInstallationQuotationsTable extends Migration
             $table->string('desc')->nullable();
 
             $table->date('date')->nullable();
+            
             $table->string('status')->nullable();
+            $table->string('status_alt')->nullable();
+
             $table->string('reference')->nullable();
 
 

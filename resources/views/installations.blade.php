@@ -212,7 +212,7 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="status">الحالة</label>
-                  <select name="status" required class="form-control form--select form--select" id="status">
+                  <select name="status" required class="form-control form--select form--select status-select" id="status" data-form='add'>
 
                     <option value=""></option>
 
@@ -222,6 +222,16 @@
 
                   </select>
                 </div>
+
+
+                {{-- status alt --}}
+                <div class="col-sm-4 mb-20 status-select-col d-none" data-form='add'>
+                  <label for="statusAlt">حالة اخرى</label>
+                  <input type="text" class="form-control" name="status_alt" id="statusAlt">
+                </div>
+
+
+
 
 
                 <div class="col-sm-4 mb-20">
@@ -341,7 +351,7 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="status">الحالة</label>
-                  <select name="status" required class="form-control form--select form--select" id="status" value='{{$quotation->status}}'>
+                  <select name="status" required class="form-control form--select form--select status-select" id="status" value='{{$quotation->status}}' data-form='edit-quotation-{{$quotation->id}}'>
 
                     <option value=""></option>
 
@@ -350,6 +360,14 @@
                     @endforeach
 
                   </select>
+                </div>
+
+
+                
+                {{-- status alt --}}
+                <div class="col-sm-4 mb-20 status-select-col d-none" data-form='edit-quotation-{{$quotation->id}}'>
+                  <label for="statusAlt">حالة اخرى</label>
+                  <input type="text" class="form-control" name="status_alt" id="statusAlt" value='{{ ($quotation->status == 'اخرى' ? $quotation->status_alt: '') }}'>
                 </div>
                 
 
@@ -479,7 +497,7 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="status">الحالة</label>
-                  <select name="status" required class="form-control form--select form--select" id="status" value='{{$bill->status}}'>
+                  <select name="status" required class="form-control form--select form--select status-select" id="status" value='{{$bill->status}}' data-form='edit-bill-{{$bill->id}}'>
 
                     <option value=""></option>
 
@@ -489,6 +507,16 @@
 
                   </select>
                 </div>
+
+
+
+                {{-- status alt --}}
+                <div class="col-sm-4 mb-20 status-select-col d-none" data-form='edit-bill-{{$bill->id}}'>
+                  <label for="statusAlt">حالة اخرى</label>
+                  <input type="text" class="form-control" name="status_alt" id="statusAlt" value='{{ ($bill->status == 'اخرى' ? $bill->status_alt: '') }}'>
+                </div>
+
+
                 
 
 
@@ -605,10 +633,48 @@
 
 
 
+
+
+
+
+
+{{-- ======================================================= --}}
+
+
 @section('scripts')
+
+
+
 
 <script>
 
+
+  // :status change event
+  $('div').on('change', '.status-select', function() {
+
+    // : get dataForm / value
+    dataForm = $(this).attr('data-form');
+    inputVal = $(this).val();
+
+
+    if (inputVal == 'اخرى') {
+
+      $(`.status-select-col[data-form=${dataForm}]`).removeClass('d-none');
+
+    } else {
+
+      $(`.status-select-col[data-form=${dataForm}]`).addClass('d-none');
+
+    } // end if
+
+
+  }); // end function
+
+
+
+
+
+  // :remove btn
   $('.remove--btn').click(function() {
 
     $('#modal-assign-id').val($(this).attr('data-id'));
@@ -619,4 +685,10 @@
 </script>
     
 @endsection
+{{-- end content --}}
+
+
+
+
+
 

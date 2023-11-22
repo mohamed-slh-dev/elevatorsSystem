@@ -46,6 +46,7 @@ class InstallationsController extends Controller
             $installation_quotation->elevator_id = $request->elevator;
             $installation_quotation->price = 0;
             $installation_quotation->status = $request->status;
+            $installation_quotation->status_alt = ($request->status == 'اخرى') ? $request->status_alt : '';
             $installation_quotation->date = $request->date;
             $installation_quotation->reference = $request->reference;
             $installation_quotation->desc = $request->desc;
@@ -69,6 +70,7 @@ class InstallationsController extends Controller
             $installation_bill->elevator_id = $request->elevator;
             $installation_bill->price = 0;
             $installation_bill->status = $request->status;
+            $installation_bill->status_alt = ($request->status == 'اخرى') ? $request->status_alt : '';
             $installation_bill->date = $request->date;
             $installation_bill->reference = $request->reference;
             $installation_bill->desc = $request->desc;
@@ -102,6 +104,7 @@ class InstallationsController extends Controller
 
 
         
+        // 1: quotation
         if ($request->type == 'quotation') {
             
             if (!empty($request->elevator_parts)) {
@@ -118,10 +121,13 @@ class InstallationsController extends Controller
                     $quotation->save();
 
                     $quotation_part->save();
-                }
-            }
+                } // end loop
+            } //end if
 
-        }else{
+    
+
+        // 2: bill
+        } else {
 
             if (!empty($request->elevator_parts)) {
            
@@ -138,16 +144,18 @@ class InstallationsController extends Controller
 
                     $bill_part->save();
          
-                 }
+                 } // end loop
     
-            }
+            } // end if
 
-        }
+        } //end else
 
+
+
+        // :return message
         return redirect()->route('installations')->with('success', 'تم اضافة عرض سعر بنجاح');
 
-
-    }
+    } //end function
 
 
 
@@ -195,8 +203,12 @@ class InstallationsController extends Controller
         $installation->elevator_id = $request->elevator;
         $installation->date = $request->date;
         if ($installationResetLink != false) $installation->price = 0; // ! reset price
+        $installation->status = $request->status;
+        $installation->status_alt = ($request->status == 'اخرى') ? $request->status_alt : '';
         $installation->reference = $request->reference;
+        $installation->desc = $request->desc;
         $installation->user_id = session()->get('user_id');
+
 
         $installation->save();
 
@@ -359,6 +371,17 @@ class InstallationsController extends Controller
     } // end function
 
 
+
+
+
+
+
+    // ========================================================================
+
+
+
+
+
     public function deleteInstallation(Request $request){
 
         if ($request->type == 'bill') {
@@ -396,6 +419,17 @@ class InstallationsController extends Controller
     }
 
 
+
+
+
+
+
+    // ========================================================================
+
+
+
+
+    
     public function printInstallation($id, $type){
 
          // : determine type / + get parts
