@@ -9,6 +9,12 @@ class Part extends Model
 {
     use HasFactory;
 
+    public function nationality()
+    {
+        return $this->belongsTo('App\Models\Nationality');
+    }
+
+    
     public function partPrices()
     {
         return $this->hasMany('App\Models\PartPrice');

@@ -19,11 +19,15 @@ use App\Models\Nationality;
 class ElevatorsController extends Controller {
 
 
-    public function parts(){
+    public function parts() {
 
+        // dependencies
         $parts = Part::all();
+        $nationalities = Nationality::all();
+        $usages = ['ماكينة', 'دلائل التعليق والتثبيت', 'الكابينة', 'الأبواب', 'لوحات الطلب', 'أجهزة الطوارئ', 'البرج', 'حفرة المصعد'];
 
-        return view('parts',compact('parts'));
+
+        return view('parts',compact('parts', 'nationalities', 'usages'));
         
     } // end controller
 
@@ -42,6 +46,10 @@ class ElevatorsController extends Controller {
         $part->name = $request->name;
         $part->type = $request->type;
         $part->desc = $request->desc;
+        $part->usage = $request->usage;
+        $part->quantity = $request->quantity;
+        $part->consumed_quantity = 0; // default value
+        $part->nationality_id = $request->nationality;
 
         if (!empty($request->file('image'))) {
             
@@ -90,7 +98,11 @@ class ElevatorsController extends Controller {
         $part->name = $request->name;
         $part->type = $request->type;
         $part->desc = $request->desc;
+        $part->usage = $request->usage;
+        $part->quantity = $request->quantity;
+        $part->nationality_id = $request->nationality;
 
+        
         if (!empty($request->file('image'))) {
             
             $image = 'part-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
@@ -325,7 +337,7 @@ class ElevatorsController extends Controller {
 
         return redirect()->route('elevators');
 
-        
+
     } // end function
 
 } // end controller

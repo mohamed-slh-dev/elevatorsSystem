@@ -3,6 +3,10 @@
 @section('title', ' الأجزاء')
     
 @section('content')
+
+
+
+
     
 {{-- add button --}}
 <div class="col-6 mb-5 text-end">
@@ -20,8 +24,9 @@
         <thead class="bg-primary">
           <tr>
             <th scope="col" class='min-w-200px'>الأسم</th>
+            <th scope="col" class='min-w-130px'>المنشأ</th>
             <th scope="col">النوع</th>
-            <th scope="col" class='min-w-130px'>الوصف</th>
+            <th scope="col" class='min-w-130px'>الإستخدام</th>
             <th scope="col" class='min-w-110px'>سعر الشراء</th>
             <th scope="col" class='min-w-110px'>سعر البيع</th>
             <th scope="col"></th>
@@ -38,8 +43,10 @@
 
             <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/parts/'.$part->image)}}" alt="image"><span class='fw-bold border-bottom'>{{$part->name}}</span></td>
 
+            <td>{{$part->nationality->name}}</td>
+
             <td>{{$part->type}}</td>
-            <td>{{$part->desc}}</td>
+            <td>{{$part->usage}}</td>
 
             <td>{{$part->partPrices->sortByDesc('id')->first->purchase_price['purchase_price']}}</td>
             <td>{{$part->partPrices->sortByDesc('id')->first->purchase_price['sell_price']}}</td>
@@ -105,6 +112,7 @@
                   <input type="text" class="form-control" required name="name" id="name">
                 </div>
 
+
                 <div class="col-sm-4 mb-20">
                   <label for="image">الصورة</label>
                   <input type="file" class="form-control" name="image" id="image" accept="image/*">
@@ -125,6 +133,7 @@
                   </select>
                 </div>
 
+                
                 <div class="col-sm-4 mb-20">
                   <label for="purchase_price">سعر الشراء</label>
                   <input type="number" class="form-control" required min="0" step="0.01" name="purchase_price" id="purchase_price">
@@ -134,6 +143,45 @@
                   <label for="sell_price">سعر البيع</label>
                   <input type="number" class="form-control" required min="0" step="0.01" name="sell_price" id="sell_price">
                 </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="nationality">بلد المنشأ</label>
+                  <select name="nationality" class="form-control form--select" id="nationality" required>
+
+                      <option value=""></option>
+
+                      @foreach ($nationalities as $nation)
+                          <option value="{{$nation->id}}">{{$nation->name}}</option>
+                      @endforeach
+
+                  </select>
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="usage">الإستخدام</label>
+                  <select name="usage" class="form-control form--select" id="usage" required>
+
+                      <option value=""></option>
+
+                      @foreach ($usages as $usage)
+                          <option value="{{$usage}}">{{$usage}}</option>
+                      @endforeach
+
+                  </select>
+                </div>
+
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="quantity">الكمية</label>
+                  <input type="number" class="form-control" required min="0" step="0.01" name="quantity" id="quantity">
+                </div>
+
 
 
                 <div class="col-sm-12 mb-20">
@@ -160,6 +208,9 @@
   </div>
 </div>
 {{-- end modal --}}
+
+
+
 
 
 
@@ -196,22 +247,62 @@
                   <input type="text" class="form-control" value="{{$part->name}}" required name="name" id="name">
                 </div>
 
+              
+
+                <div class="col-sm-4 mb-20">
+                  <label for="type">النوع</label>
+                  <select name="type" class="form-control form--select" id="type" required value='{{$part->type}}'>
+                      <option value="كهربائي">كهربائي</option>
+                      <option value="ميكانيكي">ميكانيكي</option>
+                  </select>
+                </div>
+
+
+
                 <div class="col-sm-4 mb-20">
                   <label for="image">الصورة</label>
                   <input type="file" class="form-control" name="image" id="image" accept="image/*">
                 </div>
 
 
+
+
                 <div class="col-sm-4 mb-20">
-                  <label for="type">النوع</label>
-                  <select name="type" class="form-control form--select" id="type" required>
+                  <label for="nationality">بلد المنشأ</label>
+                  <select name="nationality" class="form-control form--select" id="nationality" required value='{{$part->nationality_id}}'>
 
-                      <option value="{{$part->type}}">{{$part->type}}</option>
+                      <option value=""></option>
 
-                      <option value="كهربائي">كهربائي</option>
-                      <option value="ميكانيكي">ميكانيكي</option>
+                      @foreach ($nationalities as $nation)
+                          <option value="{{$nation->id}}">{{$nation->name}}</option>
+                      @endforeach
+
                   </select>
                 </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="usage">الإستخدام</label>
+                  <select name="usage" class="form-control form--select" id="usage" required value='{{$part->usage}}'>
+
+                      <option value=""></option>
+
+                      @foreach ($usages as $usage)
+                          <option value="{{$usage}}">{{$usage}}</option>
+                      @endforeach
+
+                  </select>
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="quantity">الكمية</label>
+                  <input type="number" class="form-control" required min="0" step="0.01" name="quantity" id="quantity" value='{{$part->quantity}}'>
+                </div>
+
+
 
                 <div class="col-sm-12 mb-20">
                   <label for="desc">الوصف</label>
@@ -312,11 +403,19 @@
 
 
 
+
+
+
 {{-- ============================================================== --}}
+
+
+
+
 
 
 @foreach ($parts as $part)
     
+
 {{-- edit part modal --}}
 <div class="col-12">
   <div class="modal fade price-history-{{$part->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
@@ -330,10 +429,10 @@
         </div>
 
           <div class="modal-body">
-              <div class="row no-gutters mx-0">
+              <div class="row no-gutters mx-0 mb-3">
 
 
-               <div class="col-sm-12 col-lg-12 col-xl-12">
+               <div class="col-sm-12 col-lg-12 col-xl-12 px-0">
                   <div class="table-responsive">
                     <table class="table table-bordered">
                       <thead class="bg-primary">
@@ -354,7 +453,7 @@
 
                           <td>{{$price->purchase_price}}</td>
                           <td>{{$price->sell_price}}</td>
-                          <td>{{$price->created_at}}</td>
+                          <td dir="ltr" class='text-start'>{{ date('d / m / Y', strtotime($price->created_at))}}</td>
                           
 
                         </tr>
@@ -365,17 +464,12 @@
                     </table>
                   </div>
                 </div>
-{{-- end table --}}
+                {{-- end table --}}
 
 
               </div>
           </div>
           {{-- end body --}}
-
-          {{-- footer --}}
-          <div class="modal-footer">
-           
-          </div>
 
 
       </div>
