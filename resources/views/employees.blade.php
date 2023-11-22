@@ -45,7 +45,7 @@
           
       <tr>
         <td><span class='fw-bold border-bottom'>{{$employee->first_name .' '. $employee->last_name}}</span></td>
-        <td>{{$employee->phone}}</td>
+        <td dir='ltr' class='text-start'>{{$employee->phone}}</td>
 
         <td>{{$employee->identity_type}}<br>/ {{$employee->identity_number}}</td>
 
@@ -169,7 +169,7 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="phone"> رقم الهاتف </label>
-                  <input type="text" id="phone" required name="phone" class="form-control text-start" dir='ltr' >
+                  <input type="text" id="phone" required name="phone" class="form-control text-start">
                 </div>
 
 
@@ -574,7 +574,7 @@
   
                   <div class="col-sm-4 mb-20">
                     <label for="phone"> رقم الهاتف </label>
-                    <input type="text" id="phone" required value="{{$employee->phone}}" name="phone" class="form-control text-start" dir='ltr' >
+                    <input type="text" id="phone" required value="{{$employee->phone}}" name="phone" class="form-control text-start">
                   </div>
   
   

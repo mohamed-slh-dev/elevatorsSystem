@@ -156,21 +156,23 @@
           <div class="d-lg-none mobile-toggle pull-right w-auto"><i data-feather="more-horizontal"></i></div>
         </div>
       </div>
-      <!-- Page Header Ends                              -->
-      <!-- Page Body Start-->
+      <!-- Page Header Ends -->
+      <!-- Page Body Start -->
       <div class="page-body-wrapper horizontal-menu">
+
+
         <!-- Page Sidebar Start-->
         <header class="main-nav">
-          <div class="sidebar-user text-center">
-              {{-- <a class="setting-primary" href="javascript:void(0)">
-              <i data-feather="settings"></i>
-            </a> --}}
+
+          {{-- profile image --}}
+          <div class="sidebar-user text-center pt-5 pb-3">
             <img class="rounded-circle of-cover" style="height: 80px; width: 80px; border-color: #0f9a74" src="{{asset('storage/users/'.session('user_img'))}}" alt="">
-            <div class="badge-bottom"></div><a href="javascript:void(0);">
-              <h6 class="mt-3 f-14 f-w-600">{{ session('name') }}</h6></a>
-              <p class="mb-0 font--family">{{ session('email') }}</p>
-         
+            <div class="badge-bottom"></div>
           </div>
+
+
+
+          {{-- navbar --}}
           <nav>
             <div class="main-navbar">
               <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
@@ -187,7 +189,7 @@
 
                   <li class="dropdown">
                     <a class="nav-link menu-title link-nav" href="{{route('dashboard')}}">
-                      <i data-feather="monitor"></i><span>لوحة التحكم</span>
+                      <i data-feather="monitor"></i><span>الرئيسية</span>
                     </a>
                   </li>
 
@@ -199,16 +201,18 @@
 
                   <li class="dropdown">
                     <a class="nav-link menu-title link-nav" href="{{route('parts')}}">
-                      <i data-feather="box"></i><span>الأجزاء </span>
+                      <i data-feather="package"></i><span>الأجزاء </span>
                     </a>
                   </li>
 
 
                   <li class="dropdown">
                     <a class="nav-link menu-title link-nav" href="{{route('elevators')}}">
-                      <i data-feather="codepen"></i><span>المصاعد </span>
+                      <i data-feather="sliders"></i><span>المصاعد </span>
                     </a>
                   </li>
+
+
 
                   <li class="dropdown">
                     <a class="nav-link menu-title link-nav" href="{{route('customers')}}">
@@ -216,12 +220,14 @@
                     </a>
                   </li>
 
-
+                  
+                  
                   <li class="dropdown">
-                    <a class="nav-link menu-title link-nav" href="{{route('users')}}">
-                      <i data-feather="users"></i><span>المستخدمين </span>
+                    <a class="nav-link menu-title link-nav" href="{{route('suppliers')}}">
+                      <i data-feather="link"></i><span>الموردين</span>
                     </a>
                   </li>
+
 
 
                   <li class="dropdown">
@@ -236,27 +242,21 @@
                     </a>
                   </li>
 
-
-                  {{-- installment type : quotation or bill --}}
-                  {{-- apply to all : modal for the inital data (without parts) then after confirm / redirect to another page with elevators parts / checkbox for selecting the parts then add price to it (default price val is latest pricing from db) --}}
                   
                   <li class="dropdown">
                     <a class="nav-link menu-title link-nav" href="{{route('financials')}}">
-                      <i data-feather="dollar-sign"></i><span>المالية </span>
+                      <i data-feather="dollar-sign"></i><span>الإجراءات المالية</span>
                     </a>
                   </li>
 
-                  {{-- 
-                    
-                    type: 1- for hr / or 2- maintenance / or 3- installation
+                   
 
-                    1- for hr:  no. type (salary / bonus / khasm) / days / emp id / note / payment w (cash / bank) / payment type (full amount / installment ) / code (customInput like ref) / date
-
-
-                    2- amount / note / pw / pt / code / date
-                    
-                    --}}
-
+                  <li class="dropdown">
+                    <a class="nav-link menu-title link-nav" href="{{route('users')}}">
+                      <i data-feather="users"></i><span>مستخدمين النظام</span>
+                    </a>
+                  </li>
+     
 
                 
                 </ul>

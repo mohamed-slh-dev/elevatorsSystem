@@ -7697,7 +7697,7 @@ table tbody .border-bottom-warning td {
     .main-navbar
     .nav-menu {
     border-radius: 0;
-    height: calc(100vh - 355px);
+    height: calc(100vh - 345px);
     left: -300px;
     z-index: 99;
     -webkit-transition: color 1s ease;

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\FinancialController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\SuppliersController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +68,14 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/users', [UsersController::class, 'users'])->name('users');
     Route::post('/add-user', [UsersController::class, 'addUser'])->name('addUser');
     Route::post('/update-user', [UsersController::class, 'updateUser'])->name('updateUser');
+
+
+
+    // * Suppliers
+    Route::get('/suppliers', [SuppliersController::class, 'suppliers'])->name('suppliers');
+    Route::post('/add-supplier', [SuppliersController::class, 'addSupplier'])->name('addSupplier');
+    Route::post('/update-supplier', [SuppliersController::class, 'updateSupplier'])->name('updateSupplier');
+
 
 
     // * Customers

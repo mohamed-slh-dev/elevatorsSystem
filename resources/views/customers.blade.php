@@ -44,7 +44,7 @@
       <tr>
         <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle table--img me-2' src="{{asset('storage/customers/'.$customer->image)}}" alt="image"><span class='fw-bold border-bottom fs-13'>{{$customer->first_name. ' '. $customer->last_name}}</span></td>
         <td>{{$customer->email}}</td>
-        <td>{{$customer->phone}}</td>
+        <td dir='ltr' class='text-start'>{{$customer->phone}}</td>
 
         <td>{{$customer->identity_type}}<br>/ {{$customer->identity_number}}</td>
 
@@ -178,7 +178,7 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="phone"> رقم الهاتف </label>
-                  <input type="text" id="phone" required name="phone" class="form-control text-start" dir='ltr' >
+                  <input type="text" id="phone" required name="phone" class="form-control text-start">
                 </div>
 
 
@@ -399,7 +399,7 @@
   
                   <div class="col-sm-4 mb-20">
                     <label for="phone"> رقم الهاتف </label>
-                    <input type="text" id="phone" required value="{{$customer->phone}}" name="phone" class="form-control text-start" dir='ltr' >
+                    <input type="text" id="phone" required value="{{$customer->phone}}" name="phone" class="form-control text-start" >
                   </div>
   
   
