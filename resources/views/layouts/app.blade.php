@@ -61,7 +61,7 @@
       <div class="page-main-header">
         <div class="main-header-right row m-0">
           <div class="main-header-left">
-            <div class="logo-wrapper">
+            <div class="logo-wrapper w-100">
                 <a href="#">
                     <h4 class='mb-0 text-center'>
                       <img src="{{asset('assets/images/logo/main-logo.png')}}" alt="" class='logo--app'>
@@ -165,7 +165,7 @@
               {{-- <a class="setting-primary" href="javascript:void(0)">
               <i data-feather="settings"></i>
             </a> --}}
-            <img class="rounded-circle of-contain" style="height: 80px; width: 80px" src="{{asset('storage/users/'.session('user_img'))}}" alt="">
+            <img class="rounded-circle of-cover" style="height: 80px; width: 80px; border-color: #0f9a74" src="{{asset('storage/users/'.session('user_img'))}}" alt="">
             <div class="badge-bottom"></div><a href="javascript:void(0);">
               <h6 class="mt-3 f-14 f-w-600">{{ session('name') }}</h6></a>
               <p class="mb-0 font--family">{{ session('email') }}</p>
