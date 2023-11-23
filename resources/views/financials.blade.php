@@ -6,7 +6,7 @@
 
 
 @php
-    $typeOptions = ['الموارد البشرية', 'المورد'];
+    $typeOptions = ['المورد', 'الموارد البشرية'];
 @endphp
     
 {{-- add button --}}
@@ -26,17 +26,12 @@
           <tr>
             <th scope="col" class='min-w-140px'>الاجراء</th>
             <th scope="col">رقم الاجراء</th>
+            <th scope="col" class='min-w-140px'>الموظف/المورد</th>
             <th scope="col">المبلغ</th>
             <th scope="col">المبلغ المتبقي</th>
-
-            <th scope="col" class='min-w-110px'>طريقة الدفع</th>
             <th scope="col" class='min-w-110px'>آلية الدفع</th>
-
             <th scope="col" class='min-w-110px'>النوع</th>
-            <th scope="col" class='min-w-110px'>الموظف</th>
-
             <th scope="col">التاريخ</th>
-            <th scope="col">الملاحظات</th>
             <th></th>
           </tr>
         </thead>
@@ -49,23 +44,28 @@
             <td><span class='fw-bold border-bottom'>{{$financial->type}}</span></td>
             <td>{{$financial->reference}}</td>
 
+
+            {{-- employee / supplier --}}
+            <td>
+              {{ (!empty($financial->employee) ? $financial->employee->first_name . ' ' . $financial->employee->last_name : ' ')}}
+              {{ (!empty($financial->supplier) ? $financial->supplier->name : '') }}
+            </td>
+
+
             <td>{{$financial->amount}}</td>
             <td>{{$financial->remaining_amount}}</td>
-
-            <td>{{$financial->payment_type}}</td>
             <td>{{$financial->payment_with}}</td>
 
-
-            <td>{{$financial->type_desc}}</td>
-            <td>{{ (!empty($financial->employee)) ? $financial->employee->first_name . ' ' . $financial->employee->last_name : ' '}}</td>
+            <td>{{($financial->type_desc) ? $financial->type_desc: '-'}}</td>
+            
 
             <td>{{ date('d-m-Y', strtotime($financial->date))}}</td>
-            <td>{{$financial->note}}</td>
 
+
+            {{-- edit --}}
             <td>
               <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-{{$financial->id}}">تعديل</button>
             </td>
-
 
           </tr>
 
@@ -105,13 +105,13 @@
           {{-- body --}}
           <div class="modal-body">
               <div class="row no-gutters mx-0">
-              
+                
+
+                {{-- type --}}
                 <div class="col-sm-4 mb-20">
                   <label for="type">الإجراء</label>
-                  <select name="type" class="form-control form--select type-select" data-form='add' id="type">
+                  <select name="type" class="form-control form--select type-select" data-form='add' id="type" value='المورد'>
                     
-                    <option value=""></option>
-                  
                     @foreach ($typeOptions as $option)
                       <option value="{{$option}}">{{$option}}</option>
                     @endforeach
@@ -119,21 +119,36 @@
                   </select>
                 </div>
 
+
+
+                {{-- reference --}}
                 <div class="col-sm-4 mb-20">
                   <label for="reference">رقم الإجراء </label>
                   <input type="text" class="form-control" name="reference" id="reference">
                 </div>
 
 
+                {{-- date --}}
                 <div class="col-sm-4 mb-20">
                   <label for="date">التاريخ</label>
                   <input type="date" class="form-control" name="date" id="date">
                 </div>
 
 
+                {{-- supplier --}}
+                <div class="col-sm-4 mb-20 type-select-supplier" data-form='add'>
+                  <label for="supplier">المورد</label>
+                  <select name="supplier" class="form-control form--select" id="supplier">
 
-                {{-- empty --}}
-                <div class="col-12"></div>
+                      <option value=""></option>
+                      
+                      @foreach ($suppliers as $supplier)
+                        <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                      @endforeach
+                      
+                  </select>
+                </div>
+
 
 
                 {{-- hr only --}}
@@ -177,48 +192,60 @@
                 {{-- end row / column--}}
 
 
-                {{-- empty --}}
-                <div class="col-12"></div>
+                
 
-
+                {{-- price --}}
                 <div class="col-sm-4 mb-20 type-select-amount" data-form='add'>
                   <label for="purchase_price">المبلغ</label>
                   <input type="number" class="form-control" min="0" step="0.01" name="amount" id="amount">
                 </div>
 
 
-                <div class="col-sm-4 mb-20">
-                  <label for="payment_type">طريقة الدفع</label>
-                  <select name="payment_type" class="form-control form--select payment-select" id="payment_type" data-form='add'>
 
-                      <option value=""></option>
-                      <option value="المبلغ كامل">المبلغ كامل</option>
-                      <option value="تقصيد المبلغ">تقصيد المبلغ</option>
-                  </select>
+
+                {{-- payment inner-col  --}}
+                <div class="col-12">
+                  <div class="row">
+
+                    <div class="col-sm-4 mb-20">
+                      <label for="payment_type">طريقة الدفع</label>
+                      <select name="payment_type" class="form-control form--select payment-select" id="payment_type" data-form='add'>
+    
+                          <option value=""></option>
+                          <option value="المبلغ كامل">المبلغ كامل</option>
+                          <option value="تقصيد المبلغ">تقصيد المبلغ</option>
+                      </select>
+                    </div>
+    
+    
+                    
+                    {{-- remaining --}}
+                    <div class="col-sm-4 mb-20 payment-select-col d-none" data-form='add'>
+                      <label for="remaining_amount">المبلغ المتبقي</label>
+                      <input type="number" min='0' step='0.01' class="form-control" name="remaining_amount" id="remaining_amount">
+                    </div>
+
+
+
+                    <div class="col-sm-4 mb-20">
+                      <label for="payment_with">آلية الدفع</label>
+                      <select name="payment_with" class="form-control form--select" id="payment_with">
+    
+                          <option value=""></option>
+                          <option value="تحويل بنكي">تحويل بنكي</option>
+                          <option value="كاش">كاش</option>
+                      </select>
+                    </div>
+
+
+                  </div>
                 </div>
-
-
-
-                <div class="col-sm-4 mb-20 payment-select-col d-none" data-form='add'>
-                  <label for="remaining_amount">المبلغ المتبقي</label>
-                  <input type="number" min='0' step='0.01' class="form-control" name="remaining_amount" id="remaining_amount">
-                </div>
+                {{-- end payment inner-col --}}
 
 
 
 
-                <div class="col-sm-4 mb-20">
-                  <label for="payment_with">آلية الدفع</label>
-                  <select name="payment_with" class="form-control form--select" id="payment_with">
-
-                      <option value=""></option>
-                      <option value="تحويل بنكي">تحويل بنكي</option>
-                      <option value="كاش">كاش</option>
-                  </select>
-                </div>
-
-
-
+                {{-- note --}}
                 <div class="col-sm-12 mb-20">
                   <label for="note">ملاحظة</label>
                   <input type="text" class="form-control" name="note" id="note">
@@ -283,7 +310,10 @@
           {{-- body --}}
           <div class="modal-body">
               <div class="row no-gutters mx-0">
-              
+                
+
+
+                {{-- type --}}
                 <div class="col-sm-4 mb-20">
                   <label for="type">الإجراء</label>
                   <select name="type" class="form-control form--select type-select" data-form='edit-{{$financial->id}}' id="type" value='{{$financial->type}}'>
@@ -295,12 +325,16 @@
                   </select>
                 </div>
 
+
+                {{-- reference --}}
                 <div class="col-sm-4 mb-20">
                   <label for="reference">رقم الإجراء </label>
                   <input type="text" class="form-control" name="reference" id="reference" value='{{$financial->reference}}'>
                 </div>
 
 
+
+                {{-- date --}}
                 <div class="col-sm-4 mb-20">
                   <label for="date">التاريخ</label>
                   <input type="date" class="form-control" name="date" id="date" value='{{$financial->date}}'>
@@ -308,8 +342,23 @@
 
 
 
-                {{-- empty --}}
-                <div class="col-12"></div>
+
+                {{-- supplier --}}
+                <div class="col-sm-4 mb-20 type-select-supplier {{$financial->type == 'الموارد البشرية' ? 'd-none' : ''}}" data-form='edit-{{$financial->id}}'>
+                  <label for="supplier">المورد</label>
+                  <select name="supplier" class="form-control form--select" id="supplier" value='{{$financial->supplier_id}}'>
+
+                      <option value=""></option>
+                      
+                      @foreach ($suppliers as $supplier)
+                        <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                      @endforeach
+                      
+                  </select>
+                </div>
+
+
+
 
 
                 {{-- hr only --}}
@@ -353,11 +402,10 @@
                 {{-- end row / column--}}
 
 
-                {{-- empty --}}
-                <div class="col-12"></div>
 
 
 
+                {{-- price --}}
                 <div class="col-sm-4 mb-20 type-select-amount {{$financial->type == 'الموارد البشرية' ? 'd-none' : ''}}" data-form='edit-{{$financial->id}}'>
 
                   <label for="purchase_price">المبلغ</label>
@@ -365,37 +413,53 @@
                 </div>
 
 
-                <div class="col-sm-4 mb-20">
-                  <label for="payment_type">طريقة الدفع</label>
-                  <select name="payment_type" class="form-control form--select payment-select" data-form='edit-{{$financial->id}}' id="payment_type" value='{{$financial->payment_type}}'>
 
-                      <option value=""></option>
-                      <option value="المبلغ كامل">المبلغ كامل</option>
-                      <option value="تقصيد المبلغ">تقصيد المبلغ</option>
-                  </select>
+
+                {{-- payment inner-col --}}
+                <div class="col-12">
+                  <div class="row">
+
+                    <div class="col-sm-4 mb-20">
+                      <label for="payment_type">طريقة الدفع</label>
+                      <select name="payment_type" class="form-control form--select payment-select" data-form='edit-{{$financial->id}}' id="payment_type" value='{{$financial->payment_type}}'>
+    
+                          <option value=""></option>
+                          <option value="المبلغ كامل">المبلغ كامل</option>
+                          <option value="تقصيد المبلغ">تقصيد المبلغ</option>
+                      </select>
+                    </div>
+    
+    
+                    
+
+                    {{-- remaining --}}
+                    <div class="col-sm-4 mb-20 payment-select-col {{$financial->payment_type != 'تقصيد المبلغ' ? 'd-none' : ''}}" data-form='edit-{{$financial->id}}'>
+                      <label for="remaining_amount">المبلغ المتبقي</label>
+                      <input type="number" min='0' step='0.01' class="form-control" name="remaining_amount" id="remaining_amount" value='{{$financial->remaining_amount}}'>
+                    </div>
+
+
+
+                    <div class="col-sm-4 mb-20">
+                      <label for="payment_with">آلية الدفع</label>
+                      <select name="payment_with" class="form-control form--select" id="payment_with" value='{{$financial->payment_with}}'>
+    
+                          <option value=""></option>
+                          <option value="تحويل بنكي">تحويل بنكي</option>
+                          <option value="كاش">كاش</option>
+                      </select>
+                    </div>
+
+
+
+                  </div>
                 </div>
+                {{-- end payment inner-col --}}
+                
 
 
 
-                <div class="col-sm-4 mb-20 payment-select-col {{$financial->payment_type != 'تقصيد المبلغ' ? 'd-none' : ''}}" data-form='edit-{{$financial->id}}'>
-                  <label for="remaining_amount">المبلغ المتبقي</label>
-                  <input type="number" min='0' step='0.01' class="form-control" name="remaining_amount" id="remaining_amount" value='{{$financial->remaining_amount}}'>
-                </div>
-
-
-
-                <div class="col-sm-4 mb-20">
-                  <label for="payment_with">آلية الدفع</label>
-                  <select name="payment_with" class="form-control form--select" id="payment_with" value='{{$financial->payment_with}}'>
-
-                      <option value=""></option>
-                      <option value="تحويل بنكي">تحويل بنكي</option>
-                      <option value="كاش">كاش</option>
-                  </select>
-                </div>
-
-
-
+                {{-- note --}}
                 <div class="col-sm-12 mb-20">
                   <label for="note">ملاحظة</label>
                   <input type="text" class="form-control" name="note" id="note" value='{{$financial->note}}'>
@@ -405,6 +469,9 @@
               </div>
           </div>
           {{-- end body --}}
+
+
+
 
           {{-- footer --}}
           <div class="modal-footer">
@@ -455,11 +522,14 @@
 
       $(`.type-select-col[data-form=${dataForm}]`).removeClass('d-none');
       $(`.type-select-amount[data-form=${dataForm}]`).addClass('d-none');
+      $(`.type-select-supplier[data-form=${dataForm}]`).addClass('d-none');
+
 
     } else {
 
       $(`.type-select-col[data-form=${dataForm}]`).addClass('d-none');
       $(`.type-select-amount[data-form=${dataForm}]`).removeClass('d-none');
+      $(`.type-select-supplier[data-form=${dataForm}]`).removeClass('d-none');
 
 
     } // end if

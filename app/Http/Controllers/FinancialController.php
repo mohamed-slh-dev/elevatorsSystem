@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\FinancialTransaction;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class FinancialController extends Controller
@@ -18,9 +19,9 @@ class FinancialController extends Controller
 
         // :get dependencies
         $employees = Employee::all();
+        $suppliers = Supplier::all();
 
-
-        return view("financials", compact('financials', 'employees'));
+        return view("financials", compact('financials', 'employees', 'suppliers'));
 
     } // end function
 
@@ -54,6 +55,7 @@ class FinancialController extends Controller
         // :amount differ
         } else {
 
+            $financial->supplier_id = !empty($request->supplier) ? $request->supplier : null;
             $financial->amount = $request->amount;
 
         } //end else
@@ -98,6 +100,14 @@ class FinancialController extends Controller
 
         $financial->type = $request->type; // HR / Maintenance / Installation
 
+        // ! reset essentials
+        $financial->employee_id = null;
+        $financial->supplier_id = null;
+        $financial->type_desc = null;
+        $financial->amount_in_days = null;
+        $financial->amount = 0;
+
+
         if ($request->type == 'الموارد البشرية') {
 
             $financial->employee_id = !empty($request->employee) ? $request->employee : null;
@@ -109,9 +119,11 @@ class FinancialController extends Controller
 
             $financial->amount = doubleval($employee->contracts->sortByDesc('created_at')->first()->salary / 30) * $request->amount_in_days;
 
+
         // :amount differ
         } else {
 
+            $financial->supplier_id = !empty($request->supplier) ? $request->supplier : null;
             $financial->amount = $request->amount;
 
         } //end else
@@ -129,7 +141,7 @@ class FinancialController extends Controller
 
         if ($request->payment_type == 'تقصيد المبلغ')
             $financial->remaining_amount = $request->remaining_amount;
-
+                
 
 
         $financial->save();
