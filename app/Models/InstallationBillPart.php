@@ -18,4 +18,10 @@ class InstallationBillPart extends Model
     }
 
 
-}
+    public function supplier() {
+        return $this->belongsTo('App\Models\Supplier');
+    }
+
+
+
+} // end model

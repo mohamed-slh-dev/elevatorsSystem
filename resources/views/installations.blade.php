@@ -22,15 +22,15 @@
           <tr>
             <th scope="col">النوع</th>
             <th scope="col" class='min-w-140px'>العميل</th>
-            <th scope="col" class='min-w-130px'>الحالة</th>
+            <th scope="col">الحالة</th>
             <th scope="col"> التاريخ</th>
             <th scope="col"> المرجع</th>
             <th scope="col"> السعر</th>
 
             <th scope="col"></th>
             <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col" style="width: auto;"></th>
+            <th scope="col" style="width: auto;"></th>
 
 
           </tr>
@@ -51,20 +51,20 @@
             <td>{{$bill->price}}</td>
 
             <td>
-        
               <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-bill-{{$bill->id}}">تعديل</button>
-
             </td>
 
             <td>
               <a href="{{route('editInstallationParts', [$bill->id, 'bill'])}}">
                 <button class="btn btn-outline-light btn--table">تعديل أجزاء المصعد</button>
               </a>
-  
             </td>   
 
 
-            <td class='text-center'>
+
+
+            {{-- print / remove --}}
+            <td class="text-center">
               <a href="{{route('printInstallation', [$bill->id, 'bill'])}}" class='text-center d-inline-block'>
                 <button class="btn btn-none btn--table d-flex align-items-center scale--2 remove--btn"><i data-feather="printer" style='width: 17px;'></i></button>
               </a>
@@ -82,8 +82,18 @@
         @endforeach
         {{-- end loop --}}
 
-         {{-- quotations loop --}}
+        
+        
+
+
+
+        {{-- ----------------------------------------------- --}}
+        
+        
+        
+        {{-- quotations loop --}}
         @foreach ($installation_quotations as $quotation)
+        
         <tr>         
 
           <td>عرض سعر</td>
@@ -95,21 +105,19 @@
           <td>{{$quotation->price}}</td>
 
           <td>
-
             <button class="btn btn--table btn-primary-light" data-bs-toggle="modal" data-bs-target=".edit-quotation-{{$quotation->id}}">تعديل</button>
-
           </td>
 
           <td>
-           
             <a href="{{route('editInstallationParts', [$quotation->id, 'quotation'])}}">
               <button class="btn btn-outline-light btn--table">تعديل أجزاء المصعد</button>
             </a>
-
           </td> 
           
 
-          <td class='text-center'>
+
+          {{-- print / delete --}}
+          <td class="text-center">
             <a href="{{route('printInstallation', [$quotation->id, 'quotation'])}}" class='text-center d-inline-block'>
               <button class="btn btn-none btn--table d-flex align-items-center scale--2 remove--btn"><i data-feather="printer" style='width: 17px;'></i></button>
             </a>
@@ -117,11 +125,9 @@
 
 
           <td class="text-center">
-
             <button data-bs-toggle="modal" data-bs-target=".delete" class="btn btn-none text-danger btn--table contract-assign-id scale--2 remove--btn" data-id="{{$quotation->id}}" data-type='quotation'>
               <i class='fa fa-trash fs-5'></i>
             </button>
-
           </td>
 
         
