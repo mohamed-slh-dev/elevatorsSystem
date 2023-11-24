@@ -201,6 +201,8 @@
                   </select>
                 </div>
 
+
+
                 <div class="col-sm-4 mb-20">
                   <label for="elevator">المصعد</label>
                   <select name="elevator" required class="form-control form--select form--select" id="elevator">
@@ -214,6 +216,105 @@
                   </select>
                 </div>
 
+
+
+
+                
+
+
+                {{-- options for reports --}}
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_type">نوع المصاعد</label>
+                  <select name="elevator_type" required class="form-control form--select form--select" id="elevator_type">
+
+                      <option value=""></option>
+
+                      <option value="مصعد بضائع">مصعد بضائع</option>
+                      <option value="مصعد أشخاص">مصعد أشخاص</option>
+                      <option value="مصعد سيارات">مصعد سيارات</option>
+
+                  </select>
+                </div>
+
+                
+                 
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_passengers">عدد الركاب</label>
+                  <input type="number" step='1' class="form-control" name="elevator_passengers" id="elevator_passengers">
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_count">عدد المصاعد</label>
+                  <input type="number" step='1' class="form-control" name="elevator_count" id="elevator_count">
+                </div>
+
+
+
+                
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_opening_mechanism">آلية فتح الباب</label>
+                  <select name="elevator_opening_mechanism" required class="form-control form--select form--select" id="elevator_opening_mechanism">
+
+                      <option value=""></option>
+                      <option value="مانيول">مانيول</option>
+                      <option value="اوتوماتيك">اوتوماتيك</option>
+
+                  </select>
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_load">حمولة المصعد</label>
+                  <input type="number" step='0.01' class="form-control" name="elevator_load" id="elevator_load">
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_speed">سرعة المصعد</label>
+                  <input type="number" step='0.01' class="form-control" name="elevator_speed" id="elevator_speed">
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_floors">عدد المحطات</label>
+                  <input type="number" step='1' class="form-control" name="elevator_floors" id="elevator_floors">
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_doors">عدد المداخل</label>
+                  <input type="number" step='1' class="form-control" name="elevator_doors" id="elevator_doors">
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_power">مدد القدرة للطاقة</label>
+                  <input type="text" class="form-control" name="elevator_power" id="elevator_power">
+                </div>
+
+
+
+                <div class="col-sm-12 mb-20">
+                  <label for="elevator_operating_mechanism">طريقة التشغيل</label>
+                  <input type="text" class="form-control" name="elevator_operating_mechanism" id="elevator_operating_mechanism">
+                </div>
+
+
+
+                {{-- options for reports --}}
+
+
+
+
+                {{-- hr --}}
+                <div class="col-12">
+                  <hr class='mt-4 mb-5'>
+                </div>
 
 
 
@@ -353,6 +454,105 @@
                   </select>
                 </div>
 
+
+
+
+                
+
+
+
+                {{-- options for reports --}}
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_type">نوع المصاعد</label>
+                  <select name="elevator_type" required class="form-control form--select form--select" id="elevator_type" value='{{$quotation->elevator_type}}'>
+
+                      <option value=""></option>
+
+                      <option value="مصعد بضائع">مصعد بضائع</option>
+                      <option value="مصعد أشخاص">مصعد أشخاص</option>
+                      <option value="مصعد سيارات">مصعد سيارات</option>
+
+                  </select>
+                </div>
+
+                
+                 
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_passengers">عدد الركاب</label>
+                  <input type="number" step='1' class="form-control" name="elevator_passengers" id="elevator_passengers" value='{{$quotation->elevator_passengers}}'>
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_count">عدد المصاعد</label>
+                  <input type="number" step='1' class="form-control" name="elevator_count" id="elevator_count" value='{{$quotation->elevator_count}}'>
+                </div>
+
+
+
+                
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_opening_mechanism">آلية فتح الباب</label>
+                  <select name="elevator_opening_mechanism" required class="form-control form--select form--select" id="elevator_opening_mechanism" value='{{$quotation->elevator_opening_mechanism}}'>
+
+                      <option value=""></option>
+                      <option value="مانيول">مانيول</option>
+                      <option value="اوتوماتيك">اوتوماتيك</option>
+
+                  </select>
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_load">حمولة المصعد</label>
+                  <input type="number" step='0.01' class="form-control" name="elevator_load" id="elevator_load" value='{{$quotation->elevator_load}}'>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_speed">سرعة المصعد</label>
+                  <input type="number" step='0.01' class="form-control" name="elevator_speed" id="elevator_speed" value='{{$quotation->elevator_speed}}'>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_floors">عدد المحطات</label>
+                  <input type="number" step='1' class="form-control" name="elevator_floors" id="elevator_floors" value='{{$quotation->elevator_floors}}'>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_doors">عدد المداخل</label>
+                  <input type="number" step='1' class="form-control" name="elevator_doors" id="elevator_doors" value='{{$quotation->elevator_doors}}'>
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_power">مدد القدرة للطاقة</label>
+                  <input type="text" class="form-control" name="elevator_power" id="elevator_power" value='{{$quotation->elevator_power}}'>
+                </div>
+
+
+
+                <div class="col-sm-12 mb-20">
+                  <label for="elevator_operating_mechanism">طريقة التشغيل</label>
+                  <input type="text" class="form-control" name="elevator_operating_mechanism" id="elevator_operating_mechanism" value='{{$quotation->elevator_operating_mechanism}}'>
+                </div>
+
+
+
+                {{-- options for reports --}}
+
+
+
+                {{-- hr --}}
+                <div class="col-12">
+                  <hr class='mt-4 mb-5'>
+                </div>
 
 
 
@@ -499,6 +699,105 @@
                     @endforeach
 
                   </select>
+                </div>
+
+
+
+
+                
+
+
+                {{-- options for reports --}}
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_type">نوع المصاعد</label>
+                  <select name="elevator_type" required class="form-control form--select form--select" id="elevator_type" value='{{$bill->elevator_type}}'>
+
+                      <option value=""></option>
+
+                      <option value="مصعد بضائع">مصعد بضائع</option>
+                      <option value="مصعد أشخاص">مصعد أشخاص</option>
+                      <option value="مصعد سيارات">مصعد سيارات</option>
+
+                  </select>
+                </div>
+
+                
+                 
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_passengers">عدد الركاب</label>
+                  <input type="number" step='1' class="form-control" name="elevator_passengers" id="elevator_passengers" value='{{$bill->elevator_passengers}}'>
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_count">عدد المصاعد</label>
+                  <input type="number" step='1' class="form-control" name="elevator_count" id="elevator_count" value='{{$bill->elevator_count}}'>
+                </div>
+
+
+
+                
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_opening_mechanism">آلية فتح الباب</label>
+                  <select name="elevator_opening_mechanism" required class="form-control form--select form--select" id="elevator_opening_mechanism" value='{{$bill->elevator_opening_mechanism}}'>
+
+                      <option value=""></option>
+                      <option value="مانيول">مانيول</option>
+                      <option value="اوتوماتيك">اوتوماتيك</option>
+
+                  </select>
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_load">حمولة المصعد</label>
+                  <input type="number" step='0.01' class="form-control" name="elevator_load" id="elevator_load" value='{{$bill->elevator_load}}'>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_speed">سرعة المصعد</label>
+                  <input type="number" step='0.01' class="form-control" name="elevator_speed" id="elevator_speed" value='{{$bill->elevator_speed}}'>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_floors">عدد المحطات</label>
+                  <input type="number" step='1' class="form-control" name="elevator_floors" id="elevator_floors" value='{{$bill->elevator_floors}}'>
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_doors">عدد المداخل</label>
+                  <input type="number" step='1' class="form-control" name="elevator_doors" id="elevator_doors" value='{{$bill->elevator_doors}}'>
+                </div>
+
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="elevator_power">مدد القدرة للطاقة</label>
+                  <input type="text" class="form-control" name="elevator_power" id="elevator_power" value='{{$bill->elevator_power}}'>
+                </div>
+
+
+
+                <div class="col-sm-12 mb-20">
+                  <label for="elevator_operating_mechanism">طريقة التشغيل</label>
+                  <input type="text" class="form-control" name="elevator_operating_mechanism" id="elevator_operating_mechanism" value='{{$bill->elevator_operating_mechanism}}'>
+                </div>
+
+
+
+                {{-- options for reports --}}
+
+
+
+                {{-- hr --}}
+                <div class="col-12">
+                  <hr class='mt-4 mb-5'>
                 </div>
 
 

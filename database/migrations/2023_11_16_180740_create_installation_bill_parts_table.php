@@ -26,7 +26,8 @@ class CreateInstallationBillPartsTable extends Migration
             $table->foreign('part_id')->references('id')->on('parts')->onDelete('cascade');
             
             $table->double('price', 11, 2)->nullable();
-            
+            $table->integer('quantity')->nullable();
+
             
             $table->bigInteger('supplier_id')->unsigned()->nullable();
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');

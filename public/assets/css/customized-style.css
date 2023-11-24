@@ -139,6 +139,10 @@ input[type="file"] {
     padding-bottom: 12px;
 }
 
+.fs-11 {
+    font-size: 11px;
+}
+
 .fs-12 {
     font-size: 12px;
 }
@@ -198,6 +202,18 @@ input[type="file"] {
 }
 
 /* ------------------------- globals / custom */
+
+.parts--input {
+    display: inline-block;
+    width: 120px;
+    border-radius: 0px;
+}
+
+.parts--input.lg {
+    display: inline-block;
+    width: 200px;
+    border-radius: 0px;
+}
 
 .logo--login {
     width: 50px;

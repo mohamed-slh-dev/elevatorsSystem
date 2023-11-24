@@ -4,6 +4,16 @@
     
 @section('content')
    
+
+{{-- 
+  ! if the quantity has changed make sure to revalidate the stock
+  ! or else if it was unchecked 
+
+  ! add finance to the supplier page
+  
+  --}}
+
+
 <div class="col-3"></div>
 <div class="col-3 mb-5">
     <input class='form-control text-center fw-bold' type="text" readonly value='{{$installation->elevator->name}}' style="pointer-events: none">
@@ -24,56 +34,169 @@
       {{-- loop - parts  --}}
       @foreach ($installation->elevator->elevatorParts as $part)
 
-        
-        {{-- : single checkbox --}}
-        <div class="checkbox checkbox-dark checkbox--item mb-3" style="width: 33%">
 
+        <div class="d-flex align-items-center justify-content-start mb-5">
+
+          
+          
+
+          {{-- : checkbox input / rewrite price if -> part already exists --}}
+          @if (in_array($part->part->id, $partsArray))
+              
+
+            {{-- single checkbox --}}
+            <div class="checkbox checkbox-dark checkbox--item d-inline-block w-auto me-3">
+
+              <input id="inline-{{$part->part->id}}" type="checkbox"
+              name="elevator_parts[]" value="{{$part->part->id}}" checked>
+
+              <label for="inline-{{$part->part->id}}"></label>
             
-            {{-- : checkbox input / rewrite price if -> part already exists --}}
-            @if (in_array($part->part->id, $partsArray))
+            </div>
+            {{-- end single checkbox --}}
+
+
+
+
+            {{-- name --}}
+            <div class="d-inline-block">
+              <label class='d-block fs-11'>الأسم</label>
+              <input class='form-control parts--input lg' type="text" name="part_name[{{$part->part->id}}][]" id="" value='{{$parts->where('part_id', $part->part->id)->first()->name}}'>
+            </div>
+
+
+
+
+            {{-- price --}}
+            <div class="d-inline-block">
+
+              <label class='d-block fs-11'>السعر</label>
+
+              <input type="number" class='form-control parts--input'
+              name="part_price[{{$part->part->id}}][]" 
+              value="{{$parts->where('part_id', $part->part->id)->first()->price}}" min="{{$part->part->partPrices->sortByDesc('id')->first->purchase_price['purchase_price']}}">
+            </div>
+
+
+
+
+            {{-- quantity --}}
+            <div class="d-inline-block">
+              <label class='d-block fs-11'>الكمية</label>
+              <input class='form-control parts--input' type="number" step='1' name="part_quantity[{{$part->part->id}}][]" id="" value='{{$parts->where('part_id', $part->part->id)->first()->quantity}}'>
+            </div>
+
+
+
+
+
+
+            {{-- supplier --}}
+            @if ($type == 'bill')
                 
-                <input id="inline-{{$part->part->id}}" type="checkbox"
-                name="elevator_parts[]" value="{{$part->part->id}}" checked>
+            <div class="d-inline-block min-w-200px" style="margin-right: 30px;">
+              <label class='d-block fs-11'>المورد (إختياري)</label>
+              <select name="part_supplier[{{$part->part->id}}][]" class="form-control form--select" value='{{$parts->where('part_id', $part->part->id)->first()->supplier_id}}' data-clear={{true}}>
 
-                <label for="inline-{{$part->part->id}}">{{ $part->part->name}}</label>
-
-
-                {{-- price input --}}
-                <input class='form-control d-inline-block text-center' 
-                style="width: 120px; height: 40px;" type="number"
-                step='0.01' 
-                name="part_price[{{$part->part->id}}][]" 
-                value="{{ $parts->where('part_id', $part->part->id)->first()->price}}">
-
-
-
-            {{-- : else --}}
-            @else
+                <option value=""></option>
                 
-                <input id="inline-{{$part->part->id}}" type="checkbox"
-                name="elevator_parts[]" value="{{$part->part->id}}">
+                @foreach ($suppliers as $supplier)
+                  <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                @endforeach
 
-                <label for="inline-{{$part->part->id}}">{{ $part->part->name}}</label>
-                
-               
-                {{-- price input --}}
-                <input class='form-control d-inline-block text-center' style="width: 120px; height: 40px;" type="number"
-                step='0.01' 
-                name="part_price[{{$part->part->id}}][]" 
-                value="{{$part->part->partPrices->sortByDesc('id')->first->sell_price['sell_price']}}" 
-                min="{{$part->part->partPrices->sortByDesc('id')->first->purchase_price['purchase_price']}}">
-
+              </select>
+            </div>
 
             @endif
             {{-- end if --}}
+
+
+
+
+
+          {{-- ------------------------------------------- --}}
+
+
+
+          {{-- : else --}}
+          @else
+              
             
 
 
 
-            
+            {{-- single checkbox --}}
+            <div class="checkbox checkbox-dark checkbox--item d-inline-block w-auto me-3">
+
+              <input id="inline-{{$part->part->id}}" type="checkbox" name="elevator_parts[]" value="{{$part->part->id}}">
+              <label for="inline-{{$part->part->id}}"></label>
+
+            </div>
+            {{-- end single checkbox --}}
+
+
+
+            {{-- name --}}
+            <div class="d-inline-block">
+              <label class='d-block fs-11'>الأسم</label>
+              <input class='form-control parts--input lg' type="text" name="part_name[{{$part->part->id}}][]" id="" value='{{$part->part->name}}'>
+            </div>
+
+
+
+
+            {{-- price --}}
+            <div class="d-inline-block">
+
+              <label class='d-block fs-11'>السعر</label>
+
+              <input type="number" class='form-control parts--input'
+              name="part_price[{{$part->part->id}}][]" 
+              value="{{$part->part->partPrices->sortByDesc('id')->first->sell_price['sell_price']}}" 
+              min="{{$part->part->partPrices->sortByDesc('id')->first->purchase_price['purchase_price']}}">
+            </div>
+
+
+
+            {{-- quantity --}}
+            <div class="d-inline-block">
+              <label class='d-block fs-11'>الكمية</label>
+              <input class='form-control parts--input' type="number" step='1' name="part_quantity[{{$part->part->id}}][]" id="">
+            </div>
+
+
+
+            {{-- supplier --}}
+            @if ($type == 'bill')
+                
+            <div class="d-inline-block min-w-200px" style="margin-right: 30px;">
+              <label class='d-block fs-11'>المورد (إختياري)</label>
+              <select name="part_supplier[{{$part->part->id}}][]" class="form-control form--select" data-clear={{true}}>
+
+                <option value=""></option>
+                
+                @foreach ($suppliers as $supplier)
+                  <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                @endforeach
+
+              </select>
+            </div>
+
+            @endif
+            {{-- end if --}}
+
+
+
+              
+          @endif
+          {{-- end if --}}
+
+
 
         </div>
-        {{-- end single checkbox --}}
+        {{-- end wrapper --}}
+
+
 
       @endforeach
       {{-- end loop --}}

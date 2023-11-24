@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Models\InstallationBill;
 use App\Models\InstallationBillPart;
@@ -37,56 +38,50 @@ class InstallationsController extends Controller
 
     public function addInstallation(Request $request) {
 
+        // initial
+        $installation = ($request->type == 'عرض سعر') ? new InstallationQuotation() : new InstallationBill();
 
-        if ($request->type == 'عرض سعر') {
-            
-            $installation_quotation = new InstallationQuotation();
 
-            $installation_quotation->customer_id = $request->customer;
-            $installation_quotation->elevator_id = $request->elevator;
-            $installation_quotation->price = 0;
-            $installation_quotation->status = $request->status;
-            $installation_quotation->status_alt = ($request->status == 'اخرى') ? $request->status_alt : '';
-            $installation_quotation->date = $request->date;
-            $installation_quotation->reference = $request->reference;
-            $installation_quotation->desc = $request->desc;
 
-            $installation_quotation->user_id = session()->get('user_id');
+        // :continue common information
+        $installation->customer_id = $request->customer;
+        $installation->elevator_id = $request->elevator;
 
-            $installation_quotation->save();
 
-            //data to send to next stage (add parts)
-            $type = 'quotation';
-            $id = $installation_quotation->id;
-            $elevator = Elevator::find($request->elevator);
+        // :report inputs
+        $installation->elevator_type = $request->elevator_type;
+        $installation->elevator_passengers = $request->elevator_passengers;
+        $installation->elevator_count = $request->elevator_count;
+        $installation->elevator_opening_mechanism = $request->elevator_opening_mechanism;
+        $installation->elevator_load = $request->elevator_load;
+        $installation->elevator_speed = $request->elevator_speed;
+        $installation->elevator_floors = $request->elevator_floors;
+        $installation->elevator_doors = $request->elevator_doors;
+        $installation->elevator_power = $request->elevator_power;
+        $installation->elevator_operating_mechanism = $request->elevator_operating_mechanism;
 
-            return view('add-installations-parts', compact('type', 'id', 'elevator'));
+        $installation->price = 0;
+        $installation->status = $request->status;
+        $installation->status_alt = ($request->status == 'اخرى') ? $request->status_alt : '';
+        $installation->date = $request->date;
+        $installation->reference = $request->reference;
+        $installation->desc = $request->desc;
+        $installation->user_id = session()->get('user_id');
+        
 
-        } else {
 
-            $installation_bill = new InstallationBill();
+        // :save instance
+        $installation->save();
 
-            $installation_bill->customer_id = $request->customer;
-            $installation_bill->elevator_id = $request->elevator;
-            $installation_bill->price = 0;
-            $installation_bill->status = $request->status;
-            $installation_bill->status_alt = ($request->status == 'اخرى') ? $request->status_alt : '';
-            $installation_bill->date = $request->date;
-            $installation_bill->reference = $request->reference;
-            $installation_bill->desc = $request->desc;
 
-            $installation_bill->user_id = session()->get('user_id');
+        // :derived information
+        $id = $installation->id;
+        $type = ($request->type == 'عرض سعر') ? 'quotation' : 'bill';
+        $elevator = Elevator::find($request->elevator);
+        $suppliers = Supplier::all();
 
-            $installation_bill->save();
+        return view('add-installations-parts', compact('type', 'id', 'elevator', 'suppliers'));
 
-            //data to send to next stage (add parts)
-            $type = 'bill';
-            $id = $installation_bill->id;
-            $elevator = Elevator::find($request->elevator);
-
-            return view('add-installations-parts', compact('type', 'id', 'elevator'));
-
-        } // end else
 
     } // end function
 
@@ -103,53 +98,97 @@ class InstallationsController extends Controller
     public function addInstallationParts(Request $request){
 
 
+        // :define vars
+        $id = $request->id;
+        $type = $request->type;
+
+
         
-        // 1: quotation
-        if ($request->type == 'quotation') {
-            
+        // : 1- quotation parts
+        if ($type == 'quotation') {
+
+
+            // : reset installation price
+            $installation = InstallationQuotation::find($id);
+            $installation->price = 0;
+            $installation->save();
+
+
+            // : add quo-parts
             if (!empty($request->elevator_parts)) {
-           
-                for ($i=0; $i < count($request->elevator_parts) ; $i++) { 
-                
-                    $quotation_part = new InstallationQuotationPart();
-                    $quotation_part->installation_quotation_id = $request->id;
-                    $quotation_part->part_id = $request->elevator_parts[$i];
-                    $quotation_part->price = $request->part_price[$request->elevator_parts[$i]][0];
+                for ($i = 0; $i < count($request->elevator_parts) ; $i++) { 
+                    
+                    $part = new InstallationQuotationPart();
+                    $part->installation_quotation_id = $request->id;
+                    $part->part_id = $request->elevator_parts[$i];
 
-                    $quotation = InstallationQuotation::find($request->id);
-                    $quotation->price += $request->part_price[$request->elevator_parts[$i]][0];
-                    $quotation->save();
+                    $part->name = $request->part_name[$request->elevator_parts[$i]][0];
 
-                    $quotation_part->save();
-                } // end loop
-            } //end if
+                    $part->quantity = ($request->part_quantity[$request->elevator_parts[$i]][0]) ? ($request->part_quantity[$request->elevator_parts[$i]][0]) : 0;
 
-    
+                    $part->price = ($request->part_price[$request->elevator_parts[$i]][0]) ? ($request->part_price[$request->elevator_parts[$i]][0]) : 0;
 
-        // 2: bill
-        } else {
 
-            if (!empty($request->elevator_parts)) {
-           
-                for ($i=0; $i < count($request->elevator_parts) ; $i++) { 
-                
-                    $bill_part = new InstallationBillPart();
-                    $bill_part->installation_bill_id = $request->id;
-                    $bill_part->part_id = $request->elevator_parts[$i];
-                    $bill_part->price = $request->part_price[$request->elevator_parts[$i]][0];
+                    $part->save();
 
-                    $bill = InstallationBill::find($request->id);
-                    $bill->price += $request->part_price[$request->elevator_parts[$i]][0];
-                    $bill->save();
 
-                    $bill_part->save();
+                    // :calc total price
+                    $installation->price += $part->price * $part->quantity;
+                    $installation->save();
+
          
-                 } // end loop
-    
+                } // end loop
             } // end if
 
-        } //end else
 
+
+
+
+        // : add bill-parts
+        } else {
+
+
+            // : reset installation price
+            $installation = InstallationBill::find($id);
+            $installation->price = 0;
+            $installation->save();
+
+
+
+            if (!empty($request->elevator_parts)) {
+                for ($i = 0; $i < count($request->elevator_parts) ; $i++) { 
+                
+                    $part = new InstallationBillPart();
+                    $part->installation_bill_id = $request->id;
+                    $part->part_id = $request->elevator_parts[$i];
+
+                    $part->name = $request->part_name[$request->elevator_parts[$i]][0];
+                    
+                    $part->quantity = ($request->part_quantity[$request->elevator_parts[$i]][0]) ? ($request->part_quantity[$request->elevator_parts[$i]][0]) : 0;
+
+                    $part->price = ($request->part_price[$request->elevator_parts[$i]][0]) ? ($request->part_price[$request->elevator_parts[$i]][0]) : 0;
+
+
+
+                    // :extra supplier id 
+                    $part->supplier_id = $request->part_supplier[$request->elevator_parts[$i]][0];
+                    $part->save();
+                    
+
+                    // :calc total price
+                    $installation->price += $part->price * $part->quantity;
+                    $installation->save();
+
+         
+                } // end loop
+            } // end if
+
+        } // end else
+
+
+
+
+        
 
 
         // :return message
@@ -198,9 +237,25 @@ class InstallationsController extends Controller
 
 
         // : continue with common-inputs
-
         $installation->customer_id = $request->customer;
         $installation->elevator_id = $request->elevator;
+
+
+        // :report inputs
+        $installation->elevator_type = $request->elevator_type;
+        $installation->elevator_passengers = $request->elevator_passengers;
+        $installation->elevator_count = $request->elevator_count;
+        $installation->elevator_opening_mechanism = $request->elevator_opening_mechanism;
+        $installation->elevator_load = $request->elevator_load;
+        $installation->elevator_speed = $request->elevator_speed;
+        $installation->elevator_floors = $request->elevator_floors;
+        $installation->elevator_doors = $request->elevator_doors;
+        $installation->elevator_power = $request->elevator_power;
+        $installation->elevator_operating_mechanism = $request->elevator_operating_mechanism;
+
+
+
+        // :continue with common inputs - 2
         $installation->date = $request->date;
         if ($installationResetLink != false) $installation->price = 0; // ! reset price
         $installation->status = $request->status;
@@ -281,7 +336,12 @@ class InstallationsController extends Controller
         // : convert to array (for conditioning)
         $partsArray = $parts->pluck('part_id')->toArray();
 
-        return view('edit-installations-parts', compact('installation', 'parts', 'partsArray', 'type'));
+
+        // : suppliers
+        $suppliers = Supplier::all();
+
+
+        return view('edit-installations-parts', compact('installation', 'parts', 'partsArray', 'type', 'suppliers'));
 
     } // end function
 
@@ -306,24 +366,33 @@ class InstallationsController extends Controller
             InstallationQuotationPart::where('installation_quotation_id', $id)->delete();
 
             // : reset installation price
-            $quotation = InstallationQuotation::find($id);
-            $quotation->price = 0;
-            $quotation->save();
+            $installation = InstallationQuotation::find($id);
+            $installation->price = 0;
+            $installation->save();
 
 
             // : add quo-parts
             if (!empty($request->elevator_parts)) {
                 for ($i = 0; $i < count($request->elevator_parts) ; $i++) { 
                     
-                    $quotation_part = new InstallationQuotationPart();
-                    $quotation_part->installation_quotation_id = $request->id;
-                    $quotation_part->part_id = $request->elevator_parts[$i];
-                    $quotation_part->price = $request->part_price[$request->elevator_parts[$i]][0];
+                    $part = new InstallationQuotationPart();
+                    $part->installation_quotation_id = $request->id;
+                    $part->part_id = $request->elevator_parts[$i];
 
-                    $quotation->price += $request->part_price[$request->elevator_parts[$i]][0];
-                    $quotation->save();
+                    $part->name = $request->part_name[$request->elevator_parts[$i]][0];
 
-                    $quotation_part->save();
+                    $part->quantity = ($request->part_quantity[$request->elevator_parts[$i]][0]) ? ($request->part_quantity[$request->elevator_parts[$i]][0]) : 0;
+
+                    $part->price = ($request->part_price[$request->elevator_parts[$i]][0]) ? ($request->part_price[$request->elevator_parts[$i]][0]) : 0;
+
+
+                    $part->save();
+
+
+                    // :calc total price
+                    $installation->price += $part->price * $part->quantity;
+                    $installation->save();
+
          
                 } // end loop
             } // end if
@@ -338,24 +407,36 @@ class InstallationsController extends Controller
             InstallationBillPart::where('installation_bill_id', $id)->delete();
 
             // : reset installation price
-            $bill = InstallationBill::find($id);
-            $bill->price = 0;
-            $bill->save();
+            $installation = InstallationBill::find($id);
+            $installation->price = 0;
+            $installation->save();
 
 
 
             if (!empty($request->elevator_parts)) {
                 for ($i = 0; $i < count($request->elevator_parts) ; $i++) { 
                 
-                    $bill_part = new InstallationBillPart();
-                    $bill_part->installation_bill_id = $request->id;
-                    $bill_part->part_id = $request->elevator_parts[$i];
-                    $bill_part->price = $request->part_price[$request->elevator_parts[$i]][0];
+                    $part = new InstallationBillPart();
+                    $part->installation_bill_id = $request->id;
+                    $part->part_id = $request->elevator_parts[$i];
+                    
+                    $part->name = $request->part_name[$request->elevator_parts[$i]][0];
+                    
+                    $part->quantity = ($request->part_quantity[$request->elevator_parts[$i]][0]) ? ($request->part_quantity[$request->elevator_parts[$i]][0]) : 0;
 
-                    $bill->price += $request->part_price[$request->elevator_parts[$i]][0];
-                    $bill->save();
+                    $part->price = ($request->part_price[$request->elevator_parts[$i]][0]) ? ($request->part_price[$request->elevator_parts[$i]][0]) : 0;
 
-                    $bill_part->save();
+
+
+                    // :extra supplier id 
+                    $part->supplier_id = $request->part_supplier[$request->elevator_parts[$i]][0];
+                    $part->save();
+                    
+
+                    // :calc total price
+                    $installation->price += $part->price * $part->quantity;
+                    $installation->save();
+
          
                 } // end loop
             } // end if

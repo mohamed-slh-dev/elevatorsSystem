@@ -9,10 +9,27 @@ class Supplier extends Model
 {
     use HasFactory;
 
+    
+
+
+    public function transactions() {
+        return $this->hasMany('App\Models\FinancialTransaction');
+    }
+
+
+    public function transactionsTotal() {
+        return $this->transactions()?->sum('amount');
+    }
+
+
+
+    // ---------------------------------------------
+
+    
+
     public function installationBillParts() {
         return $this->hasMany('App\Models\InstallationBillPart');
     }
-
 
 
     public function installationBillPartsPrice() {

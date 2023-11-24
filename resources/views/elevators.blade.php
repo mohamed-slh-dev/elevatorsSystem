@@ -22,7 +22,10 @@
           <tr>
             <th scope="col" style="min-width: 240px;">الأسم</th>
 
-            <th scope="col" colspan="3"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+
 
           </tr>
         </thead>
@@ -40,7 +43,7 @@
 
               {{-- edit --}}
               <td class='text-center'>
-                <button class="btn btn-outline-light btn--table " data-bs-toggle="modal" data-bs-target=".edit-{{$elevator->id}}">تعديل</button>
+                <button class="btn btn-outline-light btn--table " data-bs-toggle="modal" data-bs-target=".edit-{{$elevator->id}}">تعديل المصعد</button>
               </td>
 
 

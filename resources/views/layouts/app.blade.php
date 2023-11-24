@@ -56,7 +56,7 @@
     </div>
     <!-- Loader ends-->
     <!-- page-wrapper Start-->
-    <div class="page-wrapper" id="pageWrapper" style="background: url('{{asset('assets/images/background/ordinary-3.png')}}')">
+    <div class="page-wrapper" id="pageWrapper" style="background: url('{{asset('assets/images/background/ordinary-2.svg')}}'); background-size:cover; background-position:top; background-attachment: fixed; background-repeat: no-repeat">
       <!-- Page Header Start-->
       <div class="page-main-header">
         <div class="main-header-right row m-0">

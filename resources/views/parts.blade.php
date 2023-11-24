@@ -24,11 +24,12 @@
         <thead class="bg-primary">
           <tr>
             <th scope="col" class='min-w-200px'>الأسم</th>
-            <th scope="col" class='min-w-130px'>المنشأ</th>
             <th scope="col">النوع</th>
             <th scope="col" class='min-w-130px'>الإستخدام</th>
-            <th scope="col" class='min-w-110px'>سعر الشراء</th>
-            <th scope="col" class='min-w-110px'>سعر البيع</th>
+            <th scope="col">المخزون</th>
+            <th scope="col">سعر الشراء</th>
+            <th scope="col">سعر البيع</th>
+
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -43,10 +44,10 @@
 
             <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/parts/'.$part->image)}}" alt="image"><span class='fw-bold border-bottom'>{{$part->name}}</span></td>
 
-            <td>{{$part->nationality->name}}</td>
 
             <td>{{$part->type}}</td>
             <td>{{$part->usage}}</td>
+            <td>{{$part->quantity}}</td>
 
             <td>{{$part->partPrices->sortByDesc('id')->first->purchase_price['purchase_price']}}</td>
             <td>{{$part->partPrices->sortByDesc('id')->first->purchase_price['sell_price']}}</td>

@@ -25,6 +25,7 @@ class CreateInstallationQuotationPartsTable extends Migration
             $table->foreign('part_id')->references('id')->on('parts')->onDelete('cascade');
             
             $table->double('price', 11, 2)->nullable();
+            $table->integer('quantity')->nullable();
 
 
             $table->timestamps();
