@@ -66,9 +66,10 @@
 
 
           {{-- quantity --}}
+          {{-- ? quantity is divided by the elevator count to reach the limit --}}
           <div class="d-inline-block">
             <label class='d-block fs-11'>الكمية</label>
-            <input class='form-control parts--input' type="number" step='1' name="part_quantity[{{$part->part->id}}][]" id="">
+            <input class='form-control parts--input' type="number" step='1' min='0' max='{{$part->part->quantity / $elevator_count}}' name="part_quantity[{{$part->part->id}}][]" id="" {{ ($part->part->quantity > 0) ? '' : 'readonly'}}>
           </div>
 
 

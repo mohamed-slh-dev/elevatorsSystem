@@ -41,6 +41,14 @@ body {
     color: var(--text-main);
 }
 
+.text-black {
+    color: black !important;
+}
+
+.text-reports {
+    color: #009a70;
+}
+
 .tooltip-inner {
     max-width: 500px !important;
 }
@@ -155,6 +163,22 @@ input[type="file"] {
     font-size: 14px;
 }
 
+.ls-09 {
+    letter-spacing: 0.9px;
+}
+
+.ls-08 {
+    letter-spacing: 0.8px;
+}
+
+.ls-07 {
+    letter-spacing: 0.7px;
+}
+
+.ls-06 {
+    letter-spacing: 0.6px;
+}
+
 .scaleRotate--1:hover i,
 .scaleRotate--1:focus i {
     transform: scale(1.2) rotate(360deg);
@@ -244,6 +268,10 @@ input[type="file"] {
     border-radius: 0px;
 }
 
+.table--innertitle {
+    background-color: #f4f4f4 !important;
+}
+
 .table--heading {
     margin: 1px;
     background-color: #fbfbfb;
@@ -330,4 +358,12 @@ input[type="checkbox"] {
 
 .mb-20 {
     margin-bottom: 35px;
+}
+
+/* ------------------------ reports */
+
+.hr--reports {
+    border-bottom: 5px solid #009a70;
+    height: 15px !important;
+    background-color: black;
 }

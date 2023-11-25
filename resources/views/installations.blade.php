@@ -248,7 +248,7 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="elevator_count">عدد المصاعد</label>
-                  <input type="number" step='1' class="form-control" name="elevator_count" id="elevator_count">
+                  <input type="number" step='1' class="form-control" name="elevator_count" id="elevator_count" required>
                 </div>
 
 

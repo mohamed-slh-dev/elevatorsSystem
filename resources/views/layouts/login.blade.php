@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
     
+
+{{-- login changes: move to right side and left side get pattern background from https://heropatterns.com/ --}}
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Part;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Models\InstallationBill;
@@ -76,11 +77,14 @@ class InstallationsController extends Controller
 
         // :derived information
         $id = $installation->id;
+        $elevator_count = $installation->elevator_count;
+
         $type = ($request->type == 'عرض سعر') ? 'quotation' : 'bill';
         $elevator = Elevator::find($request->elevator);
         $suppliers = Supplier::all();
 
-        return view('add-installations-parts', compact('type', 'id', 'elevator', 'suppliers'));
+
+        return view('add-installations-parts', compact('type', 'id', 'elevator', 'suppliers', 'elevator_count'));
 
 
     } // end function
@@ -133,10 +137,10 @@ class InstallationsController extends Controller
 
 
                     // :calc total price
-                    $installation->price += $part->price * $part->quantity;
+                    $installation->price += ($part->price * $part->quantity) * $installation->elevator_count;
                     $installation->save();
 
-         
+
                 } // end loop
             } // end if
 
@@ -176,10 +180,21 @@ class InstallationsController extends Controller
                     
 
                     // :calc total price
-                    $installation->price += $part->price * $part->quantity;
+                    $installation->price += ($part->price * $part->quantity) * $installation->elevator_count;
                     $installation->save();
 
-         
+                    
+                    // :deduct the part quantity (only in bill / only if no supplier chosen)
+                    if (!$part->supplier_id) {
+
+                        $partOG = Part::find($request->elevator_parts[$i]);
+                        $partOG->quantity -= ($part->quantity * $installation->elevator_count);
+                        $partOG->save();
+
+                    } // end if
+                    
+
+
                 } // end loop
             } // end if
 
@@ -362,13 +377,17 @@ class InstallationsController extends Controller
         // : 1- quotation parts
         if ($type == 'quotation') {
 
-            // ! remove previous parts
-            InstallationQuotationPart::where('installation_quotation_id', $id)->delete();
 
             // : reset installation price
             $installation = InstallationQuotation::find($id);
             $installation->price = 0;
             $installation->save();
+
+
+            // ! remove previous parts
+            InstallationQuotationPart::where('installation_quotation_id', $id)->delete();
+
+            
 
 
             // : add quo-parts
@@ -390,7 +409,7 @@ class InstallationsController extends Controller
 
 
                     // :calc total price
-                    $installation->price += $part->price * $part->quantity;
+                    $installation->price += ($part->price * $part->quantity) * $installation->elevator_count;
                     $installation->save();
 
          
@@ -399,12 +418,15 @@ class InstallationsController extends Controller
 
 
 
+
+
+
+
         // : add bill-parts
         } else {
 
 
-            // ! remove previous parts
-            InstallationBillPart::where('installation_bill_id', $id)->delete();
+
 
             // : reset installation price
             $installation = InstallationBill::find($id);
@@ -413,6 +435,34 @@ class InstallationsController extends Controller
 
 
 
+
+            // ! return parts quantity to stock (if there is supplier)
+            $installationParts = InstallationBillPart::where('installation_bill_id', $id)->get();
+
+            foreach ($installationParts as $installationPart) {
+
+                // :get part
+                $partOG = Part::find($installationPart->part_id);
+
+                if (!$installationPart->supplier_id) {
+
+                    $partOG->quantity += ($installationPart->quantity * $installation->elevator_count);
+                    $partOG->save();
+
+                } // end if
+                
+            } // end loop
+
+
+
+
+            // ! remove previous parts
+            InstallationBillPart::where('installation_bill_id', $id)->delete();
+
+            
+
+
+            // :continue adding
             if (!empty($request->elevator_parts)) {
                 for ($i = 0; $i < count($request->elevator_parts) ; $i++) { 
                 
@@ -434,10 +484,20 @@ class InstallationsController extends Controller
                     
 
                     // :calc total price
-                    $installation->price += $part->price * $part->quantity;
+                    $installation->price += ($part->price * $part->quantity) * $installation->elevator_count;
                     $installation->save();
 
-         
+
+                    // :deduct the part quantity (only in bill / only if no supplier chosen)
+                    if (!$part->supplier_id) {
+
+                        $partOG = Part::find($request->elevator_parts[$i]);
+                        $partOG->quantity -= ($part->quantity * $installation->elevator_count);
+                        $partOG->save();
+
+                    } // end if
+
+
                 } // end loop
             } // end if
 
@@ -513,24 +573,34 @@ class InstallationsController extends Controller
     
     public function printInstallation($id, $type){
 
-         // : determine type / + get parts
+         // :determine type / + get parts
          if ($type == 'quotation') {
             
             $type = 'عرض سعر';
             $installation = InstallationQuotation::find($id);
-            $parts = InstallationQuotationPart::where('installation_quotation_id', $installation->id)->get();
-           
+
+            // :get parts and group them by usage
+            $partsArray = InstallationQuotationPart::where('installation_quotation_id', $installation->id)->get('id')->toArray();
+            $parts = Part::whereIn('id' , $partsArray)->get();
+
         } else {
 
             $type = 'فاتورة';
             $installation = InstallationBill::find($id);
-            $parts = InstallationBillPart::where('installation_bill_id', $installation->id)->get();
+
+
+            // :get parts and group them by usage
+            $partsArray = InstallationBillPart::where('installation_bill_id', $installation->id)->get('id')->toArray();
+            $parts = Part::whereIn('id' , $partsArray)->get();
 
         } // end if
 
+
+
+        
         return view('print-installation', compact('installation', 'parts', 'type'));
 
-    }//end of printInstallation
+    } // end function
 
 
 

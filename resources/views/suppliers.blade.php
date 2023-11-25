@@ -21,7 +21,6 @@
             <th scope="col">الأسم</th>
             <th scope="col">رقم الهاتف</th>
             <th scope="col">البريد الإلكتروني</th>
-            <th scope="col">العائد من الأجزاء</th>
             <th scope="col">المبالغ المدفوعة</th>
 
             <th scope="col"></th>
@@ -37,10 +36,7 @@
             <td class='scale--2'><span class='fw-bold border-bottom'>{{$supplier->name}}</span></td>
             <td dir='ltr' class='text-start'>{{$supplier->phone}}</td>
             <td>{{$supplier->email}}</td>
-            <td>{{number_format($supplier->installationBillPartsPrice())}}</td>
             <td>{{number_format($supplier->transactionsTotal())}}</td>
-
-          
 
             {{-- edit --}}
             <td>

@@ -6,11 +6,7 @@
    
 
 {{-- 
-  ! if the quantity has changed make sure to revalidate the stock
-  ! or else if it was unchecked 
-
   ! add finance to the supplier page
-  
   --}}
 
 
@@ -80,11 +76,36 @@
 
 
 
-            {{-- quantity --}}
-            <div class="d-inline-block">
-              <label class='d-block fs-11'>الكمية</label>
-              <input class='form-control parts--input' type="number" step='1' name="part_quantity[{{$part->part->id}}][]" id="" value='{{$parts->where('part_id', $part->part->id)->first()->quantity}}'>
-            </div>
+            {{-- quantity / bill --}}
+            @if ($type == 'bill')
+
+              <div class="d-inline-block">
+                <label class='d-block fs-11'>الكمية</label>
+                <input class='form-control parts--input' type="number" step='1' min='0' 
+                max='{{ ($part->part->quantity + ($parts->where('part_id', $part->part->id)->first()->quantity * $installation->elevator_count)) / $installation->elevator_count  }}' 
+                name="part_quantity[{{$part->part->id}}][]" 
+                value='{{$parts->where('part_id', $part->part->id)->first()->quantity}}' {{ ($part->part->quantity == 0 && $parts->where('part_id', $part->part->id)->first()->quantity == 0 ) ? 'readonly' : ''}}>
+              </div>
+
+
+            {{-- quantity / quotation --}}
+            @else
+
+
+              <div class="d-inline-block">
+                <label class='d-block fs-11'>الكمية</label>
+                <input class='form-control parts--input' type="number" step='1' min='0' 
+                max='{{ $part->part->quantity / $installation->elevator_count}}' 
+                name="part_quantity[{{$part->part->id}}][]" 
+                value='{{$parts->where('part_id', $part->part->id)->first()->quantity}}' {{ ($part->part->quantity == 0 && $parts->where('part_id', $part->part->id)->first()->quantity == 0 ) ? 'readonly' : ''}}>
+              </div>
+
+
+            @endif
+            {{-- end if --}}
+
+
+            
 
 
 
@@ -161,7 +182,7 @@
             {{-- quantity --}}
             <div class="d-inline-block">
               <label class='d-block fs-11'>الكمية</label>
-              <input class='form-control parts--input' type="number" step='1' name="part_quantity[{{$part->part->id}}][]" id="">
+              <input class='form-control parts--input' type="number" step='1' min='0' max='{{$part->part->quantity / $installation->elevator_count}}' name="part_quantity[{{$part->part->id}}][]" id="" {{ ($part->part->quantity > 0) ? '' : 'readonly'}}>
             </div>
 
 

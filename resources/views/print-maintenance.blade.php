@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
-  <head>
+
+
+
+{{-- head --}}
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,127 +50,299 @@
     {{-- Customized style  --}}
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/customized-style.css')}}">
 
-  </head>
+</head>
+{{-- end header --}}
 
-<body dir="rtl">
 
 
-<div class="col-lg-10 mx-auto" id="partnerreportdiv">
-    <div class="card ">
-        <div class="card-body invoice-head pt-0 pb-0"> 
-            <div class="row mt-5">
-                <div class="col-12 text-center printimagediv">                                                
-                   <h3>طباعة اعمال الصيانة</h3>                                          
+<style>
+    .table-bordered td, .table-bordered th {
+        border-color: ##d9d9d9 !important
+    }
+</style>
+
+{{-- body --}}
+<body dir="rtl" style="background: url('{{asset('assets/images/background/ordinary-2.svg')}}'); background-size:cover; background-position:top; background-attachment: fixed; background-repeat: no-repeat">
+
+
+    <div class="container">
+        <div class="row justify-content-center">
+
+            {{-- print action column --}}
+            <div class="col-12">
+                <div class="card p-0 text-center mb-0">
+                    <button id="print-btn" class="btn btn-none py-3 fs-6 fw-bold ls-07 text-white rounded-0" style="background-color: #000;">
+                        طباعة الفاتورة
+                    </button>
                 </div>
             </div>
-            <div class="row p-3" style="border: 1px solid #b9b9b9;" >
-               
-              
-                <div class="col-sm-2">
-                    <span id="left-header">المرجع : {{$maintenance->reference}}</span>
-                </div>
-                <div class="col-sm-8 text-center mt-2">
+
+
+
+            {{-- print card column --}}
+            <div class="col-12" id="partnerreportdiv">
+                <div class="card py-5">
+
+
+                    {{-- top invoice --}}
+                    <div class="row no-gutters mx-0">
+
+
+                        <div class="col text-center">
+                            <h3 class='fw-bold text-reports ls-08'>صاعد للمصاعد</h3>
+                            <h6 class='fw-500 ls-06'>تأسيس وتركيب</h6>
+                            <h6 class='fw-500 ls-06'>وصيانة جميع المصاعد</h6>
+                            <h6 class='fw-500 ls-06'>س.ت: 1010718840</h6>
+                            <h6 class='fw-500 ls-06'>ترخيص: 21025051827</h6>
+                        </div>
+
+
+
+                        <div class="col-3 text-center">
+                            <img src="{{asset('assets/images/logo/main-logo.png')}}" alt="" class='w-100 of-contain mb-2' style="height: 100px;">
+                            <h6 class='fw-bold mb-1 ls-08'>صاعد للمصاعد</h6>
+                            <h6 class='fw-bold text-uppercase ls-08'>saaed to elevators</h6>
+
+                        </div>
+
+
+                        <div class="col text-center">
+                            <h3 class='text-uppercase fw-bold text-reports ls-08'>saaed to elevators</h3>
+                            <h6 class='text-uppercase fw-500 ls-06'>establishment and installation</h6>
+                            <h6 class='text-uppercase fw-500 ls-06'>maintenance of all elevators</h6>
+                            <h6 class='text-uppercase fw-500 ls-06'>cr: 1010718840</h6>
+                            <h6 class='text-uppercase fw-500 ls-06'>lic: 21025051827</h6>
+                        </div>
+
+                   
+                    </div>
+                    {{-- end top invoice --}}
+
+
+
+
+
+                    {{-- hr --}}
+                    <hr class='hr--reports mb-5'>
+
+
+
+
+                    {{-- mid invoice --}}
+                    <div class="row no-gutters mx-0">
+
+
+                        {{-- empty --}}
+                        <div class="col-3"></div>
+
+
+                        <div class="col-6 text-center mb-4">
+                            <h5 class='text-reports '>العرض الفني والمالي بتوريد وتركيب</h5>
+                        </div>
+
+
+                        <div class="col-3">
+                            <h6>{{date('d / m / Y', strtotime($maintenance->date))}}</h6>
+                        </div>
+
+
+
+                        {{-- ------------------------ --}}
+
+
+                        <div class="col-9 mb-2">
+                            <h6>السادة المحترمين / شركة عبد المجيد الصايل واليحيى للإستثمار</h6>
+                        </div>
+
+
+                        <div class="col-3 mb-2">
+                            <h6>العنوان / فاتورة</h6>
+                        </div>
+
+                        {{-- ----------- --}}
+
+
+
+                        <div class="col-4 mb-4">
+                            <h6>السلام عليكم ورحمة الله وبركاته</h6>
+                        </div>
                         
-                    <h4> <span id="title-header "> {{$type}}  </h4>
-              
-                </div>
-                <div class="col-sm-2" id="p-date">
-                    <span id="print-date">تاريخ الطباعة : {{date('Y/m/d')}}</span>
-                </div>
-
-                
-
-            </div> 
-          
-        </div><!--end card-body-->
-
-        <div class="row" id="btnss">
-            
-            
-
-            <div class="col-sm-12 text-center mt-3">
-
-                <button id="print-btn" class="btn btn-dark">
-                    <i class="fa fa-print mx-1"></i>  طباعة
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="card-body pt-0">
-   
-            <hr>
-
-            <div class="row">
-                
-                    <div class="col-sm 4 ">
-                        <h4><span style="font-size: 18px">العميل: </span>  <br> 
-                            {{$maintenance->customer->first_name . ' '. $maintenance->customer->last_name}}</h4>
-                    </div>
-
-
-                    <div class="col-sm 4 text-center">
-                        <h4> <span style="font-size: 18px">المصعد: </span>  <br>
-                             {{$maintenance->elevator->name }}</h4>
-                    </div>
-
-                    <div class="col-sm 4" style="text-align: left">
-                        <h4> <span style="font-size: 18px">السعر: </span>  <br>
-                             {{$maintenance->price }}  <small>ريال</small></h4>
-                    </div>
-              
-                <div class="col-12 mb-30 mt-5">
-                    <div class="box">
-                        <div class="box-head ">
-                            <h5 class="title">أجزاء المصعد المختارة</h5>
+                        <div class="col-4 text-center mb-4">
+                            <h6>تحية طيبة</h6>
                         </div>
-                        <div>
-                              <table class="table table-bordered">
-                                <thead class="bg-primary">
-                                    <tr>
+
+
+                        {{-- empty --}}
+                        <div class="col-1"></div>
+
+
+                        <div class="col-3 mb-4">
+                            <h6>الرقم / 404</h6>
+                        </div>
+
+
+
+                        {{-- ----------- --}}
+
+
+                        <div class="col-12 mb-4">
+                            <h6>نحن صاعد للمصاعد يسرنا أن نقدم لعنايتكم عرض سعر توريد وتركيب مصعد جيرلس حسب المواصفات التالية
+                                <i class='fa fa-chevron-down me-2 text-reports'></i>
+                            </h6>
+                        </div>
+
+
+                    </div>
+                    {{-- end mid invoice --}}
+
+
+
+
+
+
+
+                    {{-- -------------------------------- --}}
+
+
+
+
+
+                    {{-- table seciton --}}
+                    <div class="row no-gutters mx-0">
+                        <div class="col-12">
+
+                            {{-- table --}}
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+
+
+                                    <thead style="background-color:#e9e9e9">
                                       
-                                        <th>الأسم</th>
-                                        <th>النوع</th>
-                                        <th>التفاصيل</th>
-                                        <th>السعر</th>
-        
-                                    </tr>
-                                </thead>
+                                    </thead>
+                            
+                            
+                                    {{-- body --}}
+                                    <tbody>
 
-                              
 
-                                <tbody>
+                                        {{-- elevator count / type --}}
+                                        <tr>
+                                            <th class='table--innertitle'>عدد المصاعد</th>
+                                            <th>{{$maintenance->elevator_count}} مصعد</th>
 
-        
-                                @foreach ($parts as $part)
+                                            <th class='table--innertitle'>نوع المصاعد</th>
+                                            <th>{{$maintenance->elevator_type}}</th>
+                                        </tr>
+                                        
 
-                                    <tr>
-                                        <td>{{$part->part->name}}</td>
-                                       
-                                        <td>{{$part->part->type}}</td>
-                                        <td>{{$part->part->desc}}</td>
-                                        <td>{{$part->price}}</td>
 
-                                    </tr>
+                                        {{-- elevator load / passengers --}}
+                                        <tr>
+                                            <th class='table--innertitle'>حمولة المصعد</th>
+                                            <th>{{$maintenance->elevator_load}} كغ</th>
 
-                                    @endforeach
+                                            <th class='table--innertitle'>عدد الركاب</th>
+                                            <th>{{$maintenance->elevator_passengers}} أشخاص</th>
+                                        </tr>
 
-                                </tbody>
-                            </table>
+
+
+                                        {{-- elevator speed / opening --}}
+                                        <tr>
+                                            <th class='table--innertitle'>سرعة المصعد</th>
+                                            <th>{{$maintenance->elevator_speed}} م/ث</th>
+
+                                            <th class='table--innertitle'>آلية فتح الباب</th>
+                                            <th>{{$maintenance->elevator_opening_mechanism}}</th>
+                                        </tr>
+
+
+
+                                        {{-- elevator floors / doors --}}
+                                        <tr>
+                                            <th class='table--innertitle'>عدد المحطات</th>
+                                            <th>{{$maintenance->elevator_floors}} محطة</th>
+
+                                            <th class='table--innertitle'>عدد مداخل الكابينة</th>
+                                            <th>{{$maintenance->elevator_doors}} مدخل</th>
+                                        </tr>
+
+
+
+                                        
+                                        {{-- elevator count / type --}}
+                                        <tr>
+                                            <th class='table--innertitle'>طريقة التشغيل</th>
+                                            <th colspan="3">{{$maintenance->elevator_operating_mechanism}}</th>
+                                        </tr>
+
+
+
+
+                                        {{-- elevator power --}}
+                                        <tr>
+                                            <th class='table--innertitle'>مدد القدرة للطاقة</th>
+                                            <th colspan="3">{{$maintenance->elevator_power}}</th>
+                                        </tr>
+
+
+
+
+
+                                        {{-- ======================================= --}}
+
+
+                                        {{-- * dynamically print parts grouped on usage --}}
+                                        @if ($parts)
+
+
+                                            {{-- loop - grouping parts --}}
+                                            @foreach ($parts->groupBy('usage') as $usage => $innerParts)
+                                                
+                                                {{-- loop - parts --}}
+                                                @foreach ($innerParts as $part)
+
+                                                
+
+
+                                                @endforeach
+                                                {{-- end loop - parts --}}
+
+                                            @endforeach
+                                            {{-- end foreach --}}
+                                            
+                                        @endif
+                                        {{-- end if --}}
+                                    </tbody>
+                                    {{-- end body --}}
+
+                                </table>
+                            </div>
+                            {{-- end table --}}
+
                         </div>
                     </div>
+                    {{-- end table seciton --}}
+
+
+
+
                 </div>
+                {{-- end card --}}
 
-                
-          
             </div>
+            {{-- end main col --}}
 
-         
+
         </div>
-    </div><!--end card-->
-</div><!--end col-->
+    </div>
+    {{-- end container --}}
+
+
+
+
+{{-- ================================================ --}}
+
 
 
     <!-- latest jquery-->
@@ -212,12 +388,11 @@
 
     <script>
 
-
         $('#print-btn').click(function() {
 
-            var div = document.getElementById('btnss');
-                div.style.visibility = "hidden";
-                div.style.display = "none";   
+            var div = document.getElementById('print-btn');
+            div.style.visibility = "hidden";
+            div.style.display = "none";   
 
             var p = document.getElementById('partnerreportdiv');
             print(p);
@@ -226,7 +401,12 @@
 
         });
         
-        
     </script>
 
 </body>
+{{-- end body --}}
+
+
+
+</html>
+{{-- end html --}}
