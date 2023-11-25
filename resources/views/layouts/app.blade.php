@@ -56,7 +56,8 @@
     </div>
     <!-- Loader ends-->
     <!-- page-wrapper Start-->
-    <div class="page-wrapper" id="pageWrapper" style="background: url('{{asset('assets/images/background/ordinary-2.svg')}}'); background-size:cover; background-position:top; background-attachment: fixed; background-repeat: no-repeat">
+    {{-- style="background: url('{{asset('assets/images/background/ordinary-2.svg')}}'); background-size:cover; background-position:top; background-attachment: fixed; background-repeat: no-repeat" --}}
+    <div class="page-wrapper login--form-bg" id="pageWrapper" style="background: url('{{asset('assets/images/background/ordinary-2.svg')}}'); background-size:cover; background-position:top; background-attachment: fixed; background-repeat: no-repeat">
       <!-- Page Header Start-->
       <div class="page-main-header">
         <div class="main-header-right row m-0">
@@ -271,9 +272,9 @@
         {{-- ========================================================= --}}
 
 
-
+        
         {{-- page body --}}
-        <div class="page-body">
+        <div class="page-body home--form-bg">
           <div class="container-fluid">
             <div class="page-header">
               <div class="row mt-4">

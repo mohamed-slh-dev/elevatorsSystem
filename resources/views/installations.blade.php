@@ -905,7 +905,7 @@
                   <div class="col-12 text-center">
                     
                     {{-- main title --}}
-                    <h5 class="modal-title fw-bold form--subheading d-inline-block mb-4" id="delete">حذف عقد</h5>
+                    <h5 class="modal-title fw-bold form--subheading d-inline-block mb-4" id="delete">حذف عملية التركيب</h5>
 
                     {{-- desc --}}
                     <h6 class='mb-3'>هل أنت متأكد من حذف هذه العملية؟</h6>

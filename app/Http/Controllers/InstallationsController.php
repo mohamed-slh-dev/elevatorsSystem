@@ -523,41 +523,59 @@ class InstallationsController extends Controller
 
 
 
+    // TODO: dispatch the parts quantity to stock when deleted (if not from supplier)
     public function deleteInstallation(Request $request){
 
+
+        // 1: bill
         if ($request->type == 'bill') {
-            
+
+
+            // :get installation
             $installation = InstallationBill::find($request->id);
 
-            foreach ($installation->installationBillParts as $part) {
+
+
+            // ! return parts quantity to stock (if there is supplier)
+            $installationParts = InstallationBillPart::where('installation_bill_id', $request->id)->get();
+
+            foreach ($installationParts as $installationPart) {
+
+                // :get part
+                $partOG = Part::find($installationPart->part_id);
+
+                if (!$installationPart->supplier_id) {
+
+                    $partOG->quantity += ($installationPart->quantity * $installation->elevator_count);
+                    $partOG->save();
+
+                } // end if
                 
-                $part->delete();
-
-            }
+            } // end loop
 
 
-            $installation->delete();
 
+
+            // ! remove installation -> parts would be remove by relation
+            InstallationBill::where('id', $request->id)->delete();
+
+
+
+
+        // 2: quotation
         } else {
 
-             $installation = InstallationQuotation::find($request->id);
-
-            foreach ($installation->installationQuotationParts as $part) {
-                
-                $part->delete();
-
-            }
-
-
-            $installation->delete();
+            // ! remove installation -> parts would be remove by relation
+            InstallationQuotation::where('id', $request->id)->delete();
            
-        }
+        } // end else
+
+
 
         return redirect()->route('installations')->with('success', 'تم  حذف عملية التركيب بنجاح');
 
         
-        
-    }
+    } // end function
 
 
 

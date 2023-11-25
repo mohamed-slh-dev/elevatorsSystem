@@ -15726,7 +15726,7 @@ strong ~ p {
 .login-form {
     padding: 30px;
     width: 450px;
-    background-color: #fff;
+    background-color: #fcfcfc;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
