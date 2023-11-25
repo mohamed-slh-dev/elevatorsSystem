@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Supplier;
+use App\Models\Part;
 use App\Models\MaintenanceBill;
 use App\Models\MaintenanceBillPart;
 use App\Models\MaintenanceQuotation;
