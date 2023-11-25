@@ -232,7 +232,7 @@
 
       <button class="btn btn-primary">حفظ التغييرات</button>
 
-      <a href="{{route('maintenances')}}">
+      <a href="{{route('maintenance')}}">
 
         <button class="btn btn-outline-danger">الرجوع <i class="fa fa-angle-double-left ms-2"></i></button>
 
