@@ -16,6 +16,8 @@ class CreateMaintenanceBillPartsTable extends Migration
         Schema::create('maintenance_bill_parts', function (Blueprint $table) {
             $table->id();
 
+            $table->string('name')->nullable();
+            
             $table->bigInteger('maintenance_bill_id')->unsigned()->nullable();
             $table->foreign('maintenance_bill_id')->references('id')->on('maintenance_bills')->onDelete('cascade');
 
@@ -23,6 +25,11 @@ class CreateMaintenanceBillPartsTable extends Migration
             $table->foreign('part_id')->references('id')->on('parts')->onDelete('cascade');
             
             $table->double('price', 11, 2)->nullable();
+            $table->integer('quantity')->nullable();
+
+            
+            $table->bigInteger('supplier_id')->unsigned()->nullable();
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
 
 
             $table->timestamps();

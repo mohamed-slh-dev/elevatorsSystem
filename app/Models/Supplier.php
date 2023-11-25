@@ -37,4 +37,20 @@ class Supplier extends Model
     }
 
 
+
+    // ---------------------------------------------
+
+    
+
+    public function maintenanceBillParts() {
+        return $this->hasMany('App\Models\InstallationBillPart');
+    }
+
+
+    public function maintenanceBillPartsPrice() {
+        return $this->maintenanceBillParts()?->sum('price');
+    }
+
+
+
 } // end model

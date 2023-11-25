@@ -17,5 +17,9 @@ class MaintenanceBillPart extends Model
         return $this->belongsTo('App\Models\Part');
     }
 
+    public function supplier() {
+        return $this->belongsTo('App\Models\Supplier');
+    }
+
 
 }

@@ -17,9 +17,11 @@
 
     @csrf
     
+
+    {{-- elevator id / type (bill / quotation)--}}
     <input type="hidden" name="id" value="{{$id}}" id="">
-    
     <input type="hidden" name="type" value="{{$type}}" id="">
+
     
     {{-- checkboxes wrapper --}}
     <div class="form-group m-checkbox-inline mb-0">
@@ -28,22 +30,73 @@
       @foreach ($elevator->elevatorParts as $part)
 
         
-        {{-- single checkbox --}}
-        <div class="checkbox checkbox-dark checkbox--item mb-3" style="width: 33%">
+        <div class="d-flex align-items-center justify-content-start mb-5">
 
-            <input id="inline-{{$part->id}}" type="checkbox" name="elevator_parts[]" value="{{$part->part->id}}">
+          {{-- single checkbox --}}
+          <div class="checkbox checkbox-dark checkbox--item d-inline-block w-auto me-3">
 
-          <label for="inline-{{$part->part->id}}">{{ $part->part->name}}</label>
+            <input id="inline-{{$part->part->id}}" type="checkbox" name="elevator_parts[]" value="{{$part->part->id}}">
+            <label for="inline-{{$part->part->id}}"></label>
 
-          <input type="number" class='form-control d-inline-block text-center' 
-          style="width: 120px; height: 40px;"
-          name="part_price[{{$part->id}}][]" 
-          value="{{$part->part->partPrices->sortByDesc('id')->first->sell_price['sell_price']}}" 
-          min="{{$part->part->partPrices->sortByDesc('id')->first->purchase_price['purchase_price']}}">
+          </div>
+          {{-- end single checkbox --}}
+
+
+
+          {{-- name --}}
+          <div class="d-inline-block">
+            <label class='d-block fs-11'>الأسم</label>
+            <input class='form-control parts--input lg' type="text" name="part_name[{{$part->part->id}}][]" id="" value='{{$part->part->name}}'>
+          </div>
+
+
+
+
+          {{-- price --}}
+          <div class="d-inline-block">
+
+            <label class='d-block fs-11'>السعر</label>
+
+            <input type="number" class='form-control parts--input'
+            name="part_price[{{$part->part->id}}][]" 
+            value="{{$part->part->partPrices->sortByDesc('id')->first->sell_price['sell_price']}}" 
+            min="{{$part->part->partPrices->sortByDesc('id')->first->purchase_price['purchase_price']}}">
+          </div>
+
+
+
+          {{-- quantity --}}
+          {{-- ? quantity is divided by the elevator count to reach the limit --}}
+          <div class="d-inline-block">
+            <label class='d-block fs-11'>الكمية</label>
+            <input class='form-control parts--input' type="number" step='1' min='0' max='{{$part->part->quantity / $elevator_count}}' name="part_quantity[{{$part->part->id}}][]" id="" {{ ($part->part->quantity > 0) ? '' : 'readonly'}}>
+          </div>
+
+
+
+          {{-- supplier --}}
+          @if ($type == 'bill')
+              
+          <div class="d-inline-block min-w-200px" style="margin-right: 30px;">
+            <label class='d-block fs-11'>المورد (إختياري)</label>
+            <select name="part_supplier[{{$part->part->id}}][]" class="form-control form--select" data-clear={{true}}>
+
+              <option value=""></option>
+              
+              @foreach ($suppliers as $supplier)
+                <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+              @endforeach
+
+            </select>
+          </div>
+
+          @endif
+          {{-- end if --}}
+
 
         </div>
-        {{-- end single checkbox --}}
-
+        {{-- end wrapper --}}
+          
       @endforeach
       {{-- end loop --}}
 
