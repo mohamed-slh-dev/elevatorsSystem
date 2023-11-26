@@ -15,7 +15,7 @@ class FinancialController extends Controller
     public function financials() {
 
         // :get finances
-        $financials = FinancialTransaction::all();
+        $financials = FinancialTransaction::paginate(15);
 
         // :get dependencies
         $employees = Employee::all();

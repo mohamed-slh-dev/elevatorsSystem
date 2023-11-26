@@ -79,6 +79,17 @@
         </tbody>
       </table>
     </div>
+
+    @if($elevators instanceof \Illuminate\Pagination\LengthAwarePaginator )
+
+    <div class="m-4">
+
+        {{$elevators->links()}}
+     
+    </div>
+    
+    @endif
+
 </div>
 
 

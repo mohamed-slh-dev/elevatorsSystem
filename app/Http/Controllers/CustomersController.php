@@ -16,7 +16,7 @@ class CustomersController extends Controller
 {
     public function customers () {
 
-        $customers = Customer::all();
+        $customers = Customer::paginate(15);
 
         $regions = Region::all();
         $provinces = Province::all();

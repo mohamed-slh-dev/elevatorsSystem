@@ -21,7 +21,7 @@ class EmployeesController extends Controller
 {
     public function employees(){
 
-        $employees = Employee::all();
+        $employees = Employee::paginate(15);
 
         $regions = Region::all();
         $provinces = Province::all();

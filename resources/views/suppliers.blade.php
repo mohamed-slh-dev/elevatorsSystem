@@ -50,6 +50,17 @@
         </tbody>
       </table>
     </div>
+
+    @if($suppliers instanceof \Illuminate\Pagination\LengthAwarePaginator )
+
+    <div class="m-4">
+
+        {{$suppliers->links()}}
+     
+    </div>
+    
+    @endif
+
 </div>
 {{-- end table --}}
 

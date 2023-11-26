@@ -11,7 +11,7 @@ class SuppliersController extends Controller {
 
     public function suppliers(){
 
-        $suppliers = Supplier::all();
+        $suppliers = Supplier::paginate(15);
 
         return view('suppliers',compact('suppliers'));
 

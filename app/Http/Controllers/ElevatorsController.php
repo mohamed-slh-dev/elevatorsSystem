@@ -22,7 +22,7 @@ class ElevatorsController extends Controller {
     public function parts() {
 
         // dependencies
-        $parts = Part::all();
+        $parts = Part::paginate(2);
         $nationalities = Nationality::all();
         $usages = ['ماكينة', 'دلائل التعليق والتثبيت', 'الكابينة', 'الأبواب', 'لوحات الطلب', 'أجهزة الطوارئ', 'البرج', 'حفرة المصعد'];
 
@@ -161,7 +161,7 @@ class ElevatorsController extends Controller {
     public function elevators() {
 
         // dependencies
-        $elevators = Elevator::all();
+        $elevators = Elevator::paginate(15);
         $elevators_parts = [];
 
         $parts = Part::all();

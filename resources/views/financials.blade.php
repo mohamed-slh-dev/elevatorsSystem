@@ -75,6 +75,18 @@
         </tbody>
       </table>
     </div>
+
+    
+    @if($financials instanceof \Illuminate\Pagination\LengthAwarePaginator )
+
+    <div class="m-4">
+
+        {{$financials->links()}}
+     
+    </div>
+    
+    @endif
+
 </div>
 {{-- end table --}}
 
