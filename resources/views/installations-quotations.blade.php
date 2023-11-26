@@ -152,8 +152,6 @@
                   <label for="type">النوع </label>
                   <select name="type" required class="form-control form--select form--select" id="type">
 
-                    <option value=""></option>
-                    <option value="فاتورة">فاتورة</option>
                     <option value="عرض سعر">عرض سعر</option>
 
                   </select>
@@ -172,26 +170,6 @@
 
                   </select>
                 </div>
-
-
-
-                <div class="col-sm-4 mb-20">
-                  <label for="elevator">المصعد</label>
-                  <select name="elevator" class="form-control form--select form--select" id="elevator">
-
-                    <option value=""></option>
-
-                    @foreach ($elevators as $elevator)
-                      <option value="{{$elevator->id}}">{{$elevator->name}}</option>
-                    @endforeach
-
-                  </select>
-                </div>
-
-
-
-
-                
 
 
                 {{-- options for reports --}}
@@ -414,23 +392,6 @@
 
                   </select>
                 </div>
-
-                <div class="col-sm-4 mb-20">
-                  <label for="elevator">المصعد</label>
-                  <select name="elevator" class="form-control form--select form--select" id="elevator" value='{{$quotation->elevator_id}}'>
-
-                    @foreach ($elevators as $elevator)
-                      <option value="{{$elevator->id}}">{{$elevator->name}}</option>
-                    @endforeach
-
-                  </select>
-                </div>
-
-
-
-
-                
-
 
 
                 {{-- options for reports --}}

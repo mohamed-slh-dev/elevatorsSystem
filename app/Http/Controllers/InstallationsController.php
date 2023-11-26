@@ -161,6 +161,10 @@ class InstallationsController extends Controller
 
 
 
+              // :return message
+              return redirect()->route('installationsQuotations')->with('success', 'تم اضافة عرض سعر بنجاح');
+
+
         // : add bill-parts
         } else {
 
@@ -211,16 +215,11 @@ class InstallationsController extends Controller
                 } // end loop
             } // end if
 
+
+              // :return message
+              return redirect()->route('installationsBills')->with('success', 'تم اضافة  فاتورة بنجاح');
+
         } // end else
-
-
-
-
-        
-
-
-        // :return message
-        return redirect()->route('installations')->with('success', 'تم اضافة عرض سعر بنجاح');
 
     } //end function
 
@@ -252,6 +251,7 @@ class InstallationsController extends Controller
 
 
         } else {
+
 
             $installation = InstallationBill::find($request->id);
 
@@ -321,7 +321,16 @@ class InstallationsController extends Controller
         // : redirect to previous page
         } else {
 
-            return redirect()->route('installations')->with('success', 'تم تعديل بيانات عملية التركيب بنجاح');
+
+            if ($request->type != 'عرض سعر') {
+                
+                return redirect()->route('installationsBills')->with('success', 'تم تعديل بيانات فاتورة التركيب بنجاح');
+            } else {
+                
+                return redirect()->route('installationsQuotations')->with('success', 'تم تعديل بيانات عرض سعر التركيب بنجاح');
+
+            }
+            
 
         } // end else
 
@@ -434,6 +443,9 @@ class InstallationsController extends Controller
 
 
 
+            // continue to main-page
+            return redirect()->route('installationsQuotations')->with('success', 'تم تعديل بيانات عرض السعر التركيب بنجاح');
+
 
         // : add bill-parts
         } else {
@@ -514,13 +526,15 @@ class InstallationsController extends Controller
                 } // end loop
             } // end if
 
+
+            // continue to main-page
+        return redirect()->route('installationsBills')->with('success', 'تم تعديل بيانات فاتورة التركيب بنجاح');
+
         } // end else
 
 
 
-        // continue to main-page
-        return redirect()->route('installations')->with('success', 'تم تعديل بيانات عملية التركيب بنجاح');
-
+        
 
     } // end function
 
@@ -574,17 +588,20 @@ class InstallationsController extends Controller
 
 
 
+            return redirect()->route('installationsBills')->with('success', 'تم  حذف فاتورة التركيب بنجاح');
+
         // 2: quotation
         } else {
 
             // ! remove installation -> parts would be remove by relation
             InstallationQuotation::where('id', $request->id)->delete();
            
+            return redirect()->route('installationsQuotations')->with('success', 'تم  حذف عرض السعر التركيب بنجاح');
+
         } // end else
 
 
 
-        return redirect()->route('installations')->with('success', 'تم  حذف عملية التركيب بنجاح');
 
         
     } // end function
