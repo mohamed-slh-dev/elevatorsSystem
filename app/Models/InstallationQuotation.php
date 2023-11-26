@@ -26,5 +26,22 @@ class InstallationQuotation extends Model
     public function installationQuotationParts() {
         return $this->hasMany('App\Models\InstallationQuotationPart');
     }
+
+
+    public function installationQuotationPartsPrice() {
+
+        $installationParts = $this->installationQuotationParts()->get();
+        $totalPrice = 0;
+
+        foreach ($installationParts as $installationPart) {
+
+            $totalPrice += $installationPart->price * $installationPart->quantity;
+
+        } // end loop
+
+        return $totalPrice;
+
+    } // end function
+
     
-}
+} // end model

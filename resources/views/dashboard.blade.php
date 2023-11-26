@@ -63,8 +63,8 @@
                                 <i data-feather="codepen"></i>
                             </div>
                             <div class="media-body">
-                                <span class="m-0 fw-bold  overview--title">المصاعد</span>
-                                <h4 class="mb-0 counter fs-3">{{$elevators->count()}}</h4>
+                                <span class="m-0 fw-bold  overview--title">الأجزاء</span>
+                                <h4 class="mb-0 counter fs-3">{{$parts->count()}}</h4>
                                 <i class="icon-bg" data-feather="codepen"></i>
                             </div>
                         </div>

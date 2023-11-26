@@ -533,7 +533,7 @@
             var p = document.getElementById('partnerreportdiv');
             print(p);
         
-             window.location.href = '/installations-qoutations'; 
+             window.location.href = '/installations-quotations'; 
 
         });
         

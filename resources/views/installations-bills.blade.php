@@ -5,38 +5,34 @@
 @section('content')
     
 {{-- add button --}}
-<div class="col-6 mb-5 text-end">
+<div class="col-6 mb-5 text-end align-self-end">
+
+  <a class='btn btn-primary d-inline-flex align-items-center ls-07 me-2' href="{{route('installationsQuotations')}}">عروض الأسعار</a>
+
     <button class="btn btn-outline-primary d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".new">
       <i class="fa fa-plus me-2 fs-13 "></i>
       إضافة عملية تركيب</button>
   </div>
 
 
-  <div class="col-12 mb-5">
-    <a href="{{route('installationsQuotations')}}">
-  
-      <button class="btn btn-outline-info d-inline-flex align-items-center scaleRotate--1" >
-          عروض الأسعار
-        </button>
-
-    </a>
-    
-  </div>
-
 
 
   
 {{-- table of installations --}}
 <div class="col-sm-12 col-lg-12 col-xl-12">
+
+
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
             <th scope="col">النوع</th>
             <th scope="col" class='min-w-140px'>العميل</th>
+
             <th scope="col">الحالة</th>
             <th scope="col"> التاريخ</th>
             <th scope="col"> المرجع</th>
+            <th scope="col" class='min-w-110px'>عدد المصاعد</th>
             <th scope="col"> السعر</th>
 
             <th scope="col"></th>
@@ -60,6 +56,7 @@
               {{ ($bill->status_alt != '' ? ' / ' .$bill->status_alt: '')}}</td>
             <td>{{$bill->date}}</td>
             <td>{{$bill->reference}}</td>
+            <td class='text-center'>{{$bill->elevator_count}}
             <td>{{$bill->price}}</td>
 
             <td>

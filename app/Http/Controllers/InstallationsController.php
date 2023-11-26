@@ -239,26 +239,14 @@ class InstallationsController extends Controller
 
         // :init
         $installation = null;
-        $installationResetLink = false;
 
         if ($request->type == 'عرض سعر') {
             
             $installation = InstallationQuotation::find($request->id);
 
-            // ! check if elevator has changed
-            // if ($installation->elevator_id != $request->elevator) 
-            //     $installationResetLink = 'quotation';
-
-
         } else {
 
-
             $installation = InstallationBill::find($request->id);
-
-            // ! check if elevator has changed
-            // if ($installation->elevator_id != $request->elevator) 
-            //     $installationResetLink = 'bill';
-
 
         } // end else
 
@@ -282,10 +270,15 @@ class InstallationsController extends Controller
         $installation->elevator_operating_mechanism = $request->elevator_operating_mechanism;
 
 
+        // :update pricing
+        ($request->type == 'عرض سعر') ? 
+        $installation->price = $installation->installationQuotationPartsPrice() * $request->elevator_count : 
+        $installation->price = $installation->installationBillPartsPrice() * $request->elevator_count;
+
+        
 
         // :continue with common inputs - 2
         $installation->date = $request->date;
-        if ($installationResetLink != false) $installation->price = 0; // ! reset price
         $installation->status = $request->status;
         $installation->status_alt = ($request->status == 'اخرى') ? $request->status_alt : '';
         $installation->reference = $request->reference;
@@ -297,42 +290,21 @@ class InstallationsController extends Controller
 
 
 
-        // : redirect to parts if it got a reset
-        if ($installationResetLink == 'quotation') {
+        // : redirect to page
 
-
-            // ! remove previous parts
-            InstallationQuotationPart::where('installation_quotation_id', $installation->id)->delete();
-
-            // : redirect to edit parts - page
-            return redirect()->route('editInstallationParts', [$installation->id, 'quotation']);
-
-
-        } elseif ($installationResetLink == 'bill') {
-
-
-            // ! remove previous parts
-            InstallationBillPart::where('installation_bill_id', $installation->id)->delete();
-
-            // : redirect to edit parts - page
-            return redirect()->route('editInstallationParts', [$installation->id, 'bill']);
-
-
-        // : redirect to previous page
-        } else {
-
-
-            if ($request->type != 'عرض سعر') {
-                
-                return redirect()->route('installationsBills')->with('success', 'تم تعديل بيانات فاتورة التركيب بنجاح');
-            } else {
-                
-                return redirect()->route('installationsQuotations')->with('success', 'تم تعديل بيانات عرض سعر التركيب بنجاح');
-
-            }
+        // 1: quotation
+        if ($request->type != 'عرض سعر') {
             
+            return redirect()->route('installationsBills')->with('success', 'تم تعديل بيانات فاتورة التركيب بنجاح');
+
+        // 2: bill
+        } else {
+            
+            return redirect()->route('installationsQuotations')->with('success', 'تم تعديل بيانات عرض سعر التركيب بنجاح');
 
         } // end else
+            
+
 
 
     } // end function

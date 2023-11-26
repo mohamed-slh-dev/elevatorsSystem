@@ -6,22 +6,14 @@
     
 {{-- add button --}}
 <div class="col-6 mb-5 text-end">
+
+  <a class='btn btn-primary d-inline-flex align-items-center ls-07 me-2' href="{{route('installationsBills')}}">الفواتير</a>
+
+
     <button class="btn btn-outline-primary d-inline-flex align-items-center scaleRotate--1" data-bs-toggle="modal" data-bs-target=".new">
       <i class="fa fa-plus me-2 fs-13 "></i>
       إضافة عملية تركيب</button>
-  </div>
-
-
-  <div class="col-12 mb-5">
-    <a href="{{route('installationsBills')}}">
-  
-      <button class="btn btn-outline-info d-inline-flex align-items-center scaleRotate--1" >
-           الفواتير
-        </button>
-
-    </a>
-    
-  </div>
+</div>
 
 
 
@@ -34,6 +26,7 @@
           <tr>
             <th scope="col">النوع</th>
             <th scope="col" class='min-w-140px'>العميل</th>
+            <th scope="col" class='min-w-110px'>عدد المصاعد</th>
             <th scope="col">الحالة</th>
             <th scope="col"> التاريخ</th>
             <th scope="col"> المرجع</th>
@@ -57,7 +50,9 @@
 
           <td>عرض سعر</td>
           <td>{{$quotation->customer->first_name. ' '. $quotation->customer->last_name}}</td>
+          <td>{{$quotation->elevator_count}}
           <td>{{$quotation->status}}
+
             {{ ($quotation->status_alt != '' ? ' / ' .$quotation->status_alt: '')}}</td>
           <td>{{$quotation->date}}</td>
           <td>{{$quotation->reference}}</td>
