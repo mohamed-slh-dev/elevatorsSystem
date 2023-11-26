@@ -65,11 +65,11 @@
 <body dir="rtl" style="background: url('{{asset('assets/images/background/ordinary-2.svg')}}'); background-size:cover; background-position:top; background-attachment: fixed; background-repeat: no-repeat">
 
     <div class="home--form-bg" style="background-color: transparent">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-center">
 
                 {{-- print action column --}}
-                <div class="col-12">
+                <div class="col-12 px-0">
                     <div class="card p-0 text-center mb-0">
                         <button id="print-btn" class="btn btn-none py-3 fs-6 fw-bold ls-07 text-white rounded-0" style="background-color: #000;">
                             طباعة {{$type}}
@@ -80,7 +80,7 @@
 
 
                 {{-- print card column --}}
-                <div class="col-12" id="partnerreportdiv">
+                <div class="col-12 px-0" id="partnerreportdiv">
                     <div class="card py-5">
 
 
