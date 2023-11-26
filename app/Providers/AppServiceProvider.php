@@ -4,25 +4,23 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
-{
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
+class AppServiceProvider extends ServiceProvider {
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
-}
+    public function register() {
+
+    } // end register
+
+    
+
+    // --------------------------------------
+
+
+    public function boot() {
+        
+        view()->composer('*',function($view) {
+            $view->with('rowCount', 15);
+        });
+
+    } // end function
+
+} // end controller

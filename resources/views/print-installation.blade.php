@@ -65,7 +65,7 @@
 <body dir="rtl" style="background: url('{{asset('assets/images/background/ordinary-2.svg')}}'); background-size:cover; background-position:top; background-attachment: fixed; background-repeat: no-repeat">
 
     <div class="home--form-bg" style="background-color: transparent">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-center">
 
                 {{-- print action column --}}
