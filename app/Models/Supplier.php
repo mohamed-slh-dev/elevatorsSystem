@@ -18,7 +18,7 @@ class Supplier extends Model
 
 
     public function transactionsTotal() {
-        return $this->transactions()?->sum('amount');
+        return $this->transactions()->sum('amount');
     }
 
 
@@ -33,7 +33,7 @@ class Supplier extends Model
 
 
     public function installationBillPartsPrice() {
-        return $this->installationBillParts()?->sum('price');
+        return $this->installationBillParts()->sum('price');
     }
 
 
@@ -48,7 +48,7 @@ class Supplier extends Model
 
 
     public function maintenanceBillPartsPrice() {
-        return $this->maintenanceBillParts()?->sum('price');
+        return $this->maintenanceBillParts()->sum('price');
     }
 
 

@@ -56,7 +56,7 @@
     </div>
     <!-- Loader ends-->
     <!-- page-wrapper Start-->
-    {{-- style="background: url('{{asset('assets/images/background/ordinary-2.svg')}}'); background-size:cover; background-position:top; background-attachment: fixed; background-repeat: no-repeat" --}}
+
     <div class="page-wrapper login--form-bg" id="pageWrapper" style="background: url('{{asset('assets/images/background/ordinary-2.svg')}}'); background-size:cover; background-position:top; background-attachment: fixed; background-repeat: no-repeat">
       <!-- Page Header Start-->
       <div class="page-main-header">

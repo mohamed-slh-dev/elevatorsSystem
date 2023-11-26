@@ -80,11 +80,11 @@ class InstallationsController extends Controller
         $elevator_count = $installation->elevator_count;
 
         $type = ($request->type == 'عرض سعر') ? 'quotation' : 'bill';
-        $elevator = Elevator::find($request->elevator);
+        $parts = Part::all();
         $suppliers = Supplier::all();
 
 
-        return view('add-installations-parts', compact('type', 'id', 'elevator', 'suppliers', 'elevator_count'));
+        return view('add-installations-parts', compact('type', 'id', 'parts', 'suppliers', 'elevator_count', 'installation'));
 
 
     } // end function
@@ -234,8 +234,8 @@ class InstallationsController extends Controller
             $installation = InstallationQuotation::find($request->id);
 
             // ! check if elevator has changed
-            if ($installation->elevator_id != $request->elevator) 
-                $installationResetLink = 'quotation';
+            // if ($installation->elevator_id != $request->elevator) 
+            //     $installationResetLink = 'quotation';
 
 
         } else {
@@ -243,8 +243,8 @@ class InstallationsController extends Controller
             $installation = InstallationBill::find($request->id);
 
             // ! check if elevator has changed
-            if ($installation->elevator_id != $request->elevator) 
-                $installationResetLink = 'bill';
+            // if ($installation->elevator_id != $request->elevator) 
+            //     $installationResetLink = 'bill';
 
 
         } // end else
@@ -352,11 +352,11 @@ class InstallationsController extends Controller
         $partsArray = $parts->pluck('part_id')->toArray();
 
 
-        // : suppliers
+        // : suppliers + original parts
         $suppliers = Supplier::all();
+        $partsOG = Part::all();
 
-
-        return view('edit-installations-parts', compact('installation', 'parts', 'partsArray', 'type', 'suppliers'));
+        return view('edit-installations-parts', compact('installation', 'partsOG', 'parts', 'partsArray', 'type', 'suppliers'));
 
     } // end function
 
@@ -523,7 +523,6 @@ class InstallationsController extends Controller
 
 
 
-    // TODO: dispatch the parts quantity to stock when deleted (if not from supplier)
     public function deleteInstallation(Request $request){
 
 
@@ -598,7 +597,7 @@ class InstallationsController extends Controller
             $installation = InstallationQuotation::find($id);
 
             // :get parts and group them by usage
-            $partsArray = InstallationQuotationPart::where('installation_quotation_id', $installation->id)->get('id')->toArray();
+            $partsArray = InstallationQuotationPart::where('installation_quotation_id', $installation->id)->get('part_id')->toArray();
             $parts = Part::whereIn('id' , $partsArray)->get();
 
         } else {
@@ -608,11 +607,10 @@ class InstallationsController extends Controller
 
 
             // :get parts and group them by usage
-            $partsArray = InstallationBillPart::where('installation_bill_id', $installation->id)->get('id')->toArray();
+            $partsArray = InstallationBillPart::where('installation_bill_id', $installation->id)->get('part_id')->toArray();
             $parts = Part::whereIn('id' , $partsArray)->get();
 
         } // end if
-
 
 
         

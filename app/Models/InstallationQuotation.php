@@ -9,6 +9,11 @@ class InstallationQuotation extends Model
 {
     use HasFactory;
 
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    
     public function customer() {
         return $this->belongsTo('App\Models\Customer');
     }

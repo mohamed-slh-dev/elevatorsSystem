@@ -49,6 +49,14 @@ body {
     color: #009a70;
 }
 
+.table--text-reports {
+    color: #009a70 !important;
+}
+
+.table--reports th,
+.table--reports td {
+}
+
 .tooltip-inner {
     max-width: 500px !important;
 }

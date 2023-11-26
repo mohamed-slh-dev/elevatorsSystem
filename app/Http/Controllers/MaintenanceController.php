@@ -82,11 +82,11 @@ class MaintenanceController extends Controller
         $elevator_count = $maintenance->elevator_count;
 
         $type = ($request->type == 'عرض سعر') ? 'quotation' : 'bill';
-        $elevator = Elevator::find($request->elevator);
+        $parts = Part::all();
         $suppliers = Supplier::all();
 
 
-        return view('add-maintenance-parts', compact('type', 'id', 'elevator', 'suppliers', 'elevator_count'));
+        return view('add-maintenance-parts', compact('type', 'id', 'parts', 'suppliers', 'elevator_count', 'maintenance'));
 
 
     } // end function
@@ -236,8 +236,8 @@ class MaintenanceController extends Controller
             $maintenance = MaintenanceQuotation::find($request->id);
 
             // ! check if elevator has changed
-            if ($maintenance->elevator_id != $request->elevator) 
-                $maintenanceResetLink = 'quotation';
+            // if ($maintenance->elevator_id != $request->elevator) 
+            //     $maintenanceResetLink = 'quotation';
 
 
         } else {
@@ -245,8 +245,8 @@ class MaintenanceController extends Controller
             $maintenance = MaintenanceBill::find($request->id);
 
             // ! check if elevator has changed
-            if ($maintenance->elevator_id != $request->elevator) 
-                $maintenanceResetLink = 'bill';
+            // if ($maintenance->elevator_id != $request->elevator) 
+            //     $maintenanceResetLink = 'bill';
 
 
         } // end else
@@ -310,7 +310,7 @@ class MaintenanceController extends Controller
         // : redirect to previous page
         } else {
 
-            return redirect()->route('maintenance')->with('success', 'تم تعديل بيانات عملية التركيب بنجاح');
+            return redirect()->route('maintenance')->with('success', 'تم تعديل بيانات عملية الصيانة بنجاح');
 
         } // end else
 
@@ -356,9 +356,10 @@ class MaintenanceController extends Controller
 
         // : suppliers
         $suppliers = Supplier::all();
+        $partsOG = Part::all();
 
 
-        return view('edit-maintenance-parts', compact('maintenance', 'parts', 'partsArray', 'type', 'suppliers'));
+        return view('edit-maintenance-parts', compact('maintenance', 'partsOG', 'parts', 'partsArray', 'type', 'suppliers'));
 
     } // end function
 
@@ -508,7 +509,7 @@ class MaintenanceController extends Controller
 
 
         // continue to main-page
-        return redirect()->route('maintenance')->with('success', 'تم تعديل بيانات عملية التركيب بنجاح');
+        return redirect()->route('maintenance')->with('success', 'تم تعديل بيانات عملية الصيانة بنجاح');
 
 
     } // end function
@@ -525,7 +526,6 @@ class MaintenanceController extends Controller
 
 
 
-    // TODO: dispatch the parts quantity to stock when deleted (if not from supplier)
     public function deleteMaintenance(Request $request){
 
 
@@ -574,7 +574,7 @@ class MaintenanceController extends Controller
 
 
 
-        return redirect()->route('maintenance')->with('success', 'تم  حذف عملية التركيب بنجاح');
+        return redirect()->route('maintenance')->with('success', 'تم  حذف عملية الصيانة بنجاح');
 
         
     } // end function
@@ -600,7 +600,7 @@ class MaintenanceController extends Controller
             $maintenance = MaintenanceQuotation::find($id);
 
             // :get parts and group them by usage
-            $partsArray = MaintenanceQuotationPart::where('maintenance_quotation_id', $maintenance->id)->get('id')->toArray();
+            $partsArray = MaintenanceQuotationPart::where('maintenance_quotation_id', $maintenance->id)->get('part_id')->toArray();
             $parts = Part::whereIn('id' , $partsArray)->get();
 
         } else {
@@ -610,7 +610,7 @@ class MaintenanceController extends Controller
 
 
             // :get parts and group them by usage
-            $partsArray = MaintenanceBillPart::where('maintenance_bill_id', $maintenance->id)->get('id')->toArray();
+            $partsArray = MaintenanceBillPart::where('maintenance_bill_id', $maintenance->id)->get('part_id')->toArray();
             $parts = Part::whereIn('id' , $partsArray)->get();
 
         } // end if

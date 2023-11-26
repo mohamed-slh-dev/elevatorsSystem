@@ -20,6 +20,7 @@
           <tr>
             <th scope="col">الأسم</th>
             <th scope="col">اسم المستخدم</th>
+            <th scope="col">رقم الهاتف</th>
             <th scope="col">البريد الإلكتروني</th>
             <th scope="col"> الحالة</th>
             <th scope="col"></th>
@@ -34,6 +35,7 @@
           <tr>         
             <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/users/'.$user->image)}}" alt="user image"><span class='fw-bold border-bottom'>{{$user->name}}</span></td>
             <td>{{$user->username}}</td>
+            <td dir='ltr' class='text-start'>{{$user->phone}}</td>
             <td>{{$user->email}}</td>
           
 
@@ -104,15 +106,23 @@
                   <input type="text" class="form-control" name="username" id="username">
                 </div>
 
+                  
                 <div class="col-sm-4 mb-20">
-                  <label for="password">كلمة المرور </label>
-                  <input type="password" class="form-control" name="password" id="password">
+                  <label for="phone">رقم الهاتف</label>
+                  <input type="text" class="form-control" name="phone" id="phone">
                 </div>
 
-                
+
+
                 <div class="col-sm-4 mb-20">
                   <label for="email">البريد الإلكتروني </label>
                   <input type="email" class="form-control" name="email" id="email">
+                </div>
+
+
+                <div class="col-sm-4 mb-20">
+                  <label for="password">كلمة المرور </label>
+                  <input type="password" class="form-control" name="password" id="password">
                 </div>
 
   
@@ -187,6 +197,12 @@
                   <input type="text" class="form-control" name="username" id="username" value='{{$user->username}}'>
                 </div>
 
+
+                <div class="col-sm-4 mb-20">
+                  <label for="phone">رقم الهاتف</label>
+                  <input type="text" class="form-control" name="phone" id="phone" value='{{$user->phone}}'>
+                </div>
+
       
                 <div class="col-sm-4 mb-20">
                   <label for="email">البريد الإلكتروني </label>
@@ -194,10 +210,10 @@
                 </div>
                   
 
-                  <div class="col-sm-4 mb-20">
-                    <label for="password">كلمة مرور جديدة</label>
-                    <input type="password" class="form-control" name="password" id="password">
-                  </div>
+                <div class="col-sm-4 mb-20">
+                  <label for="password">كلمة مرور جديدة</label>
+                  <input type="password" class="form-control" name="password" id="password">
+                </div>
   
                   
   

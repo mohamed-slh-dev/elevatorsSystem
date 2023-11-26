@@ -189,7 +189,7 @@
 
 
                 <div class="col-sm-4 mb-20">
-                  <label for="customer">العميل </label>
+                  <label for="customer">العميل</label>
                   <select name="customer" required class="form-control form--select form--select" id="customer">
 
                     <option value=""></option>
@@ -205,7 +205,7 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="elevator">المصعد</label>
-                  <select name="elevator" required class="form-control form--select form--select" id="elevator">
+                  <select name="elevator" class="form-control form--select form--select" id="elevator">
 
                     <option value=""></option>
 
@@ -445,7 +445,7 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="elevator">المصعد</label>
-                  <select name="elevator" required class="form-control form--select form--select" id="elevator" value='{{$quotation->elevator_id}}'>
+                  <select name="elevator" class="form-control form--select form--select" id="elevator" value='{{$quotation->elevator_id}}'>
 
                     @foreach ($elevators as $elevator)
                       <option value="{{$elevator->id}}">{{$elevator->name}}</option>
@@ -692,7 +692,7 @@
 
                 <div class="col-sm-4 mb-20">
                   <label for="elevator">المصعد</label>
-                  <select name="elevator" required class="form-control form--select form--select" id="elevator" value='{{$bill->elevator_id}}'>
+                  <select name="elevator" class="form-control form--select form--select" id="elevator" value='{{$bill->elevator_id}}'>
 
                     @foreach ($elevators as $elevator)
                       <option value="{{$elevator->id}}">{{$elevator->name}}</option>
