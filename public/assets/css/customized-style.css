@@ -369,6 +369,10 @@ input[type="checkbox"] {
     margin-bottom: 35px;
 }
 
+.text-bold{
+    font-weight: bold;
+}
+
 /* ------------------------ reports */
 
 .hr--reports {
@@ -376,6 +380,8 @@ input[type="checkbox"] {
     height: 15px !important;
     background-color: black;
 }
+
+
 
 /* -------------------------- backgrounds */
 
