@@ -614,7 +614,7 @@ class InstallationsController extends Controller
             $parts = Part::whereIn('id' , $partsArray)->get();
 
         
-            return view('print-installation-quoatation', compact('installation', 'parts', 'type'));
+            return view('print-installation-quotation', compact('installation', 'parts', 'type'));
 
 
         } else {

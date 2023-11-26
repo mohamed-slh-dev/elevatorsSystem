@@ -66,7 +66,7 @@
 
     <div class="home--form-bg" style="background-color: transparent">
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-center">
 
                 {{-- print action column --}}
