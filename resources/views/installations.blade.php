@@ -259,7 +259,7 @@
                   <select name="elevator_opening_mechanism" required class="form-control form--select form--select" id="elevator_opening_mechanism">
 
                       <option value=""></option>
-                      <option value="مانيول">مانيول</option>
+                      <option value="يدوي">يدوي</option>
                       <option value="اوتوماتيك">اوتوماتيك</option>
 
                   </select>

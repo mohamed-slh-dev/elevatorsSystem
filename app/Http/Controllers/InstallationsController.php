@@ -600,6 +600,10 @@ class InstallationsController extends Controller
             $partsArray = InstallationQuotationPart::where('installation_quotation_id', $installation->id)->get('part_id')->toArray();
             $parts = Part::whereIn('id' , $partsArray)->get();
 
+        
+            return view('print-installation-quoatation', compact('installation', 'parts', 'type'));
+
+
         } else {
 
             $type = 'فاتورة';
@@ -610,11 +614,14 @@ class InstallationsController extends Controller
             $partsArray = InstallationBillPart::where('installation_bill_id', $installation->id)->get('part_id')->toArray();
             $parts = Part::whereIn('id' , $partsArray)->get();
 
+        
+            return view('print-installation-bill', compact('installation', 'parts', 'type'));
+
+
         } // end if
 
 
         
-        return view('print-installation', compact('installation', 'parts', 'type'));
 
     } // end function
 
