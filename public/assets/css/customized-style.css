@@ -264,7 +264,7 @@ input[type="file"] {
 }
 
 .form--subheading {
-    border-bottom: 2px solid #eaeaea;
+    border-bottom: 2px solid #00c18c;
     padding-bottom: 4px;
 }
 .btn--table {
@@ -297,12 +297,21 @@ input[type="file"] {
     height: 50px;
 }
 
-.table--switch-btn {
-    color: #144540;
+.app--subtitle {
     font-size: 15px;
-    padding: 5px 3px;
-    border-bottom: 1px solid #144540;
-    border-radius: 1px;
+    font-weight: 700;
+}
+
+.app--subtitle::after {
+    content: ")";
+    padding-right: 3px;
+    color: #06c08d;
+}
+
+.app--subtitle::before {
+    content: "(";
+    padding-left: 2px;
+    color: #06c08d;
 }
 
 .checkbox--item {

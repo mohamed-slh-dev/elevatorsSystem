@@ -286,7 +286,12 @@
 
                 {{-- page title --}}
                 <div class="col-sm-6 mb-5">
-                  <h3 class="form--subheading d-inline-block"> @yield('title')</h3>
+                  <h3 class="form--subheading d-inline-block pb-2">@yield('title')</h3>
+
+                  @hasSection('subtitle')
+                  <span class='app--subtitle d-inline-block ms-1'>@yield('subtitle')</span>
+                  @endif
+
                 </div>
 
 
