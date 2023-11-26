@@ -86,7 +86,8 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 
 
     // * Installation
-    Route::get('/installations', [InstallationsController::class, 'installations'])->name('installations');
+    Route::get('/installations-bills', [InstallationsController::class, 'installationsBills'])->name('installationsBills');
+    Route::get('/installations-quotations', [InstallationsController::class, 'installationsQuotations'])->name('installationsQuotations');
 
     Route::post('/add-installation', [InstallationsController::class, 'addInstallation'])->name('addInstallation');
     Route::post('/add-installation-parts', [InstallationsController::class, 'addInstallationParts'])->name('addInstallationParts');

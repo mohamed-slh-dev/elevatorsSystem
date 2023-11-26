@@ -16,17 +16,30 @@ use App\Models\Elevator;
 
 class InstallationsController extends Controller
 {
-    public function installations(){
+    public function installationsBills(){
 
         // dependencies
         $statuses = ['مقبول', 'مرفوض', 'يفاوض', 'متردد', 'اخرى'];
-        $installation_bills = InstallationBill::all();
-        $installation_quotations = InstallationQuotation::all();
+        $installation_bills = InstallationBill::paginate(15);
 
         $customers = Customer::all();
         $elevators = Elevator::all();
 
-        return view('installations', compact('installation_bills', 'installation_quotations', 'customers', 'elevators', 'statuses'));
+        return view('installations-bills', compact('installation_bills', 'customers', 'elevators', 'statuses'));
+
+    } // end function
+
+
+    public function installationsQuotations(){
+
+        // dependencies
+        $statuses = ['مقبول', 'مرفوض', 'يفاوض', 'متردد', 'اخرى'];
+        $installation_quotations = InstallationQuotation::paginate(15);
+
+        $customers = Customer::all();
+        $elevators = Elevator::all();
+
+        return view('installations-quotations', compact('installation_quotations', 'customers', 'elevators', 'statuses'));
 
     } // end function
 
