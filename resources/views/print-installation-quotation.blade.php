@@ -473,14 +473,14 @@
 
 
                             {{-- socials --}}
-                            <div class="col-12 px-0 ps-2" style="background-color: black; border-right: 30px solid #009a70">
+                            <div class="col-12 px-0 ps-2" style="background-color: rgb(245, 245, 245); border-right: 30px solid #009a70">
 
                                 {{-- flex div --}}
                                 <div class="d-flex justify-content-between align-items-center">
 
                                     {{-- whatsapp --}}
                                     <div class='d-inline-flex align-items-center pt-3 pb-2'>
-                                        <span style="letter-spacing: 3px" class="ms-3 me-4 text-white fs-5">0551108180</span>
+                                        <span style="letter-spacing: 3px" class="ms-3 me-4 text-black fs-5">0551108180</span>
 
                                         <span class='footer-icons scale--2'>
                                             <i class='fa fa-whatsapp'></i>
@@ -491,7 +491,7 @@
                                     {{-- other socials --}}
                                     <div class='d-inline-flex align-items-center pt-3 pb-2'>
                                         
-                                        <span style="letter-spacing: 3px" class="ms-3 me-4 text-white fs-5">SAAEDELV</span>
+                                        <span style="letter-spacing: 3px" class="ms-3 me-4 text-black fs-5">SAAEDELV</span>
 
                                         <span class='footer-icons scale--2'>
                                             <i class='fa fa-youtube-play'></i>
