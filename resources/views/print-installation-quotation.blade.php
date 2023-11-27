@@ -81,7 +81,7 @@
 
                 {{-- print card column --}}
                 <div class="col-12 px-0" id="partnerreportdiv">
-                    <div class="card py-5">
+                    <div class="card pt-5 mb-0">
 
 
                         {{-- top invoice --}}
@@ -452,6 +452,74 @@
                                 <h6 class='fw-bold ls-08 mb-3'>صاعد للمصاعد</h6>
                                 <h6 class='fw-bold ls-08 mb-2'>الختم</h6>
                             </div>
+
+
+                        </div>
+                        {{-- end row --}}
+
+
+
+                        {{-- ------------------------------ --}}
+
+
+
+
+                        <div class="row no-gutters mx-0 mt-5 pt-5">
+
+                            <div class="col-12 text-start px-2">
+                                <h6 class='fw-bold mb-1'>الحياة بشكل أسهل</h6>
+                                <h5 class='text-reports text-uppercase fw-bold' style="letter-spacing: 2.5px">Life Easier</h5>
+                            </div>
+
+
+                            {{-- socials --}}
+                            <div class="col-12 px-0 ps-2" style="background-color: black; border-right: 30px solid #009a70">
+
+                                {{-- flex div --}}
+                                <div class="d-flex justify-content-between align-items-center">
+
+                                    {{-- whatsapp --}}
+                                    <div class='d-inline-flex align-items-center pt-3 pb-2'>
+                                        <span style="letter-spacing: 3px" class="ms-3 me-4 text-white fs-5">0551108180</span>
+
+                                        <span class='footer-icons scale--2'>
+                                            <i class='fa fa-whatsapp'></i>
+                                        </span>
+                                    </div>
+
+
+                                    {{-- other socials --}}
+                                    <div class='d-inline-flex align-items-center pt-3 pb-2'>
+                                        
+                                        <span style="letter-spacing: 3px" class="ms-3 me-4 text-white fs-5">SAAEDELV</span>
+
+                                        <span class='footer-icons scale--2'>
+                                            <i class='fa fa-youtube-play'></i>
+                                        </span>
+
+
+                                        <span class='footer-icons scale--2 me-3'>
+                                            <i class='fa fa-snapchat-ghost'></i>
+                                        </span>
+
+                                        <span class='footer-icons scale--2 me-3'>
+                                            <i class='fa fa-twitter'></i>
+                                        </span>
+
+                                        <span class='footer-icons scale--2 me-3'>
+                                            <i class='fa fa-instagram'></i>
+                                        </span>
+
+                                        <span class='footer-icons scale--2 me-3'>
+                                            <i class='fa fa-facebook'></i>
+                                        </span>
+
+                                    </div>
+
+                                
+                                </div>
+                            </div>
+                            {{-- end flex div --}}
 
                         </div>
                         {{-- end row --}}
