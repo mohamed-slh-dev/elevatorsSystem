@@ -23,7 +23,7 @@ class CreatePartsTable extends Migration
             $table->string('name')->nullable();
             $table->string('image')->nullable();
             $table->string('type')->nullable();
-            $table->string('desc')->nullable();
+            $table->text('desc')->nullable();
             $table->string('usage')->nullable();
             $table->double('quantity', 11, 2)->nullable();
             $table->double('consumed_quantity', 11, 2)->nullable();
