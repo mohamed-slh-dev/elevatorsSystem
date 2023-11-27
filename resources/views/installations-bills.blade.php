@@ -131,7 +131,7 @@
 
 {{-- new installation modal --}}
 <div class="col-12">
-  <div class="modal fade new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal fade new" role="dialog" aria-labelledby="new" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -344,7 +344,7 @@
 @foreach ($installation_bills as $bill)
     
 <div class="col-12">
-  <div class="modal fade edit-bill-{{$bill->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal fade edit-bill-{{$bill->id}}" role="dialog" aria-labelledby="new" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -564,7 +564,7 @@
 
 {{-- confirmation modal --}}
 <div class="col-12 justify-content-center">
-  <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+  <div class="modal fade delete" role="dialog" aria-labelledby="delete" aria-hidden="true">
       <div class="modal-dialog modal-sm">
 
         {{-- content --}}

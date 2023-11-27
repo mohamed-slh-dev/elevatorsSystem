@@ -100,7 +100,7 @@
 
 {{-- new part modal --}}
 <div class="col-12">
-  <div class="modal fade new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal fade new" role="dialog" aria-labelledby="new" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -231,7 +231,7 @@
     
 {{-- edit part modal --}}
 <div class="col-12">
-  <div class="modal fade edit-{{$part->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal fade edit-{{$part->id}}" role="dialog" aria-labelledby="new" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -344,7 +344,7 @@
 
 <div class="col-12">
 
-  <div class="modal fade new-price-{{$part->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal fade new-price-{{$part->id}}" role="dialog" aria-labelledby="new" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -420,7 +420,7 @@
 
 {{-- edit part modal --}}
 <div class="col-12">
-  <div class="modal fade price-history-{{$part->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal fade price-history-{{$part->id}}" role="dialog" aria-labelledby="new" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 

@@ -102,7 +102,7 @@
 
 {{-- add elevator modal --}}
 <div class="col-12">
-  <div class="modal fade new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal fade new" role="dialog" aria-labelledby="new" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -213,7 +213,7 @@
 
 {{-- edit elevator modal --}}
 <div class="col-12">
-  <div class="modal fade edit-{{$elevator->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal fade edit-{{$elevator->id}}" role="dialog" aria-labelledby="new" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 

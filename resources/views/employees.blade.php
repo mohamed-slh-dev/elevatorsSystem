@@ -101,7 +101,7 @@
 
 {{-- modal --}}
 <div class="col-12">
-<div class="modal fade new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+<div class="modal fade new" role="dialog" aria-labelledby="new" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -360,7 +360,7 @@
 
 {{-- add transaction modal --}}
 <div class="col-12">
-  <div class="modal fade new-transaction-{{$employee->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal fade new-transaction-{{$employee->id}}" role="dialog" aria-labelledby="new" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -504,7 +504,7 @@
 
 
 <div class="col-12">
-  <div class="modal fade edit-{{$employee->id}}" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+  <div class="modal fade edit-{{$employee->id}}" role="dialog" aria-labelledby="new" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
   
