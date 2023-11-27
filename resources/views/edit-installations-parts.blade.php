@@ -60,6 +60,17 @@
               <input class='form-control parts--input lg' type="text" name="part_name[{{$part->id}}][]" id="" value='{{$parts->where('part_id', $part->id)->first()->name}}'>
             </div>
 
+            @if ($type == 'quotation')
+                
+             {{-- desc --}}
+             <div class="d-inline-block">
+              <label class='d-block fs-11'>الوصف</label>
+              <input class='form-control parts--input ' style="width: 350px;" type="text" name="part_desc[{{$part->id}}][]" id="" value='{{$parts->where('part_id', $part->id)->first()->desc}}'>
+            </div>
+
+            @endif
+            
+
 
 
 
@@ -162,6 +173,18 @@
               <label class='d-block fs-11'>الأسم</label>
               <input class='form-control parts--input lg' type="text" name="part_name[{{$part->id}}][]" id="" value='{{$part->name}}'>
             </div>
+
+
+            @if ($type = 'qoutation')
+                
+             {{-- desc --}}
+             <div class="d-inline-block">
+              <label class='d-block fs-11'>الوصف</label>
+              <input class='form-control parts--input ' style="width: 350px;" type="text" name="part_desc[{{$part->id}}][]" id="" value='{{$part->desc}}'>
+            </div>
+            
+            @endif
+            
 
 
 

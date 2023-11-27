@@ -17,6 +17,7 @@ class CreateInstallationBillPartsTable extends Migration
             $table->id();
 
             $table->string('name')->nullable();
+            $table->text('desc')->nullable();
 
             
             $table->bigInteger('installation_bill_id')->unsigned()->nullable();

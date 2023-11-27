@@ -17,6 +17,7 @@ class CreateInstallationQuotationPartsTable extends Migration
             $table->id();
 
             $table->string('name')->nullable();
+            $table->text('desc')->nullable();
 
             $table->bigInteger('installation_quotation_id')->unsigned()->nullable();
             $table->foreign('installation_quotation_id')->references('id')->on('installation_quotations')->onDelete('cascade');

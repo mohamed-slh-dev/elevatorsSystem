@@ -140,6 +140,7 @@ class InstallationsController extends Controller
                     $part->part_id = $request->elevator_parts[$i];
 
                     $part->name = $request->part_name[$request->elevator_parts[$i]][0];
+                    $part->desc = $request->part_desc[$request->elevator_parts[$i]][0];
 
                     $part->quantity = ($request->part_quantity[$request->elevator_parts[$i]][0]) ? ($request->part_quantity[$request->elevator_parts[$i]][0]) : 0;
 
@@ -393,6 +394,7 @@ class InstallationsController extends Controller
                     $part->part_id = $request->elevator_parts[$i];
 
                     $part->name = $request->part_name[$request->elevator_parts[$i]][0];
+                    $part->desc = $request->part_desc[$request->elevator_parts[$i]][0];
 
                     $part->quantity = ($request->part_quantity[$request->elevator_parts[$i]][0]) ? ($request->part_quantity[$request->elevator_parts[$i]][0]) : 0;
 
@@ -599,11 +601,17 @@ class InstallationsController extends Controller
             $installation = InstallationQuotation::find($id);
 
             // :get parts and group them by usage
-            $partsArray = InstallationQuotationPart::where('installation_quotation_id', $installation->id)->get('part_id')->toArray();
-            $parts = Part::whereIn('id' , $partsArray)->get();
+            $parts = InstallationQuotationPart::where('installation_quotation_id', $installation->id)
+            ->join('parts', 'Installation_quotation_parts.part_id', '=', 'parts.id')
+            ->select('Installation_quotation_parts.name', 'Installation_quotation_parts.desc', 'parts.usage')
+            ->get()
+            ->groupBy('usage');
+
+            $usages = $parts;
+            //$parts = Part::whereIn('id' , $partsArray)->get();
 
         
-            return view('print-installation-quotation', compact('installation', 'parts', 'type'));
+            return view('print-installation-quotation', compact('installation', 'parts', 'usages', 'type'));
 
 
         } else {

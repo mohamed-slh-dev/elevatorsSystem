@@ -49,6 +49,12 @@
             <input class='form-control parts--input lg' type="text" name="part_name[{{$part->id}}][]" id="" value='{{$part->name}}'>
           </div>
 
+           {{-- desc --}}
+           <div class="d-inline-block">
+            <label class='d-block fs-11'>الوصف</label>
+            <input class='form-control parts--input ' style="width: 350px" type="text" name="part_desc[{{$part->id}}][]" id="" value='{{$part->desc}}'>
+          </div>
+
 
 
 

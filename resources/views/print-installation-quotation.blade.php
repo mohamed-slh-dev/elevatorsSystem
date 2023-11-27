@@ -293,16 +293,16 @@
 
 
                                                 {{-- loop - grouping parts --}}
-                                                @foreach ($parts->groupBy('usage') as $usage => $innerParts)
+                                                @foreach ($usages as $usage => $parts)
                                                     
                                                     {{-- usage row --}}
                                                     <tr>
-                                                        <th colspan="4" class='text-center table--text-reports fw-bold'> {{ $innerParts->first()->usage}} </th>
+                                                        <th colspan="4" class='text-center table--text-reports fw-bold'> {{ $usage}} </th>
                                                     </tr>
 
 
                                                     {{-- loop - parts --}}
-                                                    @foreach ($innerParts as $part)
+                                                    @foreach ($parts as $part)
 
                                                         <tr>
                                                             <th class='table--innertitle'>
