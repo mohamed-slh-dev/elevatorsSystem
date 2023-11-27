@@ -50,7 +50,7 @@
         
         <tr>         
 
-          <td>{{'TQ-'.$quotation->id}}</td>
+          <td>{{'IQ-'.$quotation->id}}</td>
           <td>عرض سعر</td>
           <td>{{$quotation->customer->first_name. ' '. $quotation->customer->last_name}}</td>
           <td>{{$quotation->elevator_count}}

@@ -13,7 +13,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <title>عرض سعر تركيب المصعد - ({{'TQ-'.$installation->id}})</title>
+    <title>عرض سعر تركيب المصعد - ({{'IQ-'.$installation->id}})</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     

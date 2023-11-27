@@ -53,7 +53,7 @@
         @foreach ($installation_bills as $bill)
           <tr>         
 
-            <td>{{'TB-'.$bill->id}}</td>
+            <td>{{'IB-'.$bill->id}}</td>
 
             <td>فاتورة</td>
             <td>{{$bill->customer->first_name. ' '. $bill->customer->last_name}}</td>

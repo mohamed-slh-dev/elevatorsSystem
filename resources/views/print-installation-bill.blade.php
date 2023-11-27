@@ -13,7 +13,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <title>طباعة فاتورة تركيب المصعد - ({{'TB-'.$installation->id}})</title>
+    <title>طباعة فاتورة تركيب المصعد - ({{'IB-'.$installation->id}})</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     
@@ -258,6 +258,18 @@
                                                 <td class="text-bold" style="font-size: 16px">
                                                 @php
                                                     echo $sum;
+                                                @endphp
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="text-bold" style="font-size: 16px"> الإجمالي بعد الضريبة (15%)</td>
+                                                <td class="text-bold" style="font-size: 16px">
+                                                @php
+                                                    echo $sum + ($sum * .15);
                                                 @endphp
                                                 </td>
                                             </tr>
