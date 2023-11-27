@@ -27,6 +27,8 @@
       <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
+
+            <th scope="col">#</th>
             <th scope="col">النوع</th>
             <th scope="col" class='min-w-140px'>العميل</th>
 
@@ -50,6 +52,8 @@
         {{-- installations - loop --}}
         @foreach ($installation_bills as $bill)
           <tr>         
+
+            <td>{{'TB-'.$bill->id}}</td>
 
             <td>فاتورة</td>
             <td>{{$bill->customer->first_name. ' '. $bill->customer->last_name}}</td>

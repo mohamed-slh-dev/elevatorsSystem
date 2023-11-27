@@ -42,7 +42,7 @@
         @foreach ($parts as $part)
           <tr>         
 
-            <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('storage/parts/'.$part->image)}}" alt="image"><span class='fw-bold border-bottom'>{{$part->name}}</span></td>
+            <td class='scale--2'><img width="50" height="50" class='of-cover rounded-circle me-3 table--img' src="{{asset('assets/images/part-default.jpg')}}" alt="image"><span class='fw-bold border-bottom'>{{$part->name}}</span></td>
 
 
             <td>{{$part->type}}</td>

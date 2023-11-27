@@ -25,6 +25,7 @@
       <table class="table table-bordered">
         <thead class="bg-primary">
           <tr>
+            <th scope="col">#</th>
             <th scope="col">النوع</th>
             <th scope="col" class='min-w-140px'>العميل</th>
             <th scope="col" class='min-w-110px'>عدد المصاعد</th>
@@ -49,6 +50,7 @@
         
         <tr>         
 
+          <td>{{'TQ-'.$quotation->id}}</td>
           <td>عرض سعر</td>
           <td>{{$quotation->customer->first_name. ' '. $quotation->customer->last_name}}</td>
           <td>{{$quotation->elevator_count}}

@@ -13,7 +13,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <title>طباعة تركيب المصعد - {{$installation->id}}</title>
+    <title>طباعة فاتورة تركيب المصعد - ({{'TB-'.$installation->id}})</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     

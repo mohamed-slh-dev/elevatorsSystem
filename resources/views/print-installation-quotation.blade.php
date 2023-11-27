@@ -13,7 +13,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <title>طباعة تركيب المصعد - {{$installation->id}}</title>
+    <title>عرض سعر تركيب المصعد - ({{'TQ-'.$installation->id}})</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     
@@ -367,7 +367,7 @@
 
 
                                 {{-- pricing table --}}
-                                <h6 class='fw-bold text-reports ls-08 mb-4'>السعر النهائي وجدول الدفعات</h6>
+                                <h6 class='fw-bold text-reports ls-08 mb-4 mt-5'>السعر النهائي وجدول الدفعات</h6>
 
 
 
@@ -387,7 +387,7 @@
                                                 <th rowspan="2" class='text-center table--text-reports fw-bold'>السعر الإجمالي</th>
 
                                                 <th class='text-center table--text-reports '>رقماً</th>
-                                                <th class='text-center table--text-reports '>كتابة</th>
+                                                <th class='text-center table--text-reports '>بعد الضريبة (15%)</th>
                                             </tr>
                                             
 
@@ -395,7 +395,7 @@
                                             {{-- price / in arabic --}}
                                             <tr>
                                                 <th class='text-center fw-bold'>{{number_format($installation->price)}} ريال</th>
-                                                <th class='text-center '>-</th>
+                                                <th class='text-center fw-bold'>{{number_format($installation->price * 0.15 + $installation->price )}} ريال</th>
                                             </tr>
 
 
