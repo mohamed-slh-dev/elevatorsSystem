@@ -51,14 +51,14 @@ class ElevatorsController extends Controller {
         $part->consumed_quantity = 0; // default value
         $part->nationality_id = $request->nationality;
 
-        if (!empty($request->file('image'))) {
+        // if (!empty($request->file('image'))) {
             
-            $image = 'part-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $path = $request->file('image')->storeAs('public/parts',$image);
+        //     $image = 'part-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+        //     $path = $request->file('image')->storeAs('public/parts',$image);
     
-            $part->image = $image;
+        //     $part->image = $image;
 
-        } // end if
+        // } // end if
        
 
 
@@ -103,14 +103,14 @@ class ElevatorsController extends Controller {
         $part->nationality_id = $request->nationality;
 
         
-        if (!empty($request->file('image'))) {
+        // if (!empty($request->file('image'))) {
             
-            $image = 'part-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $path = $request->file('image')->storeAs('public/parts',$image);
+        //     $image = 'part-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+        //     $path = $request->file('image')->storeAs('public/parts',$image);
     
-            $part->image = $image;
+        //     $part->image = $image;
 
-        } // end if
+        // } // end if
 
 
         // :save instance

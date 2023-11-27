@@ -125,10 +125,11 @@
                 </div>
 
 
-                <div class="col-sm-4 mb-20">
-                  <label for="image">الصورة</label>
-                  <input type="file" class="form-control" name="image" id="image" accept="image/*">
+                <div class="col-sm-8 mb-20">
+                  <label for="desc">الوصف</label>
+                  <input type="text" class="form-control" name="desc" id="desc">
                 </div>
+
 
 
                 {{-- empty --}}
@@ -196,11 +197,7 @@
 
 
 
-                <div class="col-sm-12 mb-20">
-                  <label for="desc">الوصف</label>
-                  <input type="text" class="form-control" name="desc" id="desc">
-                </div>
-
+            
 
               </div>
           </div>
@@ -260,6 +257,11 @@
                 </div>
 
               
+                <div class="col-sm-8 mb-20">
+                  <label for="desc">الوصف</label>
+                  <input type="text" value="{{$part->desc}}" class="form-control" name="desc" id="desc">
+                </div>
+
 
                 <div class="col-sm-4 mb-20">
                   <label for="type">النوع</label>
@@ -268,14 +270,6 @@
                       <option value="ميكانيكي">ميكانيكي</option>
                   </select>
                 </div>
-
-
-
-                <div class="col-sm-4 mb-20">
-                  <label for="image">الصورة</label>
-                  <input type="file" class="form-control" name="image" id="image" accept="image/*">
-                </div>
-
 
 
 
@@ -316,11 +310,7 @@
 
 
 
-                <div class="col-sm-12 mb-20">
-                  <label for="desc">الوصف</label>
-                  <input type="text" value="{{$part->desc}}" class="form-control" name="desc" id="desc">
-                </div>
-
+              
 
               </div>
           </div>

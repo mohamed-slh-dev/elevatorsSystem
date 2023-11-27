@@ -460,7 +460,7 @@
 
 
 
-                <div class="col-sm-4 mb-20">
+                <div class="col-sm-8 mb-20">
                   <label for="elevator_power">مدد القدرة للطاقة</label>
                   <input type="text" class="form-control" name="elevator_power" id="elevator_power" value='{{$quotation->elevator_power}}'>
                 </div>
