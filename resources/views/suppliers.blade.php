@@ -23,6 +23,8 @@
             <th scope="col">البريد الإلكتروني</th>
             <th scope="col">المبالغ المستحقة</th>
             <th scope="col">المبالغ المدفوعة</th>
+            <th scope="col"> المتبقي</th>
+
 
             <th scope="col"></th>
             <th scope="col"></th>
@@ -41,6 +43,8 @@
 
             <td>{{number_format($supplier->installationBillPartsPrice())}}</td>
             <td>{{number_format($supplier->transactionsTotal())}}</td>
+
+            <td> {{number_format($supplier->installationBillPartsPrice() - $supplier->transactionsTotal())}} </td>
 
             {{-- finance --}}
             <td>
