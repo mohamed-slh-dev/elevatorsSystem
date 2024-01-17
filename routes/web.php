@@ -33,6 +33,10 @@ Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('/check-login', [LoginController::class, 'checkLogin'])->name('checkLogin');
 
 
+//Storage link route for server
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 
 Route::middleware([AdminMiddleware::class])->group(function () {
     
